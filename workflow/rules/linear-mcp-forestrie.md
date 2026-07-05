@@ -1,5 +1,11 @@
 # Linear MCP (Forestrie repos)
 
+> **Mechanism preference:** Prefer the **direct GraphQL API** keyed by
+> `LINEAR_API_KEY` (see "Direct API" below) over MCP. On setups that define a
+> personal `linear-direct-api` rule, that rule takes precedence and the MCP
+> identity checks here apply only as a fallback. Use MCP only when the direct
+> API is unavailable.
+
 Applies when using the **Linear MCP server** for work in Forestrie org repos:
 
 - `canopy`, `arbor`, `arbor-flux`, `forest-1`, `univocity`, `univocity-tools`,
