@@ -46,6 +46,7 @@ If none apply, skip arc-context entirely.
 | [review-changes](./workflow/commands/review-changes.md) | PR/stack review |
 | [plan-with-linear](./workflow/commands/plan-with-linear.md) | Planning with Linear issue |
 | [triage](./workflow/commands/triage.md) | Issue triage |
+| [save-status](./workflow/commands/save-status.md) | Checkpoint work in flight for a fresh session |
 
 ### Skills (on demand — read SKILL.md only when task matches)
 
