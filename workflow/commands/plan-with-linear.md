@@ -37,7 +37,9 @@ Follow [grill-with-docs](../../vendored/matt-skills/skills/engineering/grill-wit
 - Interview relentlessly; one question at a time with recommended answers
 - Challenge terms against [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) and arc-context
 - Update repo `CONTEXT.md` or glossary docs lazily when terms crystallise
-- Offer ADRs only when hard to reverse, surprising, and trade-off driven
+- Offer ADRs only when hard to reverse, surprising, and trade-off driven — use
+  [adr-format.md](../rules/adr-format.md) for the doc itself, **not** the
+  vendored `ADR-FORMAT.md` the skill links to
 
 For Forestrie repos, prefer updating:
 
@@ -47,11 +49,13 @@ For Forestrie repos, prefer updating:
 
 ## 4. Output
 
-Produce:
+Once the user approves the plan, run
+[persist-plan](../skills/persist-plan.md) to write it out per
+[plan-docs](../rules/plan-docs.md) (scope, numbering, header, location —
+repo `docs/plans/` or devdocs/plans for multi-repo work). Then produce:
 
-1. **Plan document** path under repo `docs/plans/` (or devdocs/plans for platform-wide)
-2. **Linear issue** updated with link to plan and acceptance criteria
-3. **Behaviours to test** list (not implementation steps) for TDD handoff
+1. **Linear issue** updated with link to the persisted plan and acceptance criteria
+2. **Behaviours to test** list (not implementation steps) for TDD handoff
 
 ## 5. Handoff to implementation
 

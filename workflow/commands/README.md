@@ -9,6 +9,7 @@ Team-standard slash commands and prompt templates. Load only when invoked.
 | [review-changes.md](./review-changes.md) | Graphite-aware design review |
 | [plan-with-linear.md](./plan-with-linear.md) | Plan with FOR issue + grill |
 | [triage.md](./triage.md) | Issue triage |
+| [fork-mandate.md](./fork-mandate.md) | Fork a mandate instance against lane-b (Cloudflare-first) |
 | [save-status.md](./save-status.md) | Checkpoint work in flight into a `status-NNNN` doc for a fresh session |
 
 Install in Cursor via [harness/cursor.md](../../harness/cursor.md) — symlink

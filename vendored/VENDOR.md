@@ -8,5 +8,5 @@
 | Skills | tdd, diagnose, grill-with-docs |
 | License | See upstream repository |
 
-Do not edit files under `skills/` in place. Add Just Games overlays under
-`workflow/skills/` or repo `just/agents/skills/`.
+Do not edit files under `skills/` in place. forestrie overlays under
+`workflow/skills/` or repo `agents/skills/`.

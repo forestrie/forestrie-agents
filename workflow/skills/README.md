@@ -5,7 +5,7 @@ Forestrie-specific skill extensions here — do not edit vendored files in place
 
 | Overlay | Purpose |
 |---------|---------|
-| (none yet) | Add e.g. `forestrie-e2e/SKILL.md` when a team skill outgrows a command |
+| [persist-plan.md](./persist-plan.md) | Persist an approved plan as a canonical `docs/plans/plan-NNNN-*.md` doc — see [plan-docs rule](../rules/plan-docs.md) |
 
 Install globally or per-repo per [harness/cursor.md](../../harness/cursor.md).
 
@@ -14,5 +14,8 @@ Upstream engineering skills (read on demand):
 - [tdd](../../vendored/matt-skills/skills/engineering/tdd/SKILL.md)
 - [diagnose](../../vendored/matt-skills/skills/engineering/diagnose/SKILL.md)
 - [grill-with-docs](../../vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md)
+  — its ADR-FORMAT.md link is superseded fleet-wide by
+  [../rules/adr-format.md](../rules/adr-format.md); its CONTEXT-FORMAT.md is
+  still current
 
 Full matt-skills repo (optional sibling): `~/Dev/personal/forestrie/matt-skills/`.

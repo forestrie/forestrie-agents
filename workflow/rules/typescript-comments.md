@@ -38,9 +38,76 @@ Prefer stable **GitHub blob links** to forestrie repos:
 
 Within a comment, name the **remote component**, the **contract** (SCRAPI route,
 queue message, grant shape, on-chain call), and what this code **assumes** vs
-**guarantees**.
+**guarantees**. Same-repo implementation detail may use `{@link symbol}` in
+addition to a doc link when the symbol is the canonical local entry point.
+
+## What to write at each level
+
+| Level | Comment answers |
+|-------|-----------------|
+| **File** | What problem this module solves in the distributed flow; primary upstream/downstream dependencies. |
+| **Type** | What domain object or boundary this type represents; invariants callers must respect. |
+| **Function / method** | What operation this performs in the flow; preconditions, side effects, and error semantics worth knowing. |
+| **Stanza** (non-trivial block) | Why this branch or block exists when the surrounding function comment is not enough. |
+| **Line** | Only non-obvious mechanics (wire format quirks, platform limits, ordering constraints). |
+
+Example (canopy) — good file-level signpost:
+
+```typescript
+/**
+ * Grant auth primitives. Two distinct artifacts flow through these helpers —
+ * see [grants.md §10](https://github.com/forestrie/canopy/blob/main/docs/grants.md#10-authorization-and-evidence-model).
+ * {@link grantAuthorize} verifies from the embedded SCITT receipt only; it does
+ * not call the SequencingQueue DO.
+ */
+```
+
+Bad — restates syntax:
+
+```typescript
+// Loop over grants and push each one into the array
+for (const grant of grants) {
+  result.push(grant);
+}
+```
+
+Good — non-obvious constraint:
+
+```typescript
+// SCRAPI register-grant bodies are CBOR; parent evidence is capped because the
+// route is unauthenticated — see MAX_PARENT_GRANT_BODY_SIZE.
+```
+
+## Options and config buckets
+
+Describe **options**, **env bindings**, and **config objects** at the
+**innermost function that reads each field** — not repeated at every callsite.
+
+- On that function, document **only the fields it uses directly**.
+- Each documented field: name, meaning, valid values or source, and behaviour
+  when missing or invalid.
+- Parent callers may mention that options exist; defer field-level detail to
+  the consumer.
+
+```typescript
+/**
+ * @param options.enforceInclusion — when true, require a verifiable MMR inclusion
+ *   proof in the grant receipt; false only in pool-test mode with incomplete
+ *   bindings (see forestrie-ingress SequencingQueue configuration).
+ */
+```
+
+## JSDoc conventions
+
+- Use `/** … */` for files (module banner), types, functions, methods, and
+  non-exported constants that encode policy limits.
+- Use `@param`, `@returns`, `@throws` sparingly — only when they add contract
+  information not obvious from types.
+- Use `{@link Name}` for local symbols; markdown links for docs and other repos.
+- Keep line length readable; wrap prose naturally (soft wrap ~79 chars is fine).
 
 ## When editing
 
 - Cross-repo behaviour change → add or update signpost comments in the same change.
 - Do not copy ARC/ADR prose into source — link and state the local obligation.
+- If a function or type lacks a comment, add one before merging.

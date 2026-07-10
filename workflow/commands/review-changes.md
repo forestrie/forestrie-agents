@@ -1,8 +1,14 @@
 # Review changes (Graphite-aware, design-invariant focused)
 
-Thoroughly review **Forestrie** work in progress with the mindset of a senior
-distributed systems engineer with applied cryptography experience. Produce
-findings, a remediation **implementation plan**, and Linear follow-ups.
+Establish if the changes are predominantly infrastructure or predominantly implementation (backend).
+
+Always review from the perspective of a highly experienced distributed systems engineer with extensive experience in highly scalable systems and deep applied cryptography knowledge. The product is fundamentally about operating tamper evident transparency logs at scale.
+
+If the changes are predominantly infrastructure, use a DevOps / DevSecOps lens: you have an eye for making best use of prevailing best practice whilst taking into account the specifics of the forestrie architecture's goals. Kubernetes, CI/CD, GitOps, and infrastructure as code are things you live and breathe.
+If implementation (backend), focus closely on correctness, best practice, and optimal data-structure and algorithm choices for scale.
+
+With those personas as framing thoroughly review **Forestrie** work in progress.
+Produce findings, a remediation **implementation plan**, and Linear follow-ups.
 
 Run all git/gt/gh commands from the **working repository root**
 (`git rev-parse --show-toplevel` must be the repo under review).

@@ -83,3 +83,8 @@ Platform vocabulary: [devdocs/glossary.md](https://github.com/forestrie/devdocs/
 Home clones stay on **`main`**. Feature work uses worktrees under
 `../.worktrees/` — see each repo's `AGENTS.md` for the exact `git worktree add`
 invocation.
+
+For Claude Code, wire up
+[harness/claude-code.md § Hooks](../../harness/claude-code.md#hooks) in each
+repo's `.claude/settings.json` so plan execution is blocked outside a
+worktree.

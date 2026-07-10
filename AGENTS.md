@@ -46,6 +46,7 @@ If none apply, skip arc-context entirely.
 | [review-changes](./workflow/commands/review-changes.md) | PR/stack review |
 | [plan-with-linear](./workflow/commands/plan-with-linear.md) | Planning with Linear issue |
 | [triage](./workflow/commands/triage.md) | Issue triage |
+| [fork-mandate](./workflow/commands/fork-mandate.md) | Fork a mandate instance against lane-b |
 | [save-status](./workflow/commands/save-status.md) | Checkpoint work in flight for a fresh session |
 
 ### Skills (on demand — read SKILL.md only when task matches)
@@ -55,6 +56,7 @@ If none apply, skip arc-context entirely.
 | [tdd](./vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Feature work, bugs, test quality |
 | [diagnose](./vendored/matt-skills/skills/engineering/diagnose/SKILL.md) | Hard bugs, regressions |
 | [grill-with-docs](./vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md) | Stress-test plans against docs |
+| [persist-plan](./workflow/skills/persist-plan.md) | Persisting an approved plan as a canonical `docs/plans/` doc |
 
 ### Rules (requestable — not auto-loaded unless repo configures alwaysApply)
 

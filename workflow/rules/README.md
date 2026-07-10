@@ -10,6 +10,8 @@ than editing copies in place.
 | Rule | Scope |
 |------|-------|
 | [branch-naming.md](./branch-naming.md) | All Forestrie repos — Linear **FOR** |
+| [plan-docs.md](./plan-docs.md) | All Forestrie repos — `docs/adr`, `docs/arc`, `docs/plans` layout/numbering/lifecycle |
+| [adr-format.md](./adr-format.md) | All Forestrie repos — ADR structure/status; supersedes vendored `grill-with-docs` ADR-FORMAT.md |
 | [linear-mcp-forestrie.md](./linear-mcp-forestrie.md) | Linear MCP identity checks |
 | [go-task-over-shell.md](./go-task-over-shell.md) | Task-based repos |
 | [breaking-changes.md](./breaking-changes.md) | All repos |
