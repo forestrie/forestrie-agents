@@ -1,3 +1,11 @@
+---
+name: typescript-comments
+description: TypeScript comment conventions for Forestrie: signpost how local code fits the multi-repo platform and link the owning doc rather than duplicating platform prose.
+when_to_use: Writing or reviewing TypeScript in canopy Workers, mandate UI, or univocity-tools CLIs.
+paths: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"]
+user-invocable: false
+---
+
 # TypeScript comments
 
 **Scope:** TypeScript source in Forestrie repos (canopy Workers, mandate UI,
@@ -34,7 +42,7 @@ Prefer stable **GitHub blob links** to forestrie repos:
 | Canopy | [canopy/docs/](https://github.com/forestrie/canopy/tree/main/docs) |
 | Arbor / Go deps | [arbor/services/_deps](https://github.com/forestrie/arbor/tree/main/services/_deps) |
 | MMR COSE profile | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) |
-| Common arc-context | [forestrie-agents/arc-context/](../../arc-context/) |
+| Common arc-context | [forestrie-agents/arc-context/](../../../arc-context/) |
 
 Within a comment, name the **remote component**, the **contract** (SCRAPI route,
 queue message, grant shape, on-chain call), and what this code **assumes** vs

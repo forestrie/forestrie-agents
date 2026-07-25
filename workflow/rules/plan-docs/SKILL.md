@@ -1,3 +1,11 @@
+---
+name: plan-docs
+description: Canonical layout, numbering, and lifecycle for docs/adr, docs/arc, and docs/plans across Forestrie repos.
+when_to_use: Creating or reorganising a plan, ADR, or ARC in a Forestrie repo, or deciding whether a plan belongs in the repo or in devdocs.
+paths: ["**/plans/**", "**/docs/plans/**", "**/adr/**", "**/docs/adr/**", "**/arc/**", "**/docs/arc/**"]
+user-invocable: false
+---
+
 # Plan and decision docs
 
 Canonical layout, numbering, and lifecycle for `docs/adr/`, `docs/arc/`, and
@@ -6,9 +14,9 @@ Canonical layout, numbering, and lifecycle for `docs/adr/`, `docs/arc/`, and
 the source; sync repo-local copies from here rather than evolving them
 independently.
 
-See [persist-plan](../skills/persist-plan/SKILL.md) for the step-by-step skill that
+See [persist-plan](../../skills/persist-plan/SKILL.md) for the step-by-step skill that
 applies this rule right after a plan is approved, and
-[adr-format.md](./adr-format.md) for the ADR document's own structure and
+[adr-format](../adr-format/SKILL.md) for the ADR document's own structure and
 status vocabulary (which supersedes the vendored `grill-with-docs`
 ADR-FORMAT.md).
 
@@ -38,7 +46,7 @@ Every plan/ADR/ARC doc opens with:
 
 This `Status` vocabulary is for `docs/plans/`. ADRs use their own lifecycle
 (`ACCEPTED | READY | DISCUSS | REJECTED | HISTORICAL`) — see
-[adr-format.md](./adr-format.md#status-values).
+[adr-format](../adr-format/SKILL.md#status-values).
 
 Additional fields (`Linear epic`, `Parent PRD`, `Authority`, ...) are fine —
 this is a minimum, not a ceiling; several existing plans already extend it.
@@ -107,7 +115,7 @@ names a specific plan id.
 ## Relationship to branches and worktrees — deliberately independent
 
 Branch: `<user>/for-<issue-no>-<slug>` — worktree:
-`<repo>-for-<issue-no>-<slug>` (see [branch-naming](./branch-naming.md)). Plan
+`<repo>-for-<issue-no>-<slug>` (see [branch-naming](../branch-naming/SKILL.md)). Plan
 docs share the `for-<issue>` token in their slug **when a Linear issue drives
 the work**, but plan identity (the `plan-NNNN` sequence number) is a separate
 counter from the issue number, and a plan's filename is never required to

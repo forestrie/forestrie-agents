@@ -1,3 +1,11 @@
+---
+name: go-task-over-shell
+description: Prefer the repo Taskfile over new committed shell scripts as the automation entrypoint; new .sh automation surfaces need justification in the PR.
+when_to_use: Adding a new committed shell script, or choosing where to put a repeatable command in a go-task repo (canopy, univocity, forest-1, arbor).
+paths: ["**/Taskfile.yml", "**/Taskfile.yaml", "**/taskfiles/**", "**/*.sh"]
+user-invocable: false
+---
+
 # go-task over ad-hoc shell scripts
 
 **Scope:** Repos using go-task (`Taskfile.yml`, `taskfiles/*.yml`) — canopy,

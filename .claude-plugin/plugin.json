@@ -1,11 +1,15 @@
 {
   "name": "forestrie-agents",
-  "description": "Forestrie team workflow skills and the pinned matt-skills engineering set.",
-  "author": { "name": "Forestrie", "url": "https://github.com/forestrie" },
+  "description": "Forestrie team workflow skills and rules, plus the pinned matt-skills engineering set.",
+  "author": {
+    "name": "Forestrie",
+    "url": "https://github.com/forestrie"
+  },
   "homepage": "https://github.com/forestrie/forestrie-agents",
   "repository": "https://github.com/forestrie/forestrie-agents",
   "skills": [
     "./workflow/skills/",
+    "./workflow/rules/",
     "./vendored/matt-skills/skills/engineering/"
   ]
 }

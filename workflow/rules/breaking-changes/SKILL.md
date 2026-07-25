@@ -1,3 +1,10 @@
+---
+name: breaking-changes
+description: Prefer a hard cutover over compatibility shims: remove old names, config keys, and deprecated branches rather than keeping fallbacks. Call out data resets and operational steps during planning.
+when_to_use: Renaming or removing config keys, env vars, schemas, or APIs; deciding whether to add a migration shim, feature flag, dual code path, or legacy alias.
+user-invocable: false
+---
+
 # Breaking changes and compatibility
 
 Unless the user **explicitly** asks for backward compatibility, migration shims,

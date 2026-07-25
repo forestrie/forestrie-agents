@@ -29,7 +29,7 @@ From repository root, use the first matching row:
 2. Typecheck passes (if applicable)
 3. Tests for changed behaviour pass
 4. No secrets or `.env` files staged
-5. Commit message follows [commit-conventions](../../rules/commit-conventions.md)
+5. Commit message follows [commit-conventions](../../rules/commit-conventions/SKILL.md)
 
 ## Do not
 

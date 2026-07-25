@@ -7,7 +7,7 @@ Add a thin pointer at repo root (Forestrie repos already use this pattern):
 ```markdown
 # Claude Code
 
-Read [AGENTS.md](./AGENTS.md) before making changes.
+Read [AGENTS.md](.././AGENTS.md) before making changes.
 Common process: [forestrie-agents](https://github.com/forestrie/forestrie-agents).
 ```
 
@@ -76,7 +76,7 @@ for cross-repo ADRs, ARCs, and ops — not forestrie-agents arc-context alone.
 on the `ExitPlanMode` tool — it fires at the moment a session moves from
 planning to execution, and blocks if the session is still in a Forestrie
 repo's home clone instead of a worktree. On block, it reports the naming
-scheme from [branch-naming.md](../workflow/rules/branch-naming.md) and the
+scheme from [branch-naming](../workflow/rules/branch-naming/SKILL.md) and the
 exact `git worktree add` command to run, then asks Claude to re-run the plan
 from inside that worktree.
 

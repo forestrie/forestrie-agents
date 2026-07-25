@@ -10,7 +10,7 @@
     {
       "name": "forestrie-agents",
       "source": "./",
-      "description": "Forestrie team workflow skills: review-changes, pre-commit-checks, plan-with-linear, persist-plan, triage, setup-clone, fork-mandate, save-status, plus the pinned matt-skills engineering set.",
+      "description": "Forestrie team workflow skills (review-changes, pre-commit-checks, plan-with-linear, persist-plan, triage, setup-clone, fork-mandate, save-status), the path-scoped team rules, and the pinned matt-skills engineering set.",
       "category": "workflow"
     }
   ]

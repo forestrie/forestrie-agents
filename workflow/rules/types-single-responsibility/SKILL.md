@@ -1,3 +1,11 @@
+---
+name: types-single-responsibility
+description: No monolithic types.ts files: one main type or interface per file, with types.ts reserved as a re-export barrel only.
+when_to_use: Adding or moving a TypeScript type or interface, or seeing a growing types.ts, in canopy, mandate, or univocity-tools.
+paths: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"]
+user-invocable: false
+---
+
 # Types and single responsibility
 
 **Scope:** TypeScript monorepos (canopy, mandate, univocity-tools) and similar.

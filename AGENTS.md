@@ -57,9 +57,14 @@ skill. Install them into every harness with
 | [/diagnose](./vendored/matt-skills/skills/engineering/diagnose/SKILL.md) | Hard bugs, regressions |
 | [/grill-with-docs](./vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md) | Stress-test plans against docs |
 
-### Rules (requestable — not auto-loaded unless repo configures alwaysApply)
+### Rules (auto-applied by `paths:` glob, or by description)
 
-See [workflow/rules/README.md](./workflow/rules/README.md).
+Rules are skills with `user-invocable: false` — hidden from the `/` menu, and
+loaded only when the session touches a file their `paths:` glob matches
+(`**/*.go` for [go-comments](./workflow/rules/go-comments/SKILL.md), `**/*.sol`
+for [solidity-comments](./workflow/rules/solidity-comments/SKILL.md), and so
+on). They install alongside the skills. See
+[workflow/rules/README.md](./workflow/rules/README.md).
 
 ---
 

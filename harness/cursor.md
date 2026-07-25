@@ -64,24 +64,35 @@ forest/agents/
 
 ## Rules
 
-Cursor expects `.mdc` with YAML frontmatter, so rules cannot be symlinked from
-this repo's plain markdown the way skills can. Options:
+Rules are skills too — `workflow/rules/<name>/SKILL.md`, annotated with
+`user-invocable: false` and, where file-type scoped, `paths:`. They install
+with everything else. Cursor reads them from `.claude/skills/` /
+`.cursor/skills/` like any other skill.
 
-1. Maintain a thin `.mdc` in the repo that links to the forestrie-agents rule
-2. Copy the promoted rule once, and record that this repo's
-   [workflow/rules/](../workflow/rules/) is canonical
+For Cursor's **native** glob scoping, generate `.mdc` shims:
 
-**Known drift:** canopy, univocity, mandate, and curator each carry
-hand-copied `.cursor/rules/*.mdc` duplicating
-[workflow/rules/](../workflow/rules/). Those copies are the canonical source's
-shadow, not its equal — prefer syncing over editing them in place.
+```bash
+~/Dev/personal/forestrie/forestrie-agents/bin/forestrie-agents-sync --cursor-rules
+```
+
+`paths:` maps onto Cursor's `globs:`, and the shim body is a one-line pointer
+at the same `SKILL.md` — nothing is duplicated, so nothing can drift.
+
+**Safe by construction:** the generator never overwrites a `.mdc` it did not
+write. canopy, univocity, mandate, and curator each track hand-written
+`.cursor/rules/*.mdc` duplicating [workflow/rules/](../workflow/rules/); those
+files are skipped with a warning, so you can adopt this before retiring them.
+Generated files are excluded individually via `.git/info/exclude`, so a repo
+that tracks `.cursor/rules/` stays clean.
+
+Retiring a hand-written copy is then a one-line delete plus a re-run.
 
 ## Bootstrap
 
 Point always-applied workspace rules at:
 
 1. Repo `AGENTS.md` (thin pointer to devdocs + local docs)
-2. [linear-mcp-forestrie](../workflow/rules/linear-mcp-forestrie.md) when using Linear MCP
+2. [linear-mcp-forestrie](../workflow/rules/linear-mcp-forestrie/SKILL.md) when using Linear MCP
 3. Repo-specific overlay rules only — prefer requestable rules for common content
 
 ## Workspace

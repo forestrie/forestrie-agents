@@ -5,7 +5,7 @@
 Generate an implementation plan from a Linear **project** (not a single
 issue): read the project's issues, order them into a dependency-aware
 sequence, and persist a plan per
-[plan-docs](../../workflow/rules/plan-docs.md) with `refs:` covering the
+[plan-docs](../../workflow/rules/plan-docs/SKILL.md) with `refs:` covering the
 constituent `FOR-*` issues.
 
 Relationship: this is the planning counterpart to

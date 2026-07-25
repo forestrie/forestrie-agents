@@ -1,3 +1,11 @@
+---
+name: source-order-call-graph
+description: Order function definitions in a source file by call-graph topology, entry points first and callees before callers when reading downward.
+when_to_use: Adding functions to, or reorganising, a TypeScript or JavaScript source file in canopy, mandate, or univocity-tools.
+paths: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.mts", "**/*.cts"]
+user-invocable: false
+---
+
 # Source file order: call-graph topology
 
 **Scope:** TypeScript and JavaScript source files (canopy, mandate, univocity-tools).

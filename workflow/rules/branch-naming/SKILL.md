@@ -1,3 +1,10 @@
+---
+name: branch-naming
+description: Forestrie branch naming: <user>/for-<issue-no>-<short-desc>, Linear team key FOR implied.
+when_to_use: Creating a branch or worktree, or naming one in a plan or PR, in a Forestrie repo.
+user-invocable: false
+---
+
 # Branch naming
 
 ## Format
@@ -24,7 +31,7 @@ Examples: `robin/for-167-onboard-design`, `robin/for-170-token-binding`.
   (e.g. parent `FOR-167`, branches `robin/for-167-request-api` and
   `robin/for-167-token-binding`).
 - Do not invent issue numbers — resolve or create the issue first via Linear MCP
-  (team **FOR**) or [plan-with-linear](../skills/plan-with-linear/SKILL.md).
+  (team **FOR**) or [plan-with-linear](../../skills/plan-with-linear/SKILL.md).
 
 ## Default user prefix
 
@@ -48,7 +55,7 @@ When creating a branch, set **`<user>`** from the GitHub username:
 Before `git checkout -b`:
 
 1. **Find the issue** — search Linear (team **`FOR`**). Follow
-   [linear-mcp-forestrie.md](./linear-mcp-forestrie.md) for MCP identity checks.
+   [linear-mcp-forestrie](../linear-mcp-forestrie/SKILL.md) for MCP identity checks.
 2. **If no suitable issue exists**, create one on team **Forestrie (`FOR`)** with
    title, description, and testable acceptance criteria.
 3. **Name the branch** with the resolved issue number and slug, then create it

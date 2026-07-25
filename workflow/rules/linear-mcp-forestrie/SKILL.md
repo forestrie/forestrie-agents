@@ -1,3 +1,10 @@
+---
+name: linear-mcp-forestrie
+description: Identity checks before using the Linear MCP server in Forestrie repos. Fallback only — prefer the direct GraphQL API keyed by LINEAR_API_KEY.
+when_to_use: About to make a Linear MCP call while working in a github.com/forestrie repository.
+user-invocable: false
+---
+
 # Linear MCP (Forestrie repos)
 
 > **Mechanism preference:** Prefer the **direct GraphQL API** keyed by

@@ -9,7 +9,7 @@ argument-hint: "[target repo]"
 
 Persist an approved plan — Claude Code plan-mode output, a Cursor
 `.cursor/plans/*.plan.md`, or an ad hoc design discussion — as a canonical
-Forestrie plan document. Read [plan-docs](../../rules/plan-docs.md) first for
+Forestrie plan document. Read [plan-docs](../../rules/plan-docs/SKILL.md) first for
 the full format spec; this skill is the step-by-step "do it" version.
 
 Run this immediately after the user approves a plan, before any
@@ -34,12 +34,12 @@ Arguments: `$ARGUMENTS`
 - Use max + 1, zero-padded to 4 digits.
 - If a collision surfaces later (two worktrees branched close together),
   don't renumber — disambiguate with a distinct slug under the shared number
-  instead (see [plan-docs](../../rules/plan-docs.md#numbering)).
+  instead (see [plan-docs](../../rules/plan-docs/SKILL.md#numbering)).
 
 ## 3. Write the file
 
 `docs/plans/plan-NNNN-<slug>.md`, header per
-[plan-docs](../../rules/plan-docs.md#required-header):
+[plan-docs](../../rules/plan-docs/SKILL.md#required-header):
 
 ```
 # Plan NNNN — <Title>
@@ -72,7 +72,7 @@ See [canopy ADR-0007](https://github.com/forestrie/canopy/blob/main/docs/adr/adr
 
 Stays flat unless the plan already decomposes into two or more independently
 landable workstreams. If it does, promote per
-[plan-docs#forking-a-plan-into-subplans](../../rules/plan-docs.md#forking-a-plan-into-subplans):
+[plan-docs#forking-a-plan-into-subplans](../../rules/plan-docs/SKILL.md#forking-a-plan-into-subplans):
 create `plan-NNNN-slug/{README.md, overview.md, subplan-01-*.md, ...}`,
 moving the just-written content into `overview.md`.
 
@@ -86,7 +86,7 @@ table.
 Continue with [plan-with-linear](../plan-with-linear/SKILL.md) step 5
 (branch/worktree creation). The plan doc's filename does not need to match
 the branch name — link them via the Linear issue instead (see
-[plan-docs#relationship-to-branches-and-worktrees](../../rules/plan-docs.md#relationship-to-branches-and-worktrees--deliberately-independent)).
+[plan-docs#relationship-to-branches-and-worktrees](../../rules/plan-docs/SKILL.md#relationship-to-branches-and-worktrees--deliberately-independent)).
 
 In Claude Code, [require-worktree](../../../harness/claude-code.md#hooks) is a
 `PreToolUse` hook on `ExitPlanMode` that blocks execution from a repo's home
