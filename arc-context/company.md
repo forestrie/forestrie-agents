@@ -60,7 +60,7 @@ Full domain language: [devdocs/glossary.md](https://github.com/forestrie/devdocs
 Team key: **FOR** (Forestrie workspace). Issue ids: `FOR-<n>`.
 
 Branch naming: `robin/for-<issue-no>-<short-desc>` — see
-[workflow/rules/branch-naming.md](../workflow/rules/branch-naming.md).
+[workflow/rules/branch-naming](../workflow/rules/branch-naming/SKILL.md).
 
 ## What this file is not
 

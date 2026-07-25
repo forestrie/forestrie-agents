@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "forestrie-agents",
+  "description": "Shared agent guidance for Forestrie org development. Optional Claude Code plugin view over the same skills bin/forestrie-agents-sync installs for Cursor and pi.",
+  "owner": {
+    "name": "Forestrie",
+    "url": "https://github.com/forestrie"
+  },
+  "plugins": [
+    {
+      "name": "forestrie-agents",
+      "source": "./",
+      "description": "Forestrie team workflow skills (review-changes, pre-commit-checks, plan-with-linear, persist-plan, triage, setup-clone, fork-mandate, save-status), the path-scoped team rules, and the pinned matt-skills engineering set.",
+      "category": "workflow"
+    }
+  ]
+}

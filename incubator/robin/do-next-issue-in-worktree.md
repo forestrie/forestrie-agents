@@ -4,7 +4,7 @@
 
 Use git worktrees to execute the next issue in the argument Linear project:
 pick the next actionable `FOR-*` issue, create a worktree/branch per
-[branch-naming](../../workflow/rules/branch-naming.md), and run the
+[branch-naming](../../workflow/rules/branch-naming/SKILL.md), and run the
 implementation there (blocked outside a worktree by the
 [require-worktree hook](../../harness/hooks/require-worktree.sh)).
 

@@ -1,6 +1,10 @@
 ---
 name: tdd
-description: Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants integration tests, or asks for test-first development.
+description: >-
+  Standing process for all implementation and test work. Apply when implementing
+  features, fixing bugs, adding or changing tests, reviewing test quality, or
+  refactoring with coverage. Follow red-green-refactor via public interfaces.
+  Read SKILL.md before writing or modifying production code or tests.
 ---
 
 # Test-Driven Development
