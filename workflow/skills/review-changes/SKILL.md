@@ -1,3 +1,10 @@
+---
+name: review-changes
+description: Graphite-aware, design-invariant review of Forestrie work in progress, producing findings, a remediation plan, and Linear follow-ups.
+when_to_use: The user asks to review a branch, stack, or PR, or says "review my changes" in a Forestrie repo.
+argument-hint: "[base-ref] [FOR-123] [plan path] [scope override]"
+---
+
 # Review changes (Graphite-aware, design-invariant focused)
 
 Establish if the changes are predominantly infrastructure or predominantly implementation (backend).
@@ -23,6 +30,9 @@ Optional arguments (pass through if given):
 
 ---
 
+
+Arguments: `$ARGUMENTS`
+
 ## 1. Establish context
 
 ### 1.1 Common standards (link, do not restate)
@@ -33,9 +43,9 @@ Read selectively before reviewing the diff:
 | ------ | ---- |
 | [forestrie-agents/AGENTS.md](https://github.com/forestrie/forestrie-agents/blob/main/AGENTS.md) | Always — layer model, workflow index |
 | Repo `forest/agents/AGENTS.md` or root `AGENTS.md` | Repo overlay and precedence |
-| [forestrie-agents/workflow/rules/](../rules/) | go-task, commits, TS/Go/Solidity rules, breaking-changes |
-| [forestrie-agents/vendored/matt-skills/skills/engineering/tdd/](../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Testability, coverage |
-| One [arc-context](../../arc-context/) file | Domain terms for touched area |
+| [forestrie-agents/workflow/rules/](../../rules/) | go-task, commits, TS/Go/Solidity rules, breaking-changes |
+| [forestrie-agents/vendored/matt-skills/skills/engineering/tdd/](../../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Testability, coverage |
+| One [arc-context](../../../arc-context/) file | Domain terms for touched area |
 | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) | Shared vocabulary |
 
 ### 1.2 Repo-specific routers (read one matching repo)

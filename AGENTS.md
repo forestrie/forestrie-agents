@@ -12,7 +12,7 @@ this repository.
 1. **This file** — routing only (~2 min read)
 2. **One** [arc-context](./arc-context/) file — only if domain terms apply
 3. **Repo overlay** — `forest/agents/AGENTS.md` or root `AGENTS.md` in the working repo
-4. **Workflow** — only the invoked [command](./workflow/commands/) or [skill](./workflow/skills/)
+4. **Workflow** — only the invoked [skill](./workflow/skills/)
 
 **Precedence on conflict:** repo overlay → common `workflow/` → vendored → incubator (opt-in).
 
@@ -37,26 +37,25 @@ If none apply, skip arc-context entirely.
 
 ## Workflow index
 
-### Commands (explicit invocation)
+### Skills (`/name`, or auto-applied when the description matches)
 
-| Command | When |
-|---------|------|
-| [setup-clone](./workflow/commands/setup-clone.md) | New machine or fresh clone |
-| [pre-commit-checks](./workflow/commands/pre-commit-checks.md) | Before commit |
-| [review-changes](./workflow/commands/review-changes.md) | PR/stack review |
-| [plan-with-linear](./workflow/commands/plan-with-linear.md) | Planning with Linear issue |
-| [triage](./workflow/commands/triage.md) | Issue triage |
-| [fork-mandate](./workflow/commands/fork-mandate.md) | Fork a mandate instance against lane-b |
-| [save-status](./workflow/commands/save-status.md) | Checkpoint work in flight for a fresh session |
-
-### Skills (on demand — read SKILL.md only when task matches)
+Commands and skills are one mechanism now — a `<name>/SKILL.md` directory per
+skill. Install them into every harness with
+[`bin/forestrie-agents-sync`](./bin/forestrie-agents-sync).
 
 | Skill | When |
 |-------|------|
-| [tdd](./vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Feature work, bugs, test quality |
-| [diagnose](./vendored/matt-skills/skills/engineering/diagnose/SKILL.md) | Hard bugs, regressions |
-| [grill-with-docs](./vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md) | Stress-test plans against docs |
-| [persist-plan](./workflow/skills/persist-plan.md) | Persisting an approved plan as a canonical `docs/plans/` doc |
+| [/setup-clone](./workflow/skills/setup-clone/SKILL.md) | New machine or fresh clone |
+| [/pre-commit-checks](./workflow/skills/pre-commit-checks/SKILL.md) | Before commit |
+| [/review-changes](./workflow/skills/review-changes/SKILL.md) | PR/stack review |
+| [/plan-with-linear](./workflow/skills/plan-with-linear/SKILL.md) | Planning with a Linear issue |
+| [/persist-plan](./workflow/skills/persist-plan/SKILL.md) | Persisting an approved plan as a canonical `docs/plans/` doc |
+| [/triage](./workflow/skills/triage/SKILL.md) | Issue triage |
+| [/fork-mandate](./workflow/skills/fork-mandate/SKILL.md) | Fork a mandate instance against lane-b |
+| [/save-status](./workflow/skills/save-status/SKILL.md) | Checkpoint work in flight for a fresh session |
+| [/tdd](./vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Feature work, bugs, test quality |
+| [/diagnose](./vendored/matt-skills/skills/engineering/diagnose/SKILL.md) | Hard bugs, regressions |
+| [/grill-with-docs](./vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md) | Stress-test plans against docs |
 
 ### Rules (requestable — not auto-loaded unless repo configures alwaysApply)
 
@@ -68,7 +67,7 @@ See [workflow/rules/README.md](./workflow/rules/README.md).
 
 1. **Link, don't restate** — point to authoritative docs; do not copy ARC/ADR bodies
 2. **Skills on demand** — read a skill only when its description matches the task
-3. **Commands on invoke** — user runs `/review-changes` or pastes the command
+3. **Commands on invoke** — user runs `/review-changes`; the body loads only then
 4. **Incubator is opt-in** — never load `incubator/` unless the user names a path
 5. **devdocs for depth** — use [devdocs](https://github.com/forestrie/devdocs) for platform *why* and cross-repo ADRs/ARCs; use repo `docs/` for implementation detail
 

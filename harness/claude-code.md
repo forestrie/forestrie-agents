@@ -11,16 +11,57 @@ Read [AGENTS.md](./AGENTS.md) before making changes.
 Common process: [forestrie-agents](https://github.com/forestrie/forestrie-agents).
 ```
 
-## Skills
+## Skills (this is where slash commands come from)
 
-Install team skills by copying or symlinking from:
+Claude Code has merged custom commands into skills: a directory
+`<skills-dir>/<name>/SKILL.md` becomes the slash command `/<name>`, and Claude
+may also apply it automatically when its `description` matches the task.
 
-- `forest/agents/skills/` (repo overlay)
-- `../forestrie-agents/workflow/skills/` (common overlays)
-- `../forestrie-agents/vendored/matt-skills/skills/` (vendored)
-- `../matt-skills/skills/` (full upstream sibling checkout)
+| Level | Path | Applies to |
+|-------|------|-----------|
+| Personal | `~/.claude/skills/<name>/SKILL.md` | every project |
+| Project | `<repo>/.claude/skills/<name>/SKILL.md` | that repo (walks up to the repo root) |
 
-Or reference paths directly in CLAUDE.md when using monorepo sibling checkouts.
+Entries may be **symlinks** to directories elsewhere on disk — Claude Code
+follows them and reads `SKILL.md` from the target. That is how this repo
+installs.
+
+### Install
+
+```bash
+~/Dev/personal/forestrie/forestrie-agents/bin/forestrie-agents-sync
+```
+
+Run it in each Forestrie repo you work in. It links, lowest precedence first:
+
+1. `vendored/matt-skills/skills/engineering/` — `/tdd`, `/diagnose`, `/grill-with-docs`
+2. `workflow/skills/` — the team skills
+3. `<repo>/forest/agents/skills/` — that repo's own overlay, if any
+
+so a team skill shadows a vendored one of the same name, and a repo overlay
+shadows both.
+
+### Why per-repo, not machine-wide
+
+**Personal skills override project skills.** A machine-wide `/save-status`
+would shadow this repo's Forestrie-specific one, silently, in every Forestrie
+repo. Install per-repo and let the checkout decide which one you get.
+
+### Optional: install as a plugin instead
+
+[.claude-plugin/marketplace.json](../.claude-plugin/marketplace.json) exposes
+this repo as a Claude Code plugin, if you prefer `/plugin` management to
+symlinks:
+
+```bash
+claude plugin marketplace add forestrie/forestrie-agents
+claude plugin install forestrie-agents@forestrie-agents
+```
+
+Plugin skills are namespaced (`/forestrie-agents:review-changes`), so they
+cannot collide with personal or project skills — which also means they do not
+participate in the shadowing described above. This path is Claude Code only;
+`forestrie-agents-sync` is what serves Cursor and pi as well.
 
 ## Platform docs
 

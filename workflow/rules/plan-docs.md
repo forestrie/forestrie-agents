@@ -6,7 +6,7 @@ Canonical layout, numbering, and lifecycle for `docs/adr/`, `docs/arc/`, and
 the source; sync repo-local copies from here rather than evolving them
 independently.
 
-See [persist-plan](../skills/persist-plan.md) for the step-by-step skill that
+See [persist-plan](../skills/persist-plan/SKILL.md) for the step-by-step skill that
 applies this rule right after a plan is approved, and
 [adr-format.md](./adr-format.md) for the ADR document's own structure and
 status vocabulary (which supersedes the vendored `grill-with-docs`

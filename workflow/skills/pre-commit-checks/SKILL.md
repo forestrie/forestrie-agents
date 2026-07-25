@@ -1,3 +1,9 @@
+---
+name: pre-commit-checks
+description: Run the quality gates CI enforces for this repo type (fmt, lint, typecheck, tests) before committing Forestrie work.
+when_to_use: The user is about to commit or push, says "pre-commit", "run the checks", or asks whether the change is ready.
+---
+
 # pre-commit-checks
 
 Run quality gates before committing. Match what CI enforces for the repo type.
@@ -23,7 +29,7 @@ From repository root, use the first matching row:
 2. Typecheck passes (if applicable)
 3. Tests for changed behaviour pass
 4. No secrets or `.env` files staged
-5. Commit message follows [commit-conventions](../rules/commit-conventions.md)
+5. Commit message follows [commit-conventions](../../rules/commit-conventions.md)
 
 ## Do not
 

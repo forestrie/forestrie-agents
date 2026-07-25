@@ -1,11 +1,21 @@
+---
+name: save-status
+description: Checkpoint Forestrie work in flight into a status doc a fresh agent session can resume from, with FOR issue, worktree, and plan refs.
+when_to_use: The user says "save status", "checkpoint this", or is ending a session another will pick up.
+argument-hint: "[FOR-123 | plan ref | free-text hints]"
+---
+
 # save-status — checkpoint work in flight
 
 Condense the current session into a `status-*.md` document that is the ideal
 starting point for a **fresh agent session**: combined with the prevailing
 context hooks, reading the status doc should be enough context to continue the
 work it describes. Layout, numbering, header, and location follow
-[plan-docs](../rules/plan-docs.md) — status docs are a first-class series
+[plan-docs](../../rules/plan-docs.md) — status docs are a first-class series
 alongside `plans/`, `adr/`, `arc/`, not a separate scheme.
+
+
+Arguments: `$ARGUMENTS`
 
 ## Usage
 
@@ -19,7 +29,7 @@ alongside `plans/`, `adr/`, `arc/`, not a separate scheme.
 - With no hints, establish context from the **entire current session**:
   condense the chat, and pick up references to Linear `FOR-*` issues, the
   active worktree and branch (`<user>/for-<issue>-<slug>`, see
-  [branch-naming](../rules/branch-naming.md)), and relevant plan / ADR / ARC
+  [branch-naming](../../rules/branch-naming.md)), and relevant plan / ADR / ARC
   docs. Cross-check against recently changed plan docs in both plan roots:
   repo `docs/plans/` and [devdocs](https://github.com/forestrie/devdocs)
   `devdocs/plans/`.
@@ -27,7 +37,7 @@ alongside `plans/`, `adr/`, `arc/`, not a separate scheme.
 ## What the agent does
 
 1. **Establish the workstream** from the hints (or the session, as above).
-   Note the [arc-context](../../arc-context/) slice(s) the work touches
+   Note the [arc-context](../../../arc-context/) slice(s) the work touches
    (canopy / arbor / univocity / infra / mandate / tools) so the next agent
    loads the right domain terms.
 
@@ -37,14 +47,14 @@ alongside `plans/`, `adr/`, `arc/`, not a separate scheme.
    currently-active workstream** across repeated `/save-status` calls.
 
 3. **Otherwise create** a new doc. Home is decided by **Scope**, exactly as
-   for plans (see [plan-docs](../rules/plan-docs.md#layout)) — not by which
+   for plans (see [plan-docs](../../rules/plan-docs.md#layout)) — not by which
    repo holds the most changed files:
    - **single-repo** → implementing repo's `docs/status/`
    - **multi-repo / platform** → devdocs `devdocs/status/`
 
    **Numbering** follows the fleet rule — sequential, zero-padded 4 digits,
    per series per location (see
-   [plan-docs](../rules/plan-docs.md#numbering)): check the highest existing
+   [plan-docs](../../rules/plan-docs.md#numbering)): check the highest existing
    `status-NNNN` under the target location **on `main`** (including
    `archived/`), take max + 1. Do **not** hand-pick against the local
    worktree, which may be behind. When the workstream is a specific Linear
@@ -61,7 +71,7 @@ alongside `plans/`, `adr/`, `arc/`, not a separate scheme.
 ## Document content
 
 Open with the standard plan/ADR/ARC header (see
-[plan-docs](../rules/plan-docs.md#required-header)) — status docs use the
+[plan-docs](../../rules/plan-docs.md#required-header)) — status docs use the
 `docs/plans/` status vocabulary, normally `ACTIVE` while work is in flight:
 
 ```
@@ -96,4 +106,4 @@ and match plan-docs' link rule so refs survive a standalone clone:
 On update, refresh the sections in place and keep the header `Related` current
 rather than appending a running log. Archive a completed status doc into
 `docs/status/archived/` once its workstream lands (mirror
-[plan-docs archival](../rules/plan-docs.md#archival)).
+[plan-docs archival](../../rules/plan-docs.md#archival)).

@@ -1,7 +1,17 @@
+---
+name: plan-with-linear
+description: Plan a Forestrie change against a Linear FOR issue and grill the plan against existing ADRs, ARCs, and domain language.
+when_to_use: The user wants to plan a feature or fix, mentions a FOR issue, or says "plan this with Linear".
+argument-hint: "[FOR-123 | description of the work]"
+---
+
 # plan-with-linear
 
 Plan a change with Linear issue tracking and a grilling session against existing
 docs and domain language.
+
+
+Arguments: `$ARGUMENTS`
 
 ## 1. Resolve or create Linear issue
 
@@ -22,8 +32,8 @@ Record the issue id (e.g. `FOR-1234`).
 
 | Source | When |
 |--------|------|
-| [forestrie-agents/AGENTS.md](../../AGENTS.md) | Bootstrap |
-| One [arc-context](../../arc-context/) file | Domain terms |
+| [forestrie-agents/AGENTS.md](../../../AGENTS.md) | Bootstrap |
+| One [arc-context](../../../arc-context/) file | Domain terms |
 | Repo `AGENTS.md` or `forest/agents/AGENTS.md` | Repo-specific routes |
 | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) | Shared vocabulary |
 | Relevant plan or ARC | If user named a path |
@@ -32,13 +42,13 @@ Do **not** bulk-load devdocs arc/adr trees or full repo doc trees.
 
 ## 3. Run grill-with-docs
 
-Follow [grill-with-docs](../../vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md):
+Follow [grill-with-docs](../../../vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md):
 
 - Interview relentlessly; one question at a time with recommended answers
 - Challenge terms against [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) and arc-context
 - Update repo `CONTEXT.md` or glossary docs lazily when terms crystallise
 - Offer ADRs only when hard to reverse, surprising, and trade-off driven — use
-  [adr-format.md](../rules/adr-format.md) for the doc itself, **not** the
+  [adr-format.md](../../rules/adr-format.md) for the doc itself, **not** the
   vendored `ADR-FORMAT.md` the skill links to
 
 For Forestrie repos, prefer updating:
@@ -50,8 +60,8 @@ For Forestrie repos, prefer updating:
 ## 4. Output
 
 Once the user approves the plan, run
-[persist-plan](../skills/persist-plan.md) to write it out per
-[plan-docs](../rules/plan-docs.md) (scope, numbering, header, location —
+[persist-plan](../persist-plan/SKILL.md) to write it out per
+[plan-docs](../../rules/plan-docs.md) (scope, numbering, header, location —
 repo `docs/plans/` or devdocs/plans for multi-repo work). Then produce:
 
 1. **Linear issue** updated with link to the persisted plan and acceptance criteria
@@ -61,9 +71,9 @@ repo `docs/plans/` or devdocs/plans for multi-repo work). Then produce:
 
 When the user approves the plan:
 
-- Branch name: `robin/for-<issue-no>-<short-desc>` — see [branch-naming](../rules/branch-naming.md)
+- Branch name: `robin/for-<issue-no>-<short-desc>` — see [branch-naming](../../rules/branch-naming.md)
 - Create worktree per repo `AGENTS.md` (`../.worktrees/<repo>-for-<issue>-<slug>`)
-- Invoke [tdd](../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) for vertical slices
-- Run [pre-commit-checks](./pre-commit-checks.md) before commit
+- Invoke [tdd](../../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) for vertical slices
+- Run [pre-commit-checks](../pre-commit-checks/SKILL.md) before commit
 
 Do not implement until the user confirms the plan.

@@ -1,3 +1,9 @@
+---
+name: fork-mandate
+description: Operator runbook the agent drives: fork a personal mandate instance and configure it against the Forestrie lane-b deployment.
+when_to_use: The user wants their own mandate instance, says "fork mandate", or is following mandate/FORKING.md.
+---
+
 # fork-mandate
 
 Walk a person through forking their own **mandate** instance and configuring it
@@ -23,7 +29,7 @@ or cost-incurring actions.
 3. **Never print, echo, or commit secrets.** Read/write them only through
    Doppler (`mandate-forestrie` project) or `wrangler secret put`. Redact tokens
    in any output you show the user. See the
-   [Linear API-key](../rules/) and repo secret rules.
+   [Linear API-key](../../rules/) and repo secret rules.
 4. **Work in the mandate repo.** `cd $(git rev-parse --show-toplevel)` must be
    the `forestrie/mandate` clone (or the user's fork of it). Use a worktree per
    the repo `AGENTS.md` only if you are changing code; a plain fork clone is fine
@@ -75,7 +81,7 @@ required items are present.
 
 | Prerequisite | Check | If missing |
 | ------------ | ----- | ---------- |
-| Tools: `git`, `gh`, `node`, `pnpm`, `task` (go-task), `doppler`, `wrangler`, `jq`, `curl` | `command -v <tool>` | Prompt to install (see [setup-clone](./setup-clone.md)) |
+| Tools: `git`, `gh`, `node`, `pnpm`, `task` (go-task), `doppler`, `wrangler`, `jq`, `curl` | `command -v <tool>` | Prompt to install (see [setup-clone](../setup-clone/SKILL.md)) |
 | Fork + clone of `forestrie/mandate` | `git remote -v` in cwd | `gh repo fork forestrie/mandate --clone` |
 | GitHub Packages auth for `@forestrie/delegation-cose` | root `.npmrc` + `NODE_AUTH_TOKEN` (`read:packages`) | `gh auth refresh -s read:packages -h github.com`; see mandate README "Workers deploy" |
 | `pnpm install` succeeds | build deps present | run it |

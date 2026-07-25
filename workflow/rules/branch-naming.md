@@ -24,7 +24,7 @@ Examples: `robin/for-167-onboard-design`, `robin/for-170-token-binding`.
   (e.g. parent `FOR-167`, branches `robin/for-167-request-api` and
   `robin/for-167-token-binding`).
 - Do not invent issue numbers — resolve or create the issue first via Linear MCP
-  (team **FOR**) or [plan-with-linear](../commands/plan-with-linear.md).
+  (team **FOR**) or [plan-with-linear](../skills/plan-with-linear/SKILL.md).
 
 ## Default user prefix
 

@@ -1,3 +1,9 @@
+---
+name: setup-clone
+description: Bootstrap a Forestrie engineering checkout on a new machine: clone layout, toolchain, Doppler, and per-repo agent wiring.
+when_to_use: The user is on a new machine, says "set up my checkout", "fresh clone", or is missing sibling Forestrie repos.
+---
+
 # setup-clone
 
 Bootstrap a Forestrie engineering checkout on a new machine.
@@ -37,7 +43,7 @@ gh repo clone forestrie/arbor
 # ... other repos as needed for your task
 ```
 
-Open [forestrie.code-workspace](../README.md) (or create one) with the repos you
+Open [forestrie.code-workspace](../../../README.md) (or create one) with the repos you
 use daily.
 
 ## 3. Secrets
@@ -85,6 +91,6 @@ Home clones stay on **`main`**. Feature work uses worktrees under
 invocation.
 
 For Claude Code, wire up
-[harness/claude-code.md § Hooks](../../harness/claude-code.md#hooks) in each
+[harness/claude-code.md § Hooks](../../../harness/claude-code.md#hooks) in each
 repo's `.claude/settings.json` so plan execution is blocked outside a
 worktree.
