@@ -49,3 +49,17 @@ delegation APIs, Playwright e2e.
 - Start **both** `@canopy/api` and `@canopy/forestrie-ingress` for DO routes locally
 - Local secrets: `packages/apps/canopy-api/.dev.vars` — not repo-root `.env`
 - E2E: Doppler project **canopy** outside npm scripts (see e2e-local-doppler rule)
+- **A window-less delegation entry is not malformed — it means *you* choose the
+  bounds.** ADR-0050 §2: the pending-delegation listing is uniform; every entry
+  is "a key you may delegate to", carrying a window for on-demand pendings and
+  **none** for the standing delegate key. Signers "handle every entry
+  identically", signing over a horizon and TTL of their choosing (conventionally
+  `mmrStart = 0`). There is no `kind` discriminator. Skipping or rejecting the
+  window-less entry stalls the log: the sealer's coverage-matched lease lookup
+  finds nothing covering its seal window and defers forever on `delegation
+  material pending`, while pollers that count only *windowed* entries report an
+  empty queue — so it reads as sealer slowness, not a signer bug. Advance
+  submissions must also carry the compact **on-chain signature**, or the lease
+  has no `OnchainProof` and the publisher cannot publish that log's checkpoints.
+  Two independent signers (the e2e kit and the mandate agent) each made this
+  exact defensive mistake, so treat it as a trap, not an edge case.
