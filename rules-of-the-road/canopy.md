@@ -59,3 +59,11 @@ Responses are CBOR except `/api/health` and scitt-configuration; statement
 status is async via 303 keyed on `contentHash`. **Why:** SCRAPI/SCITT interop is
 byte-exact — a JSON convenience path drifts from what the contract verifies.
 ⤷ specialises P16. [arc-context/canopy.md](../arc-context/canopy.md).
+
+### C9 — Keep the three control planes separated by authority source
+The **user** control plane authenticates by wallet challenge; **operator**
+actions live behind `/admin/api/`; **public sealing** (certificate verify) is
+unauthenticated-but-verified. A route in one plane MUST NOT accept another
+plane's authority. **Why:** each plane's authority source is different — mixing
+them lets one plane's credential act in another (FOR-129).
+[ARC-0023](https://github.com/forestrie/devdocs/blob/main/arc/arc-0023-wallet-challenge-control-plane-auth.md).

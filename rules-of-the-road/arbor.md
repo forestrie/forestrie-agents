@@ -34,7 +34,10 @@ ranger hash-routes each log to a fixed shard count (modulus), and one log stays
 in one goroutine within its shard — no per-log Durable Objects, no single global
 DO. Scale is shard count × replicas. **Why:** preserves per-log grouping and
 prevents intra-process massif-write contention while scaling horizontally.
-[ADR-0006](https://github.com/forestrie/devdocs/blob/main/archive/2601/adr/adr-0006-do-sharding.md).
+[ADR-0006](https://github.com/forestrie/devdocs/blob/main/archive/2601/adr/adr-0006-do-sharding.md),
+with the per-shard supplements: [ADR-0008](https://github.com/forestrie/devdocs/blob/main/adr/adr-0008-cf-do-ingress-consistent-hashing.md) (consistent hashing),
+[ADR-0009](https://github.com/forestrie/devdocs/blob/main/adr/adr-0009-cf-do-ingress-range-ack.md) (range ack),
+[ADR-0010](https://github.com/forestrie/devdocs/blob/main/adr/adr-0010-cf-do-ingress-fixed-visibility-timeout.md) (visibility timeout).
 
 ### A5 — Standing delegated sealing keys, derived at boot, nothing at rest
 Delegated sealing keys are per-log, per-window (MMR range), TTL-bounded, and
@@ -63,3 +66,11 @@ The custodian signs via KMS with per-log dynamic keys under a scoped IAM model;
 private key material MUST NOT leave KMS. **Why:** custody is the trust boundary —
 an exportable key defeats it.
 [ARC-0018](https://github.com/forestrie/devdocs/blob/main/archive/2603/arc/arc-0018-custodian-kms-iam-and-dynamic-keys.md) · [ADR-0033](https://github.com/forestrie/devdocs/blob/main/archive/2603/adr/adr-0033-custodian-key-service.md).
+
+### A9 — The Univocity service owns the off-chain grant store & authority correspondence
+The off-chain genesis + grant store (`services/univocity`) is the authority
+resolver: `logId → R` and grant → authority correspondence resolve there, not
+from operator-held or ad-hoc state. **Why:** authority resolution must trace to
+the Univocity-owned store bound to the on-chain root — sourcing it elsewhere
+re-internalises operator trust.
+⤷ specialises P14/P10. [ADR-0035](https://github.com/forestrie/devdocs/blob/main/adr/adr-0035-univocity-owned-grant-store-and-authority-correspondence.md).
