@@ -67,3 +67,18 @@ unauthenticated-but-verified. A route in one plane MUST NOT accept another
 plane's authority. **Why:** each plane's authority source is different — mixing
 them lets one plane's credential act in another (FOR-129).
 [ARC-0023](https://github.com/forestrie/devdocs/blob/main/archive/2606/arc/arc-0023-wallet-challenge-control-plane-auth.md).
+
+### C10 — register-grant payment keeps payer, registrar, and subject decoupled
+The x402 grant gate reads payment policy from the **parent** grant's committed
+flags (per-hierarchy, transparency-logged — not a per-child flag) and prices per
+child `maxHeight`; it never reads the payer's or subject's identity into
+authority. The registrar is the only trusted role (L1); the payer is any funded
+wallet (permissionless, EIP-3009), and who is on the hook for the burn is a
+routing choice, provable from the settled payment `from`. Exempt a hierarchy by
+**topology** (parent it under a bit-free authority log), never by an operator
+token. **Why:** collapsing payer→operator — or reaching for the ops-admin token —
+re-centralises what P6/U2 made permissionless and forecloses sponsorship/delegation.
+⤷ specialises P6 (see also U2, C3, C5, C7).
+[ARC-0029](https://github.com/forestrie/devdocs/blob/main/arc/arc-0029-derived-grant-policy-and-sender-bound-enforcement.md) ·
+[ADR-0062](https://github.com/forestrie/devdocs/blob/main/adr/adr-0062-canopy-derived-grant-flag-registry.md) ·
+[univocity ADR-0001](https://github.com/forestrie/univocity/blob/main/docs/adr/adr-0001-payer-attribution-permissionless-submission.md).
