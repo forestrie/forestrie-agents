@@ -6,6 +6,7 @@ Forestrie-specific skill extensions here — do not edit vendored files in place
 | Overlay | Purpose |
 |---------|---------|
 | [persist-plan.md](./persist-plan.md) | Persist an approved plan as a canonical `docs/plans/plan-NNNN-*.md` doc — see [plan-docs rule](../rules/plan-docs.md) |
+| [rules-of-the-road-review.md](./rules-of-the-road-review.md) | Check a diff/plan against the fundamental invariants in [rules-of-the-road/](../../rules-of-the-road/README.md) — the design-invariant core of a review |
 
 Install globally or per-repo per [harness/cursor.md](../../harness/cursor.md).
 

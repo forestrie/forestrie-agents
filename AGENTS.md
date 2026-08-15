@@ -11,8 +11,9 @@ this repository.
 
 1. **This file** — routing only (~2 min read)
 2. **One** [arc-context](./arc-context/) file — only if domain terms apply
-3. **Repo overlay** — `forest/agents/AGENTS.md` or root `AGENTS.md` in the working repo
-4. **Workflow** — only the invoked [command](./workflow/commands/) or [skill](./workflow/skills/)
+3. **Rules of the road** — for review/planning: [platform.md](./rules-of-the-road/platform.md) + the one repo file (see table below)
+4. **Repo overlay** — `forest/agents/AGENTS.md` or root `AGENTS.md` in the working repo
+5. **Workflow** — only the invoked [command](./workflow/commands/) or [skill](./workflow/skills/)
 
 **Precedence on conflict:** repo overlay → common `workflow/` → vendored → incubator (opt-in).
 
@@ -32,6 +33,28 @@ this repository.
 | Product, business, compliance, positioning | [arc-context/company.md](./arc-context/company.md) |
 
 If none apply, skip arc-context entirely.
+
+---
+
+## Rules of the road (review + planning guardrails)
+
+Distilled **fundamental** invariants — the guardrail set for code review and
+planning. Glossaries say what terms *mean*; these say what a change must not
+*break*. Load [rules-of-the-road/platform.md](./rules-of-the-road/platform.md)
+(general, always) **plus** the one repo file matching the code you touch:
+
+| Task touches | Also load |
+|--------------|-----------|
+| ranger, sealer, custodian, sharder | [rules-of-the-road/arbor.md](./rules-of-the-road/arbor.md) |
+| SCRAPI, ingress DO, x402, delegation coordinator | [rules-of-the-road/canopy.md](./rules-of-the-road/canopy.md) |
+| Solidity, checkpoints, grants, on-chain | [rules-of-the-road/univocity.md](./rules-of-the-road/univocity.md) |
+| BYOK operator UI, delegation agent, signer | [rules-of-the-road/mandate.md](./rules-of-the-road/mandate.md) |
+| Bun/citty CLIs, contract deploy, deploy-web | [rules-of-the-road/univocity-tools.md](./rules-of-the-road/univocity-tools.md) |
+| Terraform, GKE, DNS, storage, ingress | [rules-of-the-road/forest-1.md](./rules-of-the-road/forest-1.md) |
+| GitOps manifests, release qualify/promote | [rules-of-the-road/arbor-flux.md](./rules-of-the-road/arbor-flux.md) |
+
+Index and conventions: [rules-of-the-road/README.md](./rules-of-the-road/README.md).
+Cite rules by id (`P4`, `univocity/U3`) in findings and plans.
 
 ---
 

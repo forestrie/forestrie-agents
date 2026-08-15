@@ -32,6 +32,7 @@ Read selectively before reviewing the diff:
 | Source | When |
 | ------ | ---- |
 | [forestrie-agents/AGENTS.md](https://github.com/forestrie/forestrie-agents/blob/main/AGENTS.md) | Always — layer model, workflow index |
+| [rules-of-the-road/platform.md](../../rules-of-the-road/platform.md) + the one matching repo file | **Always** — fundamental invariants; run the [rules-of-the-road-review](../skills/rules-of-the-road-review.md) skill as the design-invariant pass |
 | Repo `forest/agents/AGENTS.md` or root `AGENTS.md` | Repo overlay and precedence |
 | [forestrie-agents/workflow/rules/](../rules/) | go-task, commits, TS/Go/Solidity rules, breaking-changes |
 | [forestrie-agents/vendored/matt-skills/skills/engineering/tdd/](../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Testability, coverage |
@@ -53,6 +54,10 @@ Read selectively before reviewing the diff:
 
 ### 1.3 Design invariants (read on demand)
 
+The fundamental invariants are already the distilled
+[rules-of-the-road](../../rules-of-the-road/README.md) loaded in §1.1 — check
+the diff against those **first**. Use the indexes below only when a finding
+needs the deeper rationale behind a rule (each rule links to its ADR/ARC).
 Select a **tight** subset from touched paths. Start at indexes; do not bulk-read
 devdocs.
 
