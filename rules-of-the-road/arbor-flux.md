@@ -36,4 +36,4 @@ lane-A → lane-B promotion promotes the *same* qualified artifact; the gate MUS
 assert offline receipt verification and fail on any missing **declared** spec
 (no silent spec skips). **Why:** build-once/test-many only holds if promotion
 never rebuilds and never quietly drops a spec.
-⤷ specialises P2. [ARC-0025](https://github.com/forestrie/devdocs/blob/main/arc/arc-0025-tiered-qa-and-promotion-gates.md).
+⤷ specialises P2. [ARC-0025](https://github.com/forestrie/devdocs/blob/main/archive/2606/arc/arc-0025-tiered-qa-and-promotion-gates.md).
