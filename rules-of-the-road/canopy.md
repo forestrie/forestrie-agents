@@ -66,4 +66,4 @@ actions live behind `/admin/api/`; **public sealing** (certificate verify) is
 unauthenticated-but-verified. A route in one plane MUST NOT accept another
 plane's authority. **Why:** each plane's authority source is different — mixing
 them lets one plane's credential act in another (FOR-129).
-[ARC-0023](https://github.com/forestrie/devdocs/blob/main/arc/arc-0023-wallet-challenge-control-plane-auth.md).
+[ARC-0023](https://github.com/forestrie/devdocs/blob/main/archive/2606/arc/arc-0023-wallet-challenge-control-plane-auth.md).

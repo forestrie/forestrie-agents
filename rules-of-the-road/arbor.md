@@ -35,9 +35,9 @@ in one goroutine within its shard — no per-log Durable Objects, no single glob
 DO. Scale is shard count × replicas. **Why:** preserves per-log grouping and
 prevents intra-process massif-write contention while scaling horizontally.
 [ADR-0006](https://github.com/forestrie/devdocs/blob/main/archive/2601/adr/adr-0006-do-sharding.md),
-with the per-shard supplements: [ADR-0008](https://github.com/forestrie/devdocs/blob/main/adr/adr-0008-cf-do-ingress-consistent-hashing.md) (consistent hashing),
-[ADR-0009](https://github.com/forestrie/devdocs/blob/main/adr/adr-0009-cf-do-ingress-range-ack.md) (range ack),
-[ADR-0010](https://github.com/forestrie/devdocs/blob/main/adr/adr-0010-cf-do-ingress-fixed-visibility-timeout.md) (visibility timeout).
+with the per-shard supplements: [ADR-0008](https://github.com/forestrie/devdocs/blob/main/archive/2601/adr/adr-0008-cf-do-ingress-consistent-hashing.md) (consistent hashing),
+[ADR-0009](https://github.com/forestrie/devdocs/blob/main/archive/2601/adr/adr-0009-cf-do-ingress-range-ack.md) (range ack),
+[ADR-0010](https://github.com/forestrie/devdocs/blob/main/archive/2601/adr/adr-0010-cf-do-ingress-fixed-visibility-timeout.md) (visibility timeout).
 
 ### A5 — Standing delegated sealing keys, derived at boot, nothing at rest
 Delegated sealing keys are per-log, per-window (MMR range), TTL-bounded, and
@@ -73,4 +73,4 @@ resolver: `logId → R` and grant → authority correspondence resolve there, no
 from operator-held or ad-hoc state. **Why:** authority resolution must trace to
 the Univocity-owned store bound to the on-chain root — sourcing it elsewhere
 re-internalises operator trust.
-⤷ specialises P14/P10. [ADR-0035](https://github.com/forestrie/devdocs/blob/main/adr/adr-0035-univocity-owned-grant-store-and-authority-correspondence.md).
+⤷ specialises P14/P10. [ADR-0035](https://github.com/forestrie/devdocs/blob/main/archive/2603/adr/adr-0035-univocity-owned-grant-store-and-authority-correspondence.md).
