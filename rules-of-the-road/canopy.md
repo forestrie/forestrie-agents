@@ -20,13 +20,25 @@ Grant POST checks an atomic `logId → R` index and returns 409 on conflict.
 enable grant replay.
 ⤷ specialises P14. [ADR-0036](https://github.com/forestrie/devdocs/blob/main/archive/2603/adr/adr-0036-global-logid-r-uniqueness.md).
 
-### C3 — register-statement: grant kind + signer binding, envelope against owner authority
-Require `isStatementRegistrationGrant(grant)` (bitmap `GF_DATA_LOG | GF_EXTEND`)
-and COSE `kid == statementSignerBindingBytes(grant)`; verify the statement
-envelope against the **`ownerLogId` authority key or its delegate**, never
-against `grantData`. **Why:** issuance authority (parent) and endorsed signer
-(`grantData`) are structurally distinct — collapsing them is a forgery vector.
-⤷ specialises P10. [ARC-0019 §6](https://github.com/forestrie/devdocs/blob/main/archive/2603/arc/arc-0019-grant-verification-model.md).
+### C3 — register-statement: grant kind + signer binding; canopy admission is THE leaf-signer enforcement point
+Require `isStatementRegistrationGrant(grant)` (bitmap `GF_DATA_LOG | GF_EXTEND`).
+Verify the **grant** (the `Forestrie-Grant` COSE Sign1) against the
+**`ownerLogId` authority key or its delegate**. Verify the **statement** under
+the signer the grant binds: COSE `kid == statementSignerBindingBytes(grant)` and
+the signature under the `grantData` key — **or**, when the statement carries a
+session-key endorsement (unprotected label `-65801`, ADR-0065), under the
+session key that endorsement names, after the endorsement itself verifies under
+the `grantData` root, UV per `GF_REQUIRES_USER_VERIFICATION`, within its
+validity window. The (kid binding, verify key) pair comes from exactly ONE
+source; a present-but-invalid endorsement is a 403 and never falls back.
+**canopy admission is the enforcement point for who may sign a leaf, for every
+custody shape** — nothing downstream (ranger, sealer, publisher, univocity)
+re-checks a leaf signer, and a client-side pre-flight (e.g. the thinker DO)
+never substitutes for it. **Why:** issuance authority (parent) and endorsed
+signer (`grantData`) are structurally distinct — collapsing them is a forgery
+vector; and admission is the last verifier on the path, so a fail-open here is a
+fail-open for the whole chain.
+⤷ specialises P10. [ARC-0019 §6](https://github.com/forestrie/devdocs/blob/main/archive/2603/arc/arc-0019-grant-verification-model.md) · [ADR-0065](https://github.com/forestrie/devdocs/blob/main/adr/adr-0065-endorsed-session-key-admission.md).
 
 ### C4 — Reject obsolete grant wire fields
 Reject wire-v0 grant maps carrying keys 7/8 (legacy signer/kind); `grantData` is
