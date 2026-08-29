@@ -73,10 +73,13 @@ trusted operator; point-in-time finality is the product.
 [ADR-0053](https://github.com/forestrie/devdocs/blob/main/archive/2607/adr/adr-0053-child-log-onboarding-parent-authorized.md) · product briefs.
 
 ### P10 — Grant verification is three-part and non-substitutable
-Verify **receipt inclusion** + **envelope (COSE Sign1) signature against the
-`ownerLogId` authority** + **statement-signer binding** (`kid` == the grant's
-binding). The issuance key (parent authority) is distinct from the endorsed
-signer key (`grantData`); NEVER verify the envelope against `grantData`.
+Verify **receipt inclusion** + **grant envelope (the `Forestrie-Grant` COSE
+Sign1) signature against the `ownerLogId` authority** + **statement-signer
+binding** (`kid` == the grant's binding, and the statement signature under that
+signer — `grantData`, or a session key the `grantData` root has endorsed,
+ADR-0065). The issuance key (parent authority) is distinct from the endorsed
+signer key (`grantData`); NEVER verify the *grant* envelope against `grantData`,
+and NEVER verify a *statement* against the parent authority.
 **Why:** each part blocks a different forgery — collapsing them opens
 replay/substitution.
 [ARC-0019 §§4–6](https://github.com/forestrie/devdocs/blob/main/archive/2603/arc/arc-0019-grant-verification-model.md).
