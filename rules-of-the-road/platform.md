@@ -5,7 +5,7 @@ alongside the one repo file that matches the code. Repo files specialise these
 into concrete checks — they never restate them.
 
 Reasoning links go to [devdocs](https://github.com/forestrie/devdocs) and the
-[receipt trust model](https://github.com/forestrie/forestrie-cli/blob/main/TRUST-MODEL.md).
+[receipt trust model](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md).
 
 ---
 
@@ -29,7 +29,7 @@ Split-view (accumulator) / sealing (signer) / authority (grant chain) are
 Never source the accumulator unauthenticated from the operator's own tile store.
 **Why:** most trust confusion comes from collapsing them, and sourcing state
 from the operator re-internalises the trust the log removes.
-[TRUST-MODEL.md](https://github.com/forestrie/forestrie-cli/blob/main/TRUST-MODEL.md).
+[TRUST-MODEL.md](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md).
 
 ### P4 — Non-equivocation is enforced by the immutable contract, not watchers
 Split-view protection is structural on-chain: the contract refuses to anchor an

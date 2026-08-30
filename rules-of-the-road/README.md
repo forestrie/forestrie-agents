@@ -47,4 +47,4 @@ choices; it is not an index of every ruling.
    ADR is superseded, the rule moves with it.
 
 Reasoning links point at [devdocs](https://github.com/forestrie/devdocs)
-ADRs/ARCs and the [forestrie-cli trust model](https://github.com/forestrie/forestrie-cli/blob/main/TRUST-MODEL.md).
+ADRs/ARCs and the [receipt trust model](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md).
