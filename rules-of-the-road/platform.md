@@ -23,13 +23,18 @@ never expires. **Why:** offline verification is the headline product claim;
 coupling verify to a live service silently falsifies it.
 [ADR-0045](https://github.com/forestrie/devdocs/blob/main/archive/2607/adr/adr-0045-receipt-verify-offline-contract.md).
 
-### P3 — Keep the three trust questions separate
-Split-view (accumulator) / sealing (signer) / authority (grant chain) are
-**independent**; "the receipt is valid" is meaningless without saying which.
-Never source the accumulator unauthenticated from the operator's own tile store.
+### P3 — Keep the four trust questions separate
+Split-view (accumulator) / sealing (signer) / authority (grant chain) /
+**attribution** (who was authorised to sign THIS leaf) are **independent**;
+"the receipt is valid" is meaningless without saying which. The first three
+concern the log, the fourth the leaf, and it is answered from the leaf's own
+bytes plus the on-chain root — so it composes with any verify anchor rather
+than sitting on the ladder. Never source the accumulator unauthenticated from
+the operator's own tile store.
 **Why:** most trust confusion comes from collapsing them, and sourcing state
 from the operator re-internalises the trust the log removes.
-[TRUST-MODEL.md](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md).
+[receipt trust model](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md)
+· [ADR-0065](https://github.com/forestrie/devdocs/blob/main/adr/adr-0065-endorsed-session-key-admission.md) (attribution).
 
 ### P4 — Non-equivocation is enforced by the immutable contract, not watchers
 Split-view protection is structural on-chain: the contract refuses to anchor an
