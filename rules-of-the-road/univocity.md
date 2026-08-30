@@ -15,7 +15,7 @@ in the parent log against the parent's on-chain accumulator, within the grant's
 size bounds — link by link to the bootstrap key bound at deploy. **Why:** this
 publish-time discharge is what lets any chain read stand in for the sealing and
 authority questions.
-⤷ specialises P4/P10. [ADR-0032](https://github.com/forestrie/devdocs/blob/main/archive/2602/adr/adr-0032-delegated-checkpoint-signature-verification.md) · [TRUST-MODEL §3](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md).
+⤷ specialises P4/P10. [ADR-0032](https://github.com/forestrie/devdocs/blob/main/archive/2602/adr/adr-0032-delegated-checkpoint-signature-verification.md) · [receipt trust model, question 3](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md#3-authority--is-this-log-authorised-back-to-the-genesis--bootstrap-key).
 
 ### U2 — publishCheckpoint is permissionless
 Never gate on `msg.sender`. Anyone holding a valid grant + signed checkpoint may
