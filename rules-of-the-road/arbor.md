@@ -40,12 +40,18 @@ with the per-shard supplements: [ADR-0008](https://github.com/forestrie/devdocs/
 [ADR-0010](https://github.com/forestrie/devdocs/blob/main/archive/2601/adr/adr-0010-cf-do-ingress-fixed-visibility-timeout.md) (visibility timeout).
 
 ### A5 — Standing delegated sealing keys, derived at boot, nothing at rest
-Delegated sealing keys are per-log, per-window (MMR range), TTL-bounded, and
-KMS-MAC-derived at boot so they re-derive deterministically after pod churn. No
+The sealer's standing delegate keys are shared across logs and KMS-MAC-derived
+at boot, keyed by an epoch and an index and by nothing log-specific, so they
+re-derive deterministically after pod churn; the per-log, per-window (MMR
+range), TTL-bounded binding is on the delegation certificate, not the key. No
 long-lived private key is persisted, and the operator never holds the user root
-`K(L)`. **Why:** certificates survive restarts without on-demand signer latency,
-and BYOK custody is preserved.
-⤷ specialises P6 (BYOK). [ADR-0050](https://github.com/forestrie/devdocs/blob/main/archive/2607/adr/adr-0050-delegation-in-advance.md) · [ARC-0022 §3](https://github.com/forestrie/devdocs/blob/main/archive/2606/arc/arc-0022-byok-user-log-delegation-and-operator-hosted-sealing.md).
+`K(L)`. **The epoch is the MAC key version number**: epoch *e* is derived under
+`cryptoKeyVersions/<e>`, fixed by construction and never chosen from listing
+state, so a key-version rotation and an epoch bump are one act and the N/N−1
+overlap covers it; the MAC key never auto-rotates. **Why:** certificates survive
+restarts and rotations without on-demand signer latency, and BYOK custody is
+preserved.
+⤷ specialises P6 (BYOK). [ADR-0050](https://github.com/forestrie/protocol/blob/main/decisions/adr-0050-delegation-in-advance.md) (amendment 2026-09-26) · [ARC-0022 §3](https://github.com/forestrie/devdocs/blob/main/archive/2606/arc/arc-0022-byok-user-log-delegation-and-operator-hosted-sealing.md) · runbook: devdocs ops-0016.
 
 ### A6 — Resolve `(chainId, contract)` from public R2 genesis
 The sealer and publisher resolve each forest's chain binding from public R2
