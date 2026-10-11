@@ -1,26 +1,14 @@
-# sync/arbor.manifest — committed agent layer for forestrie/arbor: Go services on GKE.
+# sync/arbor.manifest — agent wiring for forestrie/arbor: Go services on GKE.
 # Apply: agentfiles sync <path-to-arbor> --manifest <this file>
 # Format: see sync/README.md. A relative 'source' resolves against this file's directory.
+#
+# Public repos get no copies: the plugins below arrive live, in
+# terminal sessions from the forestrie profile and in cloud sessions from the
+# SessionStart install hook that sync writes. arbor owns its rules of the road
+# (.claude/rules/rules-of-the-road-arbor.md).
 
 source ..
 
-# Plugins for terminal collaborators -> .claude/settings.json
 marketplace forestrie-agents forestrie/forestrie-agents
 plugin forestrie-core@forestrie-agents
 plugin mattpocock-skills@forestrie-agents
-
-# Always-on and path-scoped team rules -> .claude/rules/<name>.md
-rule workflow/rules/commit-conventions/SKILL.md commit-conventions.md
-rule workflow/rules/branch-naming/SKILL.md branch-naming.md
-rule workflow/rules/breaking-changes/SKILL.md breaking-changes.md
-rule workflow/rules/plan-docs/SKILL.md plan-docs.md
-rule workflow/rules/adr-format/SKILL.md adr-format.md
-rule workflow/rules/go-comments/SKILL.md go-comments.md
-rule workflow/rules/go-task-over-shell/SKILL.md go-task-over-shell.md
-
-# Rules of the road: platform plus this repo's file -> .claude/rules/
-rule rules-of-the-road/platform.md rules-of-the-road-platform.md
-rule rules-of-the-road/arbor.md rules-of-the-road-arbor.md
-
-# Skills vendored into .agents/skills (+ .claude/skills symlinks) for cloud sessions and other harnesses
-skill review-changes rules-of-the-road-review pre-commit-checks save-status persist-plan arc-arbor
