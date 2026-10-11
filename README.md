@@ -18,6 +18,27 @@ markdown for Cursor, Claude Code, and other coding agents.
 | [incubator/](./incubator/) | Provisional per-engineer proposals |
 | [harness/](./harness/) | Per-harness install notes |
 
+## Install as Claude Code plugins
+
+This repo is a Claude Code plugin marketplace (`.claude-plugin/marketplace.json`)
+with two plugins:
+
+| Plugin | Provides |
+|--------|----------|
+| `forestrie-core` | team workflow skills (`/forestrie-core:review-changes`, `…:triage`, `…:save-status`, …), team rules as path-scoped background skills, the `require-worktree` hook |
+| `mattpocock-skills` | pinned upstream `tdd`, `diagnose`, `grill-with-docs` with tracked patches |
+
+```bash
+claude plugin marketplace add forestrie/forestrie-agents     # or a local checkout path
+claude plugin install forestrie-core@forestrie-agents
+claude plugin install mattpocock-skills@forestrie-agents
+```
+
+A marketplace added from a local checkout loads plugins in place, so edits are
+live after `/reload-plugins`. Cloud sessions never load plugins; a repo that
+needs these skills there commits a synced copy (see
+[agentfiles plan 2610-01](https://github.com/robinbryce/agentfiles/tree/robin/agent-config-reorg/docs/plans/plan-2610-01-agent-config-reorg)).
+
 ## Layer model
 
 1. **Repo overlay** — `forest/agents/` in each Forestrie repo (wins on conflict)

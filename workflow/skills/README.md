@@ -14,6 +14,7 @@ command `/<name>` in Claude Code, Cursor, and pi alike.
 | [/triage](./triage/SKILL.md) | Issue triage |
 | [/fork-mandate](./fork-mandate/SKILL.md) | Fork a mandate instance against lane-b |
 | [/save-status](./save-status/SKILL.md) | Checkpoint work in flight for a fresh session |
+| [/rules-of-the-road-review](./rules-of-the-road-review/SKILL.md) | Check a diff/plan against the fundamental invariants in [rules-of-the-road/](../../rules-of-the-road/README.md) — the design-invariant core of a review |
 
 Pinned upstream skills install alongside these from
 [vendored/matt-skills/](../../vendored/matt-skills/): `/tdd`, `/diagnose`,

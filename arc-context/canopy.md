@@ -30,7 +30,9 @@ delegation APIs, Playwright e2e.
 | Agent router | [AGENTS.md](https://github.com/forestrie/canopy/blob/main/AGENTS.md) |
 | E2E / Doppler | [docs/agents/e2e.md](https://github.com/forestrie/canopy/blob/main/docs/agents/e2e.md) |
 | Grant verification map | [docs/arc/canopy-grant-verification-implementation.md](https://github.com/forestrie/canopy/blob/main/docs/arc/canopy-grant-verification-implementation.md) |
-| x402 architecture | [devdocs ARC-0015](https://github.com/forestrie/devdocs/blob/main/arc/arc-0015-x402-settlement-architecture.md) |
+| Fee accounts / metering | [devdocs ADR-0059](https://github.com/forestrie/devdocs/blob/main/archive/2607/adr/adr-0059-instance-root-fee-accounts.md) — every univocity instance root is its own fee account; supersedes the ancestry-walk model |
+| Onboard grant APIs & fee tracing | [devdocs ARC-0026](https://github.com/forestrie/devdocs/blob/main/archive/2607/arc/arc-0026-onboard-grant-apis-and-fee-tracing.md) |
+| x402 architecture (historical) | [devdocs ARC-0015](https://github.com/forestrie/devdocs/blob/main/archive/2601/arc/arc-0015-x402-settlement-architecture.md) — SUPERSEDED; progression in the [payments theme index](https://github.com/forestrie/devdocs/blob/main/archive/INDEX-payments-fees.md) |
 | System testing | [devdocs ARC-0024](https://github.com/forestrie/devdocs/blob/main/arc/arc-0024-system-testing-architecture.md) |
 
 ## Platform cross-links
@@ -39,7 +41,7 @@ delegation APIs, Playwright e2e.
 |--------|-------|
 | Sequencing / signing (GKE) | [arbor.md](./arbor.md) |
 | On-chain checkpoints | [univocity.md](./univocity.md) |
-| Grant verification model | [devdocs ARC-0019](https://github.com/forestrie/devdocs/blob/main/arc/arc-0019-grant-verification-model.md) |
+| Grant verification model | [devdocs ARC-0019](https://github.com/forestrie/devdocs/blob/main/archive/2603/arc/arc-0019-grant-verification-model.md) |
 | MMR / COSE receipts | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) |
 
 ## Gotchas
@@ -47,3 +49,17 @@ delegation APIs, Playwright e2e.
 - Start **both** `@canopy/api` and `@canopy/forestrie-ingress` for DO routes locally
 - Local secrets: `packages/apps/canopy-api/.dev.vars` — not repo-root `.env`
 - E2E: Doppler project **canopy** outside npm scripts (see e2e-local-doppler rule)
+- **A window-less delegation entry is not malformed — it means *you* choose the
+  bounds.** ADR-0050 §2: the pending-delegation listing is uniform; every entry
+  is "a key you may delegate to", carrying a window for on-demand pendings and
+  **none** for the standing delegate key. Signers "handle every entry
+  identically", signing over a horizon and TTL of their choosing (conventionally
+  `mmrStart = 0`). There is no `kind` discriminator. Skipping or rejecting the
+  window-less entry stalls the log: the sealer's coverage-matched lease lookup
+  finds nothing covering its seal window and defers forever on `delegation
+  material pending`, while pollers that count only *windowed* entries report an
+  empty queue — so it reads as sealer slowness, not a signer bug. Advance
+  submissions must also carry the compact **on-chain signature**, or the lease
+  has no `OnchainProof` and the publisher cannot publish that log's checkpoints.
+  Two independent signers (the e2e kit and the mandate agent) each made this
+  exact defensive mistake, so treat it as a trap, not an edge case.

@@ -50,10 +50,11 @@ Full domain language: [devdocs/glossary.md](https://github.com/forestrie/devdocs
 
 | Topic | Path |
 |-------|------|
-| x402 settlement | [devdocs ARC-0015](https://github.com/forestrie/devdocs/blob/main/arc/arc-0015-x402-settlement-architecture.md) |
-| Checkpoint incentivisation | [devdocs ARC-0016](https://github.com/forestrie/devdocs/blob/main/arc/arc-0016-checkpoint-incentivisation-model.md) |
+| Fee accounts / metering | [devdocs ADR-0059](https://github.com/forestrie/devdocs/blob/main/archive/2607/adr/adr-0059-instance-root-fee-accounts.md) — every univocity instance root is its own fee account |
+| x402 settlement (historical) | [devdocs ARC-0015](https://github.com/forestrie/devdocs/blob/main/archive/2601/arc/arc-0015-x402-settlement-architecture.md) — SUPERSEDED; progression in the [payments theme index](https://github.com/forestrie/devdocs/blob/main/archive/INDEX-payments-fees.md) |
+| Checkpoint incentivisation | [devdocs ARC-0016](https://github.com/forestrie/devdocs/blob/main/archive/2602/arc/arc-0016-checkpoint-incentivisation-model.md) |
 | Fee distribution / hierarchy | [devdocs ARC-0017](https://github.com/forestrie/devdocs/blob/main/arc/arc-0017-hierarchical-authority-logs-and-fee-distribution.md) |
-| Reputation model | [devdocs ARC-0020](https://github.com/forestrie/devdocs/blob/main/arc/arc-0020-incentivisation-and-reputation-model.md) |
+| Reputation model | [devdocs ARC-0020](https://github.com/forestrie/devdocs/blob/main/archive/2606/arc/arc-0020-incentivisation-and-reputation-model.md) |
 
 ## Linear
 

@@ -1,17 +1,21 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "forestrie-agents",
-  "description": "Shared agent guidance for Forestrie org development. Optional Claude Code plugin view over the same skills bin/forestrie-agents-sync installs for Cursor and pi.",
-  "owner": {
-    "name": "Forestrie",
-    "url": "https://github.com/forestrie"
-  },
+  "description": "Forestrie team agent guidance as Claude Code plugins: workflow skills, path-scoped team rules, the worktree guardrail, and the pinned engineering skills.",
+  "owner": { "name": "Forestrie", "url": "https://github.com/forestrie" },
   "plugins": [
     {
-      "name": "forestrie-agents",
+      "name": "forestrie-core",
       "source": "./",
-      "description": "Forestrie team workflow skills (review-changes, pre-commit-checks, plan-with-linear, persist-plan, triage, setup-clone, fork-mandate, save-status), the path-scoped team rules, and the pinned matt-skills engineering set.",
+      "description": "/forestrie-core:review-changes, triage, save-status, persist-plan, plan-with-linear, rules-of-the-road-review and more; team rules as path-scoped background skills; require-worktree hook.",
       "category": "workflow"
+    },
+    {
+      "name": "mattpocock-skills",
+      "source": "./vendored/matt-skills",
+      "description": "Pinned upstream engineering skills (tdd, diagnose, grill-with-docs) from mattpocock/skills with Forestrie's tracked patches; see vendored/matt-skills/VENDOR.md.",
+      "category": "engineering",
+      "skills": ["./skills/engineering/"]
     }
   ]
 }
