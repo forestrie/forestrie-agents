@@ -59,8 +59,11 @@ profile, and from each repo's `AGENTS.md`, `.claude/rules/` and
 - **Upstream, read-only unless asked:** `aws-sdk-go-v2` (aws/aws-sdk-go-v2),
   `matt-skills` (mattpocock/skills, the vendoring source for forestrie-agents).
 - **Not git clones:** `curator` (Cursor multi-root harness folder),
-  `docs-canopy`, `forestrie-ops`, `helm-charts`, `gitapp`, `media`, `offcuts`.
-  Use them only when the prompt points at them.
+  `docs-canopy`, `forestrie-ops`, `helm-charts`, `gitapp`, `media`, `offcuts`,
+  `univocity-security-review-2026-09-19`. Use them only when the prompt points
+  at them.
+- **Not Forestrie:** `git-bootstrap` (robinbryce/git-bootstrap), `just-agents`
+  (SentientDogs/just-agents). Ignore unless asked.
 
 ## Working here
 

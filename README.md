@@ -37,4 +37,4 @@ re-sync the org repos afterwards.
 4. **Incubator** — opt-in only; never loaded by default
 
 The design behind this layout is
-[agentfiles plan 2610-01](https://github.com/robinbryce/agentfiles/tree/robin/agent-config-reorg/docs/plans/plan-2610-01-agent-config-reorg).
+[agentfiles plan 2610-01](https://github.com/robinbryce/agentfiles/tree/8b60ee4a/docs/plans/plan-2610-01-agent-config-reorg).
