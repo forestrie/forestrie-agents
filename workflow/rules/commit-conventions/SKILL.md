@@ -1,6 +1,6 @@
 ---
 name: commit-conventions
-description: Forestrie commit message limits: title <=79 chars, body lines <=72, no Co-Authored-By, repository-configured author only.
+description: "Forestrie commit message limits: title <=79 chars, body lines <=72, no Co-Authored-By, repository-configured author only."
 when_to_use: Writing a commit message in a Forestrie org repository.
 user-invocable: false
 ---

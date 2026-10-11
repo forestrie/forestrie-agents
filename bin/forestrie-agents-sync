@@ -58,6 +58,7 @@ add_source() { [ -d "$1" ] && SOURCES+=("$1") || true; }
 add_source "$AGENTS_REPO/vendored/matt-skills/skills/engineering"   # pinned upstream
 add_source "$AGENTS_REPO/workflow/rules"                            # team rules
 add_source "$AGENTS_REPO/workflow/skills"                           # team standard
+add_source "$AGENTS_REPO/arc-context"                               # domain glossaries
 add_source "$REPO/forest/agents/rules"                              # repo overlay
 add_source "$REPO/forest/agents/skills"                             # repo overlay
 [ "${#SOURCES[@]}" -gt 0 ] || die "no skill sources found under $AGENTS_REPO"

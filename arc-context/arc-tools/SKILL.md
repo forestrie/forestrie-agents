@@ -1,3 +1,10 @@
+---
+name: arc-tools
+description: univocity-tools domain glossary. Use when a task touches Cart, contract-artefacts, or the deploy CLIs (Bun/citty).
+when_to_use: "Cart, contract-artefacts, citty CLI, Bun.spawn, forge exec, deploy-web, CREATE3 config."
+user-invocable: false
+---
+
 # arc-context: tools (univocity-tools)
 
 Minimal glossary for **univocity-tools** — Bun/TypeScript CLIs for contract

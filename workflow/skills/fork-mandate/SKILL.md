@@ -1,6 +1,6 @@
 ---
 name: fork-mandate
-description: Operator runbook the agent drives: fork a personal mandate instance and configure it against the Forestrie lane-b deployment.
+description: "Operator runbook the agent drives: fork a personal mandate instance and configure it against the Forestrie lane-b deployment."
 when_to_use: The user wants their own mandate instance, says "fork mandate", or is following mandate/FORKING.md.
 ---
 

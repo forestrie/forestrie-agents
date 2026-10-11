@@ -1,6 +1,6 @@
 ---
 name: branch-naming
-description: Forestrie branch naming: <user>/for-<issue-no>-<short-desc>, Linear team key FOR implied.
+description: "Forestrie branch naming: <user>/for-<issue-no>-<short-desc>, Linear team key FOR implied."
 when_to_use: Creating a branch or worktree, or naming one in a plan or PR, in a Forestrie repo.
 user-invocable: false
 ---

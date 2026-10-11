@@ -1,0 +1,27 @@
+# sync/canopy.manifest — committed agent layer for forestrie/canopy: SCRAPI Workers API (TypeScript).
+# Apply: agentfiles sync <path-to-canopy> --manifest <this file>
+# Format: see sync/README.md. A relative 'source' resolves against this file's directory.
+
+source ..
+
+# Plugins for terminal collaborators -> .claude/settings.json
+marketplace forestrie-agents forestrie/forestrie-agents
+plugin forestrie-core@forestrie-agents
+plugin mattpocock-skills@forestrie-agents
+
+# Always-on and path-scoped team rules -> .claude/rules/<name>.md
+rule workflow/rules/commit-conventions/SKILL.md commit-conventions.md
+rule workflow/rules/branch-naming/SKILL.md branch-naming.md
+rule workflow/rules/breaking-changes/SKILL.md breaking-changes.md
+rule workflow/rules/plan-docs/SKILL.md plan-docs.md
+rule workflow/rules/adr-format/SKILL.md adr-format.md
+rule workflow/rules/typescript-comments/SKILL.md typescript-comments.md
+rule workflow/rules/types-single-responsibility/SKILL.md types-single-responsibility.md
+rule workflow/rules/source-order-call-graph/SKILL.md source-order-call-graph.md
+
+# Rules of the road: platform plus this repo's file -> .claude/rules/
+rule rules-of-the-road/platform.md rules-of-the-road-platform.md
+rule rules-of-the-road/canopy.md rules-of-the-road-canopy.md
+
+# Skills vendored into .agents/skills (+ .claude/skills symlinks) for cloud sessions and other harnesses
+skill review-changes rules-of-the-road-review pre-commit-checks save-status persist-plan arc-canopy

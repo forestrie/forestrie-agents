@@ -42,11 +42,11 @@ Read selectively before reviewing the diff:
 | Source | When |
 | ------ | ---- |
 | [forestrie-agents/AGENTS.md](https://github.com/forestrie/forestrie-agents/blob/main/AGENTS.md) | Always — layer model, workflow index |
-| [rules-of-the-road/platform.md](../../rules-of-the-road/platform.md) + the one matching repo file | **Always** — fundamental invariants; run the [rules-of-the-road-review](../skills/rules-of-the-road-review.md) skill as the design-invariant pass |
+| [Rules of the road](https://github.com/forestrie/forestrie-agents/tree/main/rules-of-the-road): `platform.md` + the one matching repo file (already loaded as `.claude/rules/rules-of-the-road-*.md` in a synced repo) | **Always** — fundamental invariants; run the [rules-of-the-road-review](../rules-of-the-road-review/SKILL.md) skill as the design-invariant pass |
 | Repo `forest/agents/AGENTS.md` or root `AGENTS.md` | Repo overlay and precedence |
 | [forestrie-agents/workflow/rules/](../../rules/) | go-task, commits, TS/Go/Solidity rules, breaking-changes |
 | [forestrie-agents/vendored/matt-skills/skills/engineering/tdd/](../../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Testability, coverage |
-| One [arc-context](../../../arc-context/) file | Domain terms for touched area |
+| The matching `arc-*` glossary skill (`arc-canopy`, `arc-arbor`, `arc-univocity`, `arc-infra`, `arc-mandate`, `arc-tools`, `arc-company`) | Domain terms for touched area |
 | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) | Shared vocabulary |
 
 ### 1.2 Repo-specific routers (read one matching repo)
@@ -65,7 +65,7 @@ Read selectively before reviewing the diff:
 ### 1.3 Design invariants (read on demand)
 
 The fundamental invariants are already the distilled
-[rules-of-the-road](../../rules-of-the-road/README.md) loaded in §1.1 — check
+[rules-of-the-road](https://github.com/forestrie/forestrie-agents/tree/main/rules-of-the-road) loaded in §1.1 — check
 the diff against those **first**. Use the indexes below only when a finding
 needs the deeper rationale behind a rule (each rule links to its ADR/ARC).
 Select a **tight** subset from touched paths. Start at indexes; do not bulk-read

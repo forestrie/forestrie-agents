@@ -1,10 +1,10 @@
 # Rules of the road — arbor (Go services)
 
 ranger, sealer, custodian, sharder, univocity HTTP service. Load with
-[platform.md](./platform.md); these do not restate it. `⤷` = specialises a
+[platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md); these do not restate it. `⤷` = specialises a
 platform rule into a concrete check.
 
-Glossary/links: [arc-context/arbor.md](../arc-context/arbor.md).
+Glossary/links: [`arc-arbor` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-arbor/SKILL.md).
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: go-comments
-description: Go comment conventions for arbor and the shared Go libraries: package comments, exported symbol docs, and signposting cross-repo wire contracts instead of duplicating devdocs prose.
+description: "Go comment conventions for arbor and the shared Go libraries: package comments, exported symbol docs, and signposting cross-repo wire contracts instead of duplicating devdocs prose."
 when_to_use: Writing or reviewing Go code in arbor or go-merklelog / go-univocity / go-sigv4.
 paths: ["**/*.go"]
 user-invocable: false

@@ -1,6 +1,6 @@
 ---
 name: setup-clone
-description: Bootstrap a Forestrie engineering checkout on a new machine: clone layout, toolchain, Doppler, and per-repo agent wiring.
+description: "Bootstrap a Forestrie engineering checkout on a new machine: clone layout, toolchain, Doppler, and per-repo agent wiring."
 when_to_use: The user is on a new machine, says "set up my checkout", "fresh clone", or is missing sibling Forestrie repos.
 ---
 

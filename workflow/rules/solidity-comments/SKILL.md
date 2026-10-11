@@ -1,6 +1,6 @@
 ---
 name: solidity-comments
-description: Solidity comment conventions for univocity: NatSpec on exported functions, signposting crypto libraries, and linking the platform auth model and MMR wire format.
+description: "Solidity comment conventions for univocity: NatSpec on exported functions, signposting crypto libraries, and linking the platform auth model and MMR wire format."
 when_to_use: Writing or reviewing Solidity in univocity src/, script/, or test/.
 paths: ["**/*.sol"]
 user-invocable: false

@@ -37,7 +37,7 @@ Arguments: `$ARGUMENTS`
 ## What the agent does
 
 1. **Establish the workstream** from the hints (or the session, as above).
-   Note the [arc-context](../../../arc-context/) slice(s) the work touches
+   Note the `arc-*` glossary skill(s) the work touches
    (canopy / arbor / univocity / infra / mandate / tools) so the next agent
    loads the right domain terms.
 

@@ -33,7 +33,7 @@ Record the issue id (e.g. `FOR-1234`).
 | Source | When |
 |--------|------|
 | [forestrie-agents/AGENTS.md](../../../AGENTS.md) | Bootstrap |
-| One [arc-context](../../../arc-context/) file | Domain terms |
+| The matching `arc-*` glossary skill | Domain terms |
 | Repo `AGENTS.md` or `forest/agents/AGENTS.md` | Repo-specific routes |
 | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) | Shared vocabulary |
 | Relevant plan or ARC | If user named a path |
@@ -45,7 +45,7 @@ Do **not** bulk-load devdocs arc/adr trees or full repo doc trees.
 Follow [grill-with-docs](../../../vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md):
 
 - Interview relentlessly; one question at a time with recommended answers
-- Challenge terms against [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) and arc-context
+- Challenge terms against [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) and the `arc-*` glossary skill
 - Update repo `CONTEXT.md` or glossary docs lazily when terms crystallise
 - Offer ADRs only when hard to reverse, surprising, and trade-off driven — use
   [adr-format](../../rules/adr-format/SKILL.md) for the doc itself, **not** the

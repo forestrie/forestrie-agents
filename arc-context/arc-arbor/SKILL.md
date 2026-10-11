@@ -1,3 +1,10 @@
+---
+name: arc-arbor
+description: Arbor domain glossary (Go services on GKE). Use when a task touches ranger, sealer, custodian, the grant store, or GKE services.
+when_to_use: "Queue consumers, sealing, KMS signing, grant store, shard assignments, GKE workloads, Go service tests."
+user-invocable: false
+---
+
 # arc-context: arbor (GKE services)
 
 Minimal glossary for **arbor** — Go microservices: ranger, sealer, custodian,
@@ -54,9 +61,9 @@ these paths locally.
 
 | Domain | Where |
 |--------|-------|
-| Ingress / API | [canopy.md](./canopy.md) |
-| GitOps deploy | [infra.md](./infra.md) |
-| On-chain verification | [univocity.md](./univocity.md) |
+| Ingress / API | [arc-canopy](../arc-canopy/SKILL.md) |
+| GitOps deploy | [arc-infra](../arc-infra/SKILL.md) |
+| On-chain verification | [arc-univocity](../arc-univocity/SKILL.md) |
 | MMR / COSE profile | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) |
 
 ## Gotchas

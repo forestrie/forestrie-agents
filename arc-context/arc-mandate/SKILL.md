@@ -1,3 +1,10 @@
+---
+name: arc-mandate
+description: Mandate domain glossary (BYOK operator). Use when a task touches the BYOK operator UI, the delegation agent, or the mandate signer.
+when_to_use: "Operator UI, session exchange, delegation signing, browser e2e, Privy auth in deploy-web."
+user-invocable: false
+---
+
 # arc-context: mandate (BYOK operator)
 
 Minimal glossary for **mandate** — BYOK Univocity instance management (operator
@@ -27,7 +34,7 @@ Privy auth in deploy-web.
 | Agent router | [AGENTS.md](https://github.com/forestrie/mandate/blob/main/AGENTS.md) |
 | UI browser e2e plan | [docs/plans/plan-0047-ui-browser-e2e.md](https://github.com/forestrie/mandate/blob/main/docs/plans/plan-0047-ui-browser-e2e.md) |
 | Delegation (platform) | [devdocs glossary — BYOK](https://github.com/forestrie/devdocs/blob/main/glossary.md) |
-| Canopy delegation coordinator | [canopy.md](./canopy.md) |
+| Canopy delegation coordinator | [arc-canopy](../arc-canopy/SKILL.md) |
 
 ## Sibling repos
 
@@ -48,4 +55,4 @@ Privy auth in deploy-web.
   Submissions must also include the compact **on-chain signature**, or the
   lease has no `OnchainProof` and the publisher cannot publish that log's
   checkpoints (ADR-0050 review V3, coordinator C5). Same trap as the canopy
-  e2e kit hit — see [canopy.md](./canopy.md) Gotchas.
+  e2e kit hit — see [arc-canopy](../arc-canopy/SKILL.md) Gotchas.

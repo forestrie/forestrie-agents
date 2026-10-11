@@ -1,10 +1,10 @@
 # Rules of the road — canopy (SCRAPI edge)
 
 Cloudflare Workers: SCRAPI API, forestrie-ingress (SequencingQueue DO), x402
-settlement, delegation coordinator. Load with [platform.md](./platform.md).
+settlement, delegation coordinator. Load with [platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md).
 `⤷` = specialises a platform rule.
 
-Glossary/links: [arc-context/canopy.md](../arc-context/canopy.md).
+Glossary/links: [`arc-canopy` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-canopy/SKILL.md).
 
 ---
 
@@ -70,7 +70,7 @@ independence — the operator is a fungible pipe, it does not confer authority.
 Responses are CBOR except `/api/health` and scitt-configuration; statement
 status is async via 303 keyed on `contentHash`. **Why:** SCRAPI/SCITT interop is
 byte-exact — a JSON convenience path drifts from what the contract verifies.
-⤷ specialises P16. [arc-context/canopy.md](../arc-context/canopy.md).
+⤷ specialises P16. [`arc-canopy` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-canopy/SKILL.md).
 
 ### C9 — Keep the three control planes separated by authority source
 The **user** control plane authenticates by wallet challenge; **operator**

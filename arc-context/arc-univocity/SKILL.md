@@ -1,3 +1,10 @@
+---
+name: arc-univocity
+description: Univocity domain glossary (on-chain). Use when a task touches Solidity, checkpoints, grants, or on-chain Univocity.
+when_to_use: "Checkpoints, grants, authority logs, ImutableUnivocity, CREATE3 deploy, Foundry tests, Slither."
+user-invocable: false
+---
+
 # arc-context: univocity (on-chain)
 
 Minimal glossary for **univocity** — Solidity contracts for on-chain split-view

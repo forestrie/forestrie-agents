@@ -1,3 +1,10 @@
+---
+name: arc-canopy
+description: Canopy domain glossary (SCRAPI edge). Use when a task touches the SCRAPI API, Workers, x402, or delegation DOs.
+when_to_use: "Workers, SCRAPI routes, SequencingQueue DO, R2, Queues, x402, delegation APIs, Playwright e2e."
+user-invocable: false
+---
+
 # arc-context: canopy (SCRAPI edge)
 
 Minimal glossary for **canopy** — Cloudflare Workers SCRAPI API, ingress DOs,
@@ -39,8 +46,8 @@ delegation APIs, Playwright e2e.
 
 | Domain | Where |
 |--------|-------|
-| Sequencing / signing (GKE) | [arbor.md](./arbor.md) |
-| On-chain checkpoints | [univocity.md](./univocity.md) |
+| Sequencing / signing (GKE) | [arc-arbor](../arc-arbor/SKILL.md) |
+| On-chain checkpoints | [arc-univocity](../arc-univocity/SKILL.md) |
 | Grant verification model | [devdocs ARC-0019](https://github.com/forestrie/devdocs/blob/main/archive/2603/arc/arc-0019-grant-verification-model.md) |
 | MMR / COSE receipts | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) |
 

@@ -9,7 +9,7 @@ argument-hint: "[diff ref | plan path]"
 
 Check a diff (or a plan) against Forestrie's **fundamental invariants** — the
 distilled guardrail set in
-[rules-of-the-road/](../../../rules-of-the-road/README.md). Use this as the
+[rules-of-the-road/](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/README.md). Use this as the
 design-invariant pass of a code review, or standalone when you only want the
 "does this break something load-bearing?" check.
 
@@ -19,19 +19,26 @@ tests, Linear follow-ups) — it is its design-invariant core, made reusable.
 
 ## 1. Load the guardrails (auto)
 
-Always load [platform.md](../../../rules-of-the-road/platform.md). Then load the
-**one** repo file matching the changed paths — never more than one unless the
-change is genuinely cross-repo:
+You need [platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md) plus the **one** repo file matching
+the changed paths — never more than one unless the change is genuinely
+cross-repo. Find them in this order:
+
+1. **Already in context.** A repo synced by `agentfiles sync` commits them as
+   `.claude/rules/rules-of-the-road-platform.md` and
+   `.claude/rules/rules-of-the-road-<repo>.md`, which load at session start.
+2. **Local checkout.** `$FORESTRIE_AGENTS/rules-of-the-road/` (default
+   `~/Dev/personal/forestrie/forestrie-agents`).
+3. **GitHub.** The links in the table below.
 
 | Changed paths | Repo file |
 |---------------|-----------|
-| ranger / sealer / custodian / sharder (Go) | [arbor.md](../../../rules-of-the-road/arbor.md) |
-| SCRAPI / ingress DO / x402 / delegation coordinator (Workers) | [canopy.md](../../../rules-of-the-road/canopy.md) |
-| Solidity / on-chain | [univocity.md](../../../rules-of-the-road/univocity.md) |
-| BYOK operator UI / delegation agent / signer | [mandate.md](../../../rules-of-the-road/mandate.md) |
-| Bun/citty CLIs / contract deploy / deploy-web | [univocity-tools.md](../../../rules-of-the-road/univocity-tools.md) |
-| Terraform / GKE / DNS / storage | [forest-1.md](../../../rules-of-the-road/forest-1.md) |
-| GitOps manifests / release qualify/promote | [arbor-flux.md](../../../rules-of-the-road/arbor-flux.md) |
+| ranger / sealer / custodian / sharder (Go) | [arbor.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/arbor.md) |
+| SCRAPI / ingress DO / x402 / delegation coordinator (Workers) | [canopy.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/canopy.md) |
+| Solidity / on-chain | [univocity.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/univocity.md) |
+| BYOK operator UI / delegation agent / signer | [mandate.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/mandate.md) |
+| Bun/citty CLIs / contract deploy / deploy-web | [univocity-tools.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/univocity-tools.md) |
+| Terraform / GKE / DNS / storage | [forest-1.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/forest-1.md) |
+| GitOps manifests / release qualify/promote | [arbor-flux.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/arbor-flux.md) |
 
 Determine changed paths from `git diff --name-only $BASE...HEAD` (base per
 [review-changes §2](../review-changes/SKILL.md)).

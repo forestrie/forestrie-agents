@@ -10,7 +10,7 @@ this repository.
 ## Loading order
 
 1. **This file** — routing only (~2 min read)
-2. **One** [arc-context](./arc-context/) file — only if domain terms apply
+2. **One** [`arc-*` glossary skill](./arc-context/) — only if domain terms apply (background skills; they load on description match)
 3. **Rules of the road** — for review/planning: [platform.md](./rules-of-the-road/platform.md) + the one repo file (see table below)
 4. **Repo overlay** — `forest/agents/AGENTS.md` or root `AGENTS.md` in the working repo
 5. **Workflow** — only the invoked [skill](./workflow/skills/)
@@ -19,20 +19,20 @@ this repository.
 
 ---
 
-## When to load arc-context
+## When to load a glossary skill
 
 | Task touches | Read |
 |--------------|------|
-| SCRAPI API, Workers, x402, delegation DOs | [arc-context/canopy.md](./arc-context/canopy.md) |
-| ranger, sealer, custodian, grant store, GKE services | [arc-context/arbor.md](./arc-context/arbor.md) |
-| Solidity, checkpoints, grants, on-chain Univocity | [arc-context/univocity.md](./arc-context/univocity.md) |
-| Terraform, GKE, Flux bootstrap, cluster ops | [arc-context/infra.md](./arc-context/infra.md) |
-| GitOps manifests, Kustomize, ExternalSecrets | [arc-context/infra.md](./arc-context/infra.md) (deploy slice) |
-| BYOK operator UI, delegation agent, mandate signer | [arc-context/mandate.md](./arc-context/mandate.md) |
-| Cart, contract-artefacts, deploy CLIs (Bun/citty) | [arc-context/tools.md](./arc-context/tools.md) |
-| Product, business, compliance, positioning | [arc-context/company.md](./arc-context/company.md) |
+| SCRAPI API, Workers, x402, delegation DOs | [arc-canopy](./arc-context/arc-canopy/SKILL.md) |
+| ranger, sealer, custodian, grant store, GKE services | [arc-arbor](./arc-context/arc-arbor/SKILL.md) |
+| Solidity, checkpoints, grants, on-chain Univocity | [arc-univocity](./arc-context/arc-univocity/SKILL.md) |
+| Terraform, GKE, Flux bootstrap, cluster ops | [arc-infra](./arc-context/arc-infra/SKILL.md) |
+| GitOps manifests, Kustomize, ExternalSecrets | [arc-infra](./arc-context/arc-infra/SKILL.md) (deploy slice) |
+| BYOK operator UI, delegation agent, mandate signer | [arc-mandate](./arc-context/arc-mandate/SKILL.md) |
+| Cart, contract-artefacts, deploy CLIs (Bun/citty) | [arc-tools](./arc-context/arc-tools/SKILL.md) |
+| Product, business, compliance, positioning | [arc-company](./arc-context/arc-company/SKILL.md) |
 
-If none apply, skip arc-context entirely.
+If none apply, skip the glossaries entirely.
 
 ---
 
@@ -54,6 +54,8 @@ planning. Glossaries say what terms *mean*; these say what a change must not
 | GitOps manifests, release qualify/promote | [rules-of-the-road/arbor-flux.md](./rules-of-the-road/arbor-flux.md) |
 
 Index and conventions: [rules-of-the-road/README.md](./rules-of-the-road/README.md).
+In a repo synced with [`sync/<repo>.manifest`](./sync/README.md), `platform.md`
+and the repo's own file are already loaded from `.claude/rules/`.
 Cite rules by id (`P4`, `univocity/U3`) in findings and plans.
 
 ---

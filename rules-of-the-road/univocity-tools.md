@@ -1,9 +1,9 @@
 # Rules of the road — univocity-tools (Bun CLIs)
 
 Bun/TypeScript CLIs for contract build, release, deploy, ops (Cart, deploy-web).
-Load with [platform.md](./platform.md). `⤷` = specialises a platform rule.
+Load with [platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md). `⤷` = specialises a platform rule.
 
-Glossary/links: [arc-context/tools.md](../arc-context/tools.md).
+Glossary/links: [`arc-tools` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-tools/SKILL.md).
 
 ---
 

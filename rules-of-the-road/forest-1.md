@@ -1,10 +1,10 @@
 # Rules of the road — forest-1 (GKE platform)
 
 Terraform + Flux bootstrap for the ledger GKE cluster; DNS, ingress, storage
-provisioning. Load with [platform.md](./platform.md). `⤷` = specialises a
+provisioning. Load with [platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md). `⤷` = specialises a
 platform rule.
 
-Glossary/links: [arc-context/infra.md](../arc-context/infra.md).
+Glossary/links: [`arc-infra` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-infra/SKILL.md).
 
 ---
 
@@ -27,7 +27,7 @@ GitHub Actions ↔ GKE authenticates via Workload Identity; runtime secrets are
 Doppler-backed ExternalSecrets. No long-lived service-account keys in CI or the
 cluster. **Why:** a static key is a standing compromise; short-lived federated
 identity is not.
-[ADR-0049](https://github.com/forestrie/devdocs/blob/main/archive/2607/adr/adr-0049-doppler-github-oidc-worker-deploy.md) · [arc-context/infra.md](../arc-context/infra.md).
+[ADR-0049](https://github.com/forestrie/devdocs/blob/main/archive/2607/adr/adr-0049-doppler-github-oidc-worker-deploy.md) · [`arc-infra` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-infra/SKILL.md).
 
 ### F4 — Ingress is isolated from workloads
 Ingress runs on a dedicated pool with per-project isolation; services run on the

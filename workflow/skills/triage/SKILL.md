@@ -1,6 +1,6 @@
 ---
 name: triage
-description: Triage a Linear issue or GitHub item for team FOR: classify, route to design or implementation, and update Linear.
+description: "Triage a Linear issue or GitHub item for team FOR: classify, route to design or implementation, and update Linear."
 when_to_use: The user says "triage this", pastes a FOR issue id, or asks what should happen with an incoming issue.
 argument-hint: "[FOR-123 | issue URL]"
 ---
@@ -16,7 +16,7 @@ Arguments: `$ARGUMENTS`
 
 - Issue title, description, labels, priority
 - Linked PRs or parent initiative
-- One relevant [arc-context](../../../arc-context/) file if domain-specific
+- The relevant `arc-*` glossary skill if domain-specific
 - [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) if terminology is ambiguous
 
 ## 2. Classify

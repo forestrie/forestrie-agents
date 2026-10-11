@@ -27,4 +27,4 @@ Rule → link:
 | P16 | [Conformant COSE/CBOR everywhere; `@forestrie/encoding` owns the wire layer](https://github.com/forestrie/protocol/blob/main/rules/platform.md#p16--conformant-cosecbor-everywhere-forestrieencoding-owns-the-wire-layer) |
 
 Repo files that specialise these rules remain in
-[README.md](./README.md).
+[README.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/README.md).
