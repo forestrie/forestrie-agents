@@ -10,11 +10,9 @@ What distinguishes them is frontmatter, not location:
 | `paths: [...]` | Loaded **only** when the session touches a matching file |
 | `description` / `when_to_use` | How the agent decides to apply an unscoped rule |
 
-Install them with the skills, in one step:
-
-```bash
-~/Dev/personal/forestrie/forestrie-agents/bin/forestrie-agents-sync
-```
+They ship as background skills in the `forestrie-core` plugin. A repo's
+[sync manifest](../../sync/README.md) also copies the ones it needs into
+`.claude/rules/<name>.md`, where Claude Code reads the same `paths:` field.
 
 ## Path-scoped — load only when you touch the code they govern
 

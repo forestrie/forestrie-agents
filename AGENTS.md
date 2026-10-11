@@ -1,145 +1,81 @@
-# forestrie-agents — agent bootstrap
+# forestrie-agents
 
-**For agents:** establish task scope, then load **selectively**. Do not bulk-read
-this repository.
+Shared agent guidance for the **Forestrie** org, shipped two ways:
 
-**For humans:** see [README.md](./README.md).
+- as Claude Code **plugins** (this repo is the `forestrie-agents` marketplace),
+  for terminal sessions in the forestrie profile;
+- as a **committed layer** that [`agentfiles sync`](./sync/README.md) copies
+  into each org repo, for cloud sessions and other harnesses.
 
----
+Agents working in an org repo do not read this file. They get the skills and
+rules through those two channels. This file is for changing this repo.
 
-## Loading order
+## Org map
 
-1. **This file** — routing only (~2 min read)
-2. **One** [`arc-*` glossary skill](./arc-context/) — only if domain terms apply (background skills; they load on description match)
-3. **Rules of the road** — for review/planning: [platform.md](./rules-of-the-road/platform.md) + the one repo file (see table below)
-4. **Repo overlay** — `forest/agents/AGENTS.md` or root `AGENTS.md` in the working repo
-5. **Workflow** — only the invoked [skill](./workflow/skills/)
+| Repo | Visibility | What | Rules of the road | Glossary skill |
+|------|------------|------|-------------------|----------------|
+| [canopy](https://github.com/forestrie/canopy) | public | SCRAPI Workers API | [canopy](./rules-of-the-road/canopy.md) | [arc-canopy](./arc-context/arc-canopy/SKILL.md) |
+| [arbor](https://github.com/forestrie/arbor) | public | Go services on GKE | [arbor](./rules-of-the-road/arbor.md) | [arc-arbor](./arc-context/arc-arbor/SKILL.md) |
+| [univocity](https://github.com/forestrie/univocity) | public | On-chain checkpoint contracts | [univocity](./rules-of-the-road/univocity.md) | [arc-univocity](./arc-context/arc-univocity/SKILL.md) |
+| [univocity-tools](https://github.com/forestrie/univocity-tools) | public | Contract build and deploy CLIs | [univocity-tools](./rules-of-the-road/univocity-tools.md) | [arc-tools](./arc-context/arc-tools/SKILL.md) |
+| [mandate](https://github.com/forestrie/mandate) | public | BYOK operator UI and delegation | [mandate](./rules-of-the-road/mandate.md) | [arc-mandate](./arc-context/arc-mandate/SKILL.md) |
+| [forest-1](https://github.com/forestrie/forest-1) | private | GKE platform (Terraform + Flux) | [forest-1](./rules-of-the-road/forest-1.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
+| [arbor-flux](https://github.com/forestrie/arbor-flux) | private | GitOps manifests | [arbor-flux](./rules-of-the-road/arbor-flux.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
+| [devdocs](https://github.com/forestrie/devdocs) | private | ADRs, ARCs, runbooks | [platform](./rules-of-the-road/platform.md) only | [arc-company](./arc-context/arc-company/SKILL.md) |
+| [protocol](https://github.com/forestrie/protocol) | public | Protocol spec, glossary, platform rules (`P1`–`P16`) | owns platform | — |
+| [product](https://github.com/forestrie/product) | private | Briefs, decks, product plans | — | [arc-company](./arc-context/arc-company/SKILL.md) |
 
-**Precedence on conflict:** repo overlay → common `workflow/` → vendored → incubator (opt-in).
+Each row with a rules-of-the-road file has a [sync manifest](./sync/). The
+clone layout on a workstation is in [workspace/AGENTS.md](./workspace/AGENTS.md).
 
----
+**Visibility matters.** This repo is private, and synced copies land in public
+repos. Write nothing here that cannot be public: no secrets, no customer
+names, no internal hostnames.
 
-## When to load a glossary skill
+## Layout
 
-| Task touches | Read |
-|--------------|------|
-| SCRAPI API, Workers, x402, delegation DOs | [arc-canopy](./arc-context/arc-canopy/SKILL.md) |
-| ranger, sealer, custodian, grant store, GKE services | [arc-arbor](./arc-context/arc-arbor/SKILL.md) |
-| Solidity, checkpoints, grants, on-chain Univocity | [arc-univocity](./arc-context/arc-univocity/SKILL.md) |
-| Terraform, GKE, Flux bootstrap, cluster ops | [arc-infra](./arc-context/arc-infra/SKILL.md) |
-| GitOps manifests, Kustomize, ExternalSecrets | [arc-infra](./arc-context/arc-infra/SKILL.md) (deploy slice) |
-| BYOK operator UI, delegation agent, mandate signer | [arc-mandate](./arc-context/arc-mandate/SKILL.md) |
-| Cart, contract-artefacts, deploy CLIs (Bun/citty) | [arc-tools](./arc-context/arc-tools/SKILL.md) |
-| Product, business, compliance, positioning | [arc-company](./arc-context/arc-company/SKILL.md) |
+| Path | What | Ships as |
+|------|------|----------|
+| [workflow/skills/](./workflow/skills/) | Team skills (`/review-changes`, `/triage`, …) | plugin `forestrie-core`; subset synced |
+| [workflow/rules/](./workflow/rules/) | Team rules: `user-invocable: false`, often `paths:`-scoped | plugin `forestrie-core`; synced to `.claude/rules/` |
+| [arc-context/](./arc-context/) | Domain glossaries as `arc-*` background skills | plugin `forestrie-core`; one synced per repo |
+| [rules-of-the-road/](./rules-of-the-road/) | Fundamental invariants, cited by id (`P4`, `canopy/C3`) | synced to `.claude/rules/rules-of-the-road-*.md` |
+| [sync/](./sync/) | Per-repo manifests for `agentfiles sync` | — |
+| [vendored/matt-skills/](./vendored/matt-skills/) | Upstream `tdd`, `diagnose`, `grill-with-docs` with tracked patches | plugin `mattpocock-skills` |
+| [harness/](./harness/) | Claude Code and other-tool notes; the `require-worktree` hook | hook ships in `forestrie-core` |
+| [workspace/](./workspace/) | Workstation `AGENTS.md`, installed by `agentfiles bootstrap` | — |
+| [incubator/](./incubator/) | Per-engineer drafts; never loaded by default | — |
 
-If none apply, skip the glossaries entirely.
+## Contributing
 
----
+**Add or change a skill or rule.** Edit `workflow/skills/<name>/SKILL.md` or
+`workflow/rules/<name>/SKILL.md`. Frontmatter must be valid YAML: quote any
+value that contains `: `. A rule sets `user-invocable: false`, and `paths:`
+when it applies to certain files only.
 
-## Rules of the road (review + planning guardrails)
+**Add a glossary.** Create `arc-context/arc-<name>/SKILL.md` with
+`user-invocable: false` and a `description` that names the work it covers.
 
-Distilled **fundamental** invariants — the guardrail set for code review and
-planning. Glossaries say what terms *mean*; these say what a change must not
-*break*. Load [rules-of-the-road/platform.md](./rules-of-the-road/platform.md)
-(general, always) **plus** the one repo file matching the code you touch:
+**Change a rule of the road.** Keep it one imperative, one-sentence why, one
+link (see [rules-of-the-road/README.md](./rules-of-the-road/README.md)). Use
+absolute GitHub links only, since the file is copied into other repos.
 
-| Task touches | Also load |
-|--------------|-----------|
-| ranger, sealer, custodian, sharder | [rules-of-the-road/arbor.md](./rules-of-the-road/arbor.md) |
-| SCRAPI, ingress DO, x402, delegation coordinator | [rules-of-the-road/canopy.md](./rules-of-the-road/canopy.md) |
-| Solidity, checkpoints, grants, on-chain | [rules-of-the-road/univocity.md](./rules-of-the-road/univocity.md) |
-| BYOK operator UI, delegation agent, signer | [rules-of-the-road/mandate.md](./rules-of-the-road/mandate.md) |
-| Bun/citty CLIs, contract deploy, deploy-web | [rules-of-the-road/univocity-tools.md](./rules-of-the-road/univocity-tools.md) |
-| Terraform, GKE, DNS, storage, ingress | [rules-of-the-road/forest-1.md](./rules-of-the-road/forest-1.md) |
-| GitOps manifests, release qualify/promote | [rules-of-the-road/arbor-flux.md](./rules-of-the-road/arbor-flux.md) |
+**Check before opening a PR:**
 
-Index and conventions: [rules-of-the-road/README.md](./rules-of-the-road/README.md).
-In a repo synced with [`sync/<repo>.manifest`](./sync/README.md), `platform.md`
-and the repo's own file are already loaded from `.claude/rules/`.
-Cite rules by id (`P4`, `univocity/U3`) in findings and plans.
+```bash
+claude plugin validate .
+npx skills@1.7.2 add . --list          # every skill listed, none "Skipped"
+```
 
----
+**After merge, re-sync** each affected repo and commit there:
 
-## Workflow index
+```bash
+agentfiles sync <repo> --manifest sync/<repo>.manifest
+agentfiles doctor --repo <repo>        # "no drift"
+```
 
-### Skills (`/name`, or auto-applied when the description matches)
+**Promote from the incubator.** Sanitise for Forestrie, move it into
+`workflow/` or `arc-context/`, update the indexes, and mention
+`agent-guidance-promotion` in the PR.
 
-Commands and skills are one mechanism now — a `<name>/SKILL.md` directory per
-skill. Install them into every harness with
-[`bin/forestrie-agents-sync`](./bin/forestrie-agents-sync).
-
-| Skill | When |
-|-------|------|
-| [/setup-clone](./workflow/skills/setup-clone/SKILL.md) | New machine or fresh clone |
-| [/pre-commit-checks](./workflow/skills/pre-commit-checks/SKILL.md) | Before commit |
-| [/review-changes](./workflow/skills/review-changes/SKILL.md) | PR/stack review |
-| [/plan-with-linear](./workflow/skills/plan-with-linear/SKILL.md) | Planning with a Linear issue |
-| [/persist-plan](./workflow/skills/persist-plan/SKILL.md) | Persisting an approved plan as a canonical `docs/plans/` doc |
-| [/triage](./workflow/skills/triage/SKILL.md) | Issue triage |
-| [/fork-mandate](./workflow/skills/fork-mandate/SKILL.md) | Fork a mandate instance against lane-b |
-| [/save-status](./workflow/skills/save-status/SKILL.md) | Checkpoint work in flight for a fresh session |
-| [/tdd](./vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Feature work, bugs, test quality |
-| [/diagnose](./vendored/matt-skills/skills/engineering/diagnose/SKILL.md) | Hard bugs, regressions |
-| [/grill-with-docs](./vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md) | Stress-test plans against docs |
-
-### Rules (auto-applied by `paths:` glob, or by description)
-
-Rules are skills with `user-invocable: false` — hidden from the `/` menu, and
-loaded only when the session touches a file their `paths:` glob matches
-(`**/*.go` for [go-comments](./workflow/rules/go-comments/SKILL.md), `**/*.sol`
-for [solidity-comments](./workflow/rules/solidity-comments/SKILL.md), and so
-on). They install alongside the skills. See
-[workflow/rules/README.md](./workflow/rules/README.md).
-
----
-
-## Context efficiency rules
-
-1. **Link, don't restate** — point to authoritative docs; do not copy ARC/ADR bodies
-2. **Skills on demand** — read a skill only when its description matches the task
-3. **Commands on invoke** — user runs `/review-changes`; the body loads only then
-4. **Incubator is opt-in** — never load `incubator/` unless the user names a path
-5. **devdocs for depth** — use [devdocs](https://github.com/forestrie/devdocs) for platform *why* and cross-repo ADRs/ARCs; use repo `docs/` for implementation detail
-
----
-
-## Forestrie repo routers
-
-After arc-context (if any), use the working repo's doc router:
-
-| Repo | Router |
-|------|--------|
-| devdocs | [AGENTS.md](https://github.com/forestrie/devdocs/blob/main/AGENTS.md) |
-| canopy | [AGENTS.md](https://github.com/forestrie/canopy/blob/main/AGENTS.md) |
-| arbor | [AGENTS.md](https://github.com/forestrie/arbor/blob/main/AGENTS.md) |
-| forest-1 | [AGENTS.md](https://github.com/forestrie/forest-1/blob/main/AGENTS.md) |
-| arbor-flux | [AGENTS.md](https://github.com/forestrie/arbor-flux/blob/main/AGENTS.md) |
-| univocity | [AGENTS.md](https://github.com/forestrie/univocity/blob/main/AGENTS.md) |
-| univocity-tools | [AGENTS.md](https://github.com/forestrie/univocity-tools/blob/main/AGENTS.md) |
-| mandate | [AGENTS.md](https://github.com/forestrie/mandate/blob/main/AGENTS.md) |
-
-**Workspace routing:** `forestrie-agent-context.md` at the forestrie parent checkout
-(`~/Dev/personal/forestrie/`) lists clone layout and primary paths when present.
-
----
-
-## Key external references
-
-| Topic | Where |
-|-------|-------|
-| MMR / COSE receipts profile | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) — local sibling often at `~/Dev/personal/forestrie/draft-bryce-cose-receipts-mmr-profile/` |
-| Go MMR libraries (arbor deps) | [go-merklelog](https://github.com/forestrie/go-merklelog), [go-univocity](https://github.com/forestrie/go-univocity), [go-sigv4](https://github.com/forestrie/go-sigv4) |
-| Platform glossary | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) |
-| End-to-end architecture | [devdocs/architecture.md](https://github.com/forestrie/devdocs/blob/main/architecture.md) |
-
----
-
-## Linear
-
-Team key: **FOR**. Workspace: **forestrie**. Login: `robinbryce@gmail.com` for MCP.
-
-Before the first Linear MCP call in a Forestrie repo, verify identity per
-[linear-mcp-forestrie](https://github.com/forestrie/canopy/blob/main/.cursor/rules/linear-mcp-forestrie.mdc).
-
-Direct API: load `LINEAR_API_KEY` from `~/Dev/personal/forestrie/.envrc` when
-present. Linear MCP uses Cursor OAuth separately.
+**Linear:** team key **FOR**.

@@ -41,7 +41,6 @@ Read selectively before reviewing the diff:
 
 | Source | When |
 | ------ | ---- |
-| [forestrie-agents/AGENTS.md](https://github.com/forestrie/forestrie-agents/blob/main/AGENTS.md) | Always — layer model, workflow index |
 | [Rules of the road](https://github.com/forestrie/forestrie-agents/tree/main/rules-of-the-road): `platform.md` + the one matching repo file (already loaded as `.claude/rules/rules-of-the-road-*.md` in a synced repo) | **Always** — fundamental invariants; run the [rules-of-the-road-review](../rules-of-the-road-review/SKILL.md) skill as the design-invariant pass |
 | Repo `forest/agents/AGENTS.md` or root `AGENTS.md` | Repo overlay and precedence |
 | [forestrie-agents/workflow/rules/](../../rules/) | go-task, commits, TS/Go/Solidity rules, breaking-changes |
