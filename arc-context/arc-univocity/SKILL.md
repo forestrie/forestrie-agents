@@ -56,8 +56,8 @@ Checkpoint and receipt wire formats align with the
 Internet-Draft. Local sibling checkout:
 `~/Dev/personal/forestrie/draft-bryce-cose-receipts-mmr-profile/`.
 
-Go implementations of MMR primitives live in arbor
-[go-merklelog](https://github.com/forestrie/arbor/tree/main/services/_deps/go-merklelog).
+Go implementations of MMR primitives live in
+[go-merklelog](https://github.com/forestrie/go-merklelog).
 
 ## Deploy / secrets
 

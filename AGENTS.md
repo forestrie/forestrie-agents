@@ -128,7 +128,7 @@ After arc-context (if any), use the working repo's doc router:
 | Topic | Where |
 |-------|-------|
 | MMR / COSE receipts profile | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) — local sibling often at `~/Dev/personal/forestrie/draft-bryce-cose-receipts-mmr-profile/` |
-| Go MMR libraries (arbor deps) | [arbor/services/_deps](https://github.com/forestrie/arbor/tree/main/services/_deps) — `go-merklelog`, `go-univocity`, `go-sigv4`, etc. |
+| Go MMR libraries (arbor deps) | [go-merklelog](https://github.com/forestrie/go-merklelog), [go-univocity](https://github.com/forestrie/go-univocity), [go-sigv4](https://github.com/forestrie/go-sigv4) |
 | Platform glossary | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) |
 | End-to-end architecture | [devdocs/architecture.md](https://github.com/forestrie/devdocs/blob/main/architecture.md) |
 

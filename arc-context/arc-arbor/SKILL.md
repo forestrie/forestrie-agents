@@ -31,8 +31,8 @@ assignments, GKE workloads, Go service tests.
 
 ## Go dependencies (`services/_deps`)
 
-Arbor vendors sibling libraries under
-[arbor/services/_deps](https://github.com/forestrie/arbor/tree/main/services/_deps).
+Arbor clones sibling libraries into `services/_deps` (gitignored), from
+[go-merklelog](https://github.com/forestrie/go-merklelog), [go-univocity](https://github.com/forestrie/go-univocity), [go-sigv4](https://github.com/forestrie/go-sigv4) and others.
 Read source there for MMR, signing, and storage behaviour — do not guess APIs.
 
 | Dependency | Role |

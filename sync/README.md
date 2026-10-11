@@ -11,7 +11,7 @@ live, from the `forestrie-core` plugin. The committed copy is a deliberate
 
 ## Apply
 
-[`agentfiles sync`](https://github.com/robinbryce/agentfiles/blob/robin/agent-config-reorg/bin/agentfiles)
+[`agentfiles sync`](https://github.com/robinbryce/agentfiles/blob/8b60ee4a/bin/agentfiles)
 reads a manifest and writes the committed layer:
 
 ```bash
