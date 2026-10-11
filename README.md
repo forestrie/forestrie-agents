@@ -12,10 +12,32 @@ markdown for Cursor, Claude Code, and other coding agents.
 |------|---------|
 | [AGENTS.md](./AGENTS.md) | Agent bootstrap router — read first |
 | [arc-context/](./arc-context/) | Minimal domain glossaries + links |
-| [workflow/](./workflow/) | Team-standard commands, skills, rules |
+| [workflow/](./workflow/) | Team-standard [skills](./workflow/skills/) (= slash commands) and [rules](./workflow/rules/) |
+| [bin/](./bin/) | [`forestrie-agents-sync`](./bin/forestrie-agents-sync) — installs skills into every harness |
 | [vendored/](./vendored/) | Pinned third-party agent content |
 | [incubator/](./incubator/) | Provisional per-engineer proposals |
 | [harness/](./harness/) | Per-harness install notes |
+
+## Install as Claude Code plugins
+
+This repo is a Claude Code plugin marketplace (`.claude-plugin/marketplace.json`)
+with two plugins:
+
+| Plugin | Provides |
+|--------|----------|
+| `forestrie-core` | team workflow skills (`/forestrie-core:review-changes`, `…:triage`, `…:save-status`, …), team rules as path-scoped background skills, the `require-worktree` hook |
+| `mattpocock-skills` | pinned upstream `tdd`, `diagnose`, `grill-with-docs` with tracked patches |
+
+```bash
+claude plugin marketplace add forestrie/forestrie-agents     # or a local checkout path
+claude plugin install forestrie-core@forestrie-agents
+claude plugin install mattpocock-skills@forestrie-agents
+```
+
+A marketplace added from a local checkout loads plugins in place, so edits are
+live after `/reload-plugins`. Cloud sessions never load plugins; a repo that
+needs these skills there commits a synced copy (see
+[agentfiles plan 2610-01](https://github.com/robinbryce/agentfiles/tree/robin/agent-config-reorg/docs/plans/plan-2610-01-agent-config-reorg)).
 
 ## Layer model
 
@@ -57,19 +79,26 @@ matt-skills/          # full upstream skills (optional sibling)
 
 ## Per-repo setup
 
-Each Forestrie repo should contain (or point at):
+Run this once in each Forestrie repo you work in:
 
-```text
-forest/agents/
-├── AGENTS.md
-├── commands/
-├── skills/
-└── rules/
+```bash
+~/Dev/personal/forestrie/forestrie-agents/bin/forestrie-agents-sync
 ```
 
-Many repos already use root **`AGENTS.md`** as a thin router — that is
-equivalent. See [harness/cursor.md](./harness/cursor.md) for syncing
-`.cursor/` from `forest/agents/`.
+It symlinks every skill in this repo into `.claude/skills/`, `.cursor/skills/`,
+`.agents/skills/`, and `.cursor/commands/`, so `/review-changes`,
+`/pre-commit-checks`, `/save-status` and the rest work as slash commands in
+Claude Code, Cursor, and pi from one canonical source. Generated links are
+added to `.git/info/exclude`, so they never appear in `git status`.
+
+Install per-repo, not machine-wide: Claude Code resolves personal skills
+*above* project skills, so a global skill would shadow the team's.
+
+A repo may add its own overlay at `forest/agents/skills/<name>/SKILL.md`; it is
+applied last and shadows a team or vendored skill of the same name. Many repos
+also use root **`AGENTS.md`** as a thin router. See
+[harness/cursor.md](./harness/cursor.md) and
+[harness/claude-code.md](./harness/claude-code.md).
 
 ## Related repos
 

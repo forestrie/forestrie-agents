@@ -1,0 +1,193 @@
+#!/usr/bin/env bash
+# forestrie-agents-sync — install the Forestrie workflow skills as slash
+# commands in whichever harness you use.
+#
+# Every skill is a <name>/SKILL.md directory following the Agent Skills
+# standard (https://agentskills.io). Claude Code, Cursor, and pi all turn such
+# a directory into /<name>. This script symlinks the canonical directories in
+# this repo into each harness's discovery path, so there is nothing to copy and
+# nothing to keep in sync:
+#
+#   Claude Code   <repo>/.claude/skills/<name>
+#   Cursor        <repo>/.cursor/skills/<name>     (also reads .claude/skills)
+#   pi / generic  <repo>/.agents/skills/<name>
+#   Cursor legacy <repo>/.cursor/commands/<name>.md -> that skill's SKILL.md
+#
+# Sources are applied lowest-precedence first, so a team skill shadows a
+# vendored one of the same name, and a repo's own forest/agents/skills/
+# overlay shadows both — matching the precedence in AGENTS.md.
+#
+# Usage:
+#   forestrie-agents-sync [repo-dir]      # defaults to the current repo
+#   forestrie-agents-sync --dry-run
+#   forestrie-agents-sync --prune         # also drop managed links no longer in source
+#   forestrie-agents-sync --cursor-rules  # also emit .cursor/rules/*.mdc shims (opt-in)
+#
+# Install per-repo, not machine-wide: Claude Code resolves personal skills
+# ABOVE project skills, so a global /save-status would shadow this one.
+set -euo pipefail
+
+SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AGENTS_REPO="$(cd "$SELF/.." && pwd)"
+REPO=""; DRY=0; PRUNE=0; MDC=0
+
+die() { echo "forestrie-agents-sync: $*" >&2; exit 1; }
+say() { echo "  $*"; }
+run() { if [ "$DRY" = 1 ]; then echo "  [dry-run] $*"; else "$@"; fi; }
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --dry-run) DRY=1; shift ;;
+    --prune)   PRUNE=1; shift ;;
+    --cursor-rules) MDC=1; shift ;;
+    -h|--help) sed -n '2,29p' "$0"; exit 0 ;;
+    -*) die "unknown flag: $1" ;;
+    *) REPO="$1"; shift ;;
+  esac
+done
+
+REPO="${REPO:-$PWD}"
+[ -d "$REPO" ] || die "repo dir not found: $REPO"
+if git -C "$REPO" rev-parse --show-toplevel >/dev/null 2>&1; then
+  REPO="$(git -C "$REPO" rev-parse --show-toplevel)"
+fi
+
+# ---------------------------------------------------------------- sources ---
+SOURCES=()
+add_source() { [ -d "$1" ] && SOURCES+=("$1") || true; }
+add_source "$AGENTS_REPO/vendored/matt-skills/skills/engineering"   # pinned upstream
+add_source "$AGENTS_REPO/workflow/rules"                            # team rules
+add_source "$AGENTS_REPO/workflow/skills"                           # team standard
+add_source "$REPO/forest/agents/rules"                              # repo overlay
+add_source "$REPO/forest/agents/skills"                             # repo overlay
+[ "${#SOURCES[@]}" -gt 0 ] || die "no skill sources found under $AGENTS_REPO"
+
+SKILL_DIRS=("$REPO/.claude/skills" "$REPO/.cursor/skills" "$REPO/.agents/skills")
+CMD_DIR="$REPO/.cursor/commands"
+
+echo "forestrie-agents-sync: $REPO"
+for s in "${SOURCES[@]}"; do say "source: $s"; done
+
+# ------------------------------------------------------------- resolution ---
+declare -A RESOLVED=()
+for src in "${SOURCES[@]}"; do
+  for d in "$src"/*/; do
+    [ -f "$d/SKILL.md" ] || continue
+    RESOLVED["$(basename "$d")"]="${d%/}"
+  done
+done
+[ "${#RESOLVED[@]}" -gt 0 ] || die "no <name>/SKILL.md directories under the sources"
+
+# ------------------------------------------------------------------ link ---
+# Only ever replace a symlink. A real file or directory belongs to someone else.
+link_one() {
+  local target="$1" dest="$2"
+  if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+    say "skip $dest (real file/dir — not overwriting)"; return 1
+  fi
+  run ln -sfn "$target" "$dest"
+}
+
+for dir in "${SKILL_DIRS[@]}"; do run mkdir -p "$dir"; done
+run mkdir -p "$CMD_DIR"
+
+for name in $(printf '%s\n' "${!RESOLVED[@]}" | sort); do
+  target="${RESOLVED[$name]}"
+  for dir in "${SKILL_DIRS[@]}"; do link_one "$target" "$dir/$name"; done
+  link_one "$target/SKILL.md" "$CMD_DIR/$name.md"
+  say "/$name -> $target"
+done
+
+# ----------------------------------------------------------------- prune ---
+if [ "$PRUNE" = 1 ]; then
+  for dir in "${SKILL_DIRS[@]}"; do
+    [ -d "$dir" ] || continue
+    for entry in "$dir"/*; do
+      [ -L "$entry" ] || continue
+      base="$(basename "$entry")"
+      if [ -z "${RESOLVED[$base]+x}" ] || [ ! -e "$entry" ]; then
+        say "prune $entry"; run rm -f "$entry"
+      fi
+    done
+  done
+  for entry in "$CMD_DIR"/*.md; do
+    [ -L "$entry" ] || continue
+    base="$(basename "$entry" .md)"
+    if [ -z "${RESOLVED[$base]+x}" ] || [ ! -e "$entry" ]; then
+      say "prune $entry"; run rm -f "$entry"
+    fi
+  done
+fi
+
+# ------------------------------------------------------- cursor .mdc rules ---
+# Cursor scopes rules natively with .mdc `globs`, which SKILL.md `paths:` maps
+# onto directly. Opt-in, because several repos track .cursor/rules/*.mdc by
+# hand: a file without our marker is never overwritten.
+MDC_MARKER="generated by forestrie-agents-sync — edits will be lost"
+MDC_WRITTEN=()
+
+fm_get() {
+  awk -v k="$2" '
+    NR==1 && $0=="---" { inb=1; next }
+    inb && $0=="---"   { exit }
+    inb && index($0, k ": ")==1 { print substr($0, length(k)+3); exit }
+  ' "$1"
+}
+
+if [ "$MDC" = 1 ]; then
+  MDC_DIR="$REPO/.cursor/rules"
+  run mkdir -p "$MDC_DIR"
+  for name in $(printf '%s\n' "${!RESOLVED[@]}" | sort); do
+    skill="${RESOLVED[$name]}/SKILL.md"
+    # rules are the non-user-invocable skills; only those become .mdc
+    [ "$(fm_get "$skill" "user-invocable")" = "false" ] || continue
+    dest="$MDC_DIR/$name.mdc"
+    if [ -e "$dest" ] && ! grep -qF "$MDC_MARKER" "$dest" 2>/dev/null; then
+      say "skip $dest (repo owns this .mdc — not overwriting)"; continue
+    fi
+    desc="$(fm_get "$skill" "description")"
+    paths="$(fm_get "$skill" "paths")"
+    globs="$(printf '%s' "$paths" | tr -d '[]"' | sed 's/, */,/g')"
+    always="$(fm_get "$skill" "cursor-always-apply")"
+    [ -n "$always" ] || always=false
+    if [ "$DRY" = 1 ]; then
+      echo "  [dry-run] write $dest (globs: ${globs:-none}, alwaysApply: $always)"
+    else
+      {
+        echo "---"
+        echo "description: $desc"
+        [ -n "$globs" ] && echo "globs: $globs"
+        echo "alwaysApply: $always"
+        echo "---"
+        echo
+        echo "<!-- $MDC_MARKER. Source: $skill -->"
+        echo
+        echo "Follow the rule in [\`$name\`](../skills/$name/SKILL.md)."
+      } > "$dest"
+    fi
+    MDC_WRITTEN+=("$name")
+    say "rule /$name -> $dest"
+  done
+fi
+
+# ------------------------------------------------------------ git exclude ---
+# The links point at an absolute path on this machine, so they are local-only:
+# keep them out of git status and out of commits.
+if git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1; then
+  gitdir="$(git -C "$REPO" rev-parse --git-dir)"
+  case "$gitdir" in /*) ;; *) gitdir="$REPO/$gitdir" ;; esac
+  excl="$gitdir/info/exclude"
+  run mkdir -p "$gitdir/info"
+  if [ "$DRY" = 0 ]; then
+    for p in "/.claude/skills/" "/.cursor/skills/" "/.cursor/commands/" "/.agents/"; do
+      grep -qxF "$p" "$excl" 2>/dev/null || echo "$p" >> "$excl"
+    done
+    # .cursor/rules/ itself may be tracked, so exclude only what we generated
+    for n in ${MDC_WRITTEN+"${MDC_WRITTEN[@]}"}; do
+      grep -qxF "/.cursor/rules/$n.mdc" "$excl" 2>/dev/null || echo "/.cursor/rules/$n.mdc" >> "$excl"
+    done
+  fi
+  say "excluded generated link dirs via $excl"
+fi
+
+echo "done. ${#RESOLVED[@]} skill(s) installed."
