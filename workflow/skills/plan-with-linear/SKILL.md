@@ -32,7 +32,6 @@ Record the issue id (e.g. `FOR-1234`).
 
 | Source | When |
 |--------|------|
-| [forestrie-agents/AGENTS.md](../../../AGENTS.md) | Bootstrap |
 | The matching `arc-*` glossary skill | Domain terms |
 | Repo `AGENTS.md` or `forest/agents/AGENTS.md` | Repo-specific routes |
 | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) | Shared vocabulary |
