@@ -1,10 +1,10 @@
 # Rules of the road — arbor-flux (GitOps + release)
 
 Kustomize/Flux manifests for Arbor services, and the release qualification/
-promotion train. Load with [platform.md](./platform.md). `⤷` = specialises a
+promotion train. Load with [platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md). `⤷` = specialises a
 platform rule.
 
-Glossary/links: [arc-context/infra.md](../arc-context/infra.md).
+Glossary/links: [`arc-infra` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-infra/SKILL.md).
 
 ---
 
@@ -13,7 +13,7 @@ All application state is declared in Git and reconciled by Flux from a
 `GitRepository`; no imperative `kubectl` changes to running services. **Why:**
 drift between the cluster and Git is invisible and unrecoverable — reconciliation
 is the audit trail.
-[arc-context/infra.md](../arc-context/infra.md).
+[`arc-infra` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-infra/SKILL.md).
 
 ### FX2 — Secrets are ExternalSecret refs, never inline
 Secrets are `ExternalSecret` references to Doppler; manifests carry no secret

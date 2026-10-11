@@ -1,7 +1,7 @@
 # Rules of the road
 
 Application-aware **guardrails** for reviewing and planning Forestrie work.
-Not a glossary (see [arc-context](../arc-context/)), not a spec (see
+Not a glossary (see the [`arc-*` skills](../arc-context/)), not a spec (see
 [devdocs](https://github.com/forestrie/devdocs)) — a distilled set of the
 *fundamental* invariants a change must not break.
 
@@ -19,6 +19,18 @@ choices; it is not an index of every ruling.
   "does this change violate a fundamental?" checks.
 - A rule is a *check target*, not prose to restate — cite it by id (e.g.
   `P4`, `univocity/U3`) in review findings and plans.
+
+## A rules source for the committed layer
+
+These files are not loaded from here. Each repo's
+[sync manifest](../sync/README.md) copies `platform.md` and that repo's own
+file into the repo as `.claude/rules/rules-of-the-road-platform.md` and
+`.claude/rules/rules-of-the-road-<repo>.md`. There they load at the start of
+every Claude Code session in that repo, cloud sessions included.
+
+Because the files are copied, every link in them is an absolute GitHub URL. A
+relative link would break in the copy. This README is the only file here that
+uses relative links, and it is never copied.
 
 ## Files
 

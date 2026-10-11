@@ -1,10 +1,10 @@
 # Rules of the road — mandate (BYOK operator)
 
 Operator-hosted Univocity instance management: operator UI, delegation agent,
-signer, register/onboard. Load with [platform.md](./platform.md). `⤷` =
+signer, register/onboard. Load with [platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md). `⤷` =
 specialises a platform rule.
 
-Glossary/links: [arc-context/mandate.md](../arc-context/mandate.md). BYOK model:
+Glossary/links: [`arc-mandate` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-mandate/SKILL.md). BYOK model:
 [ARC-0022](https://github.com/forestrie/devdocs/blob/main/archive/2606/arc/arc-0022-byok-user-log-delegation-and-operator-hosted-sealing.md).
 
 ---

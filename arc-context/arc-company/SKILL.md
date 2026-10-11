@@ -1,3 +1,10 @@
+---
+name: arc-company
+description: Forestrie product and business glossary. Use when a task touches product, business, compliance, or positioning.
+when_to_use: "Positioning, compliance framing, customer-facing language, roadmap discussions, decks and briefs."
+user-invocable: false
+---
+
 # arc-context: company (product and business)
 
 Minimal glossary for **Forestrie** as a product and business — not engineering
@@ -61,10 +68,10 @@ Full domain language: [devdocs/glossary.md](https://github.com/forestrie/devdocs
 Team key: **FOR** (Forestrie workspace). Issue ids: `FOR-<n>`.
 
 Branch naming: `robin/for-<issue-no>-<short-desc>` — see
-[workflow/rules/branch-naming](../workflow/rules/branch-naming/SKILL.md).
+[workflow/rules/branch-naming](../../workflow/rules/branch-naming/SKILL.md).
 
 ## What this file is not
 
 - Not API specs → repo `docs/api/` or SCRAPI implementation in canopy
 - Not ops runbooks → [devdocs/ops/](https://github.com/forestrie/devdocs/tree/main/ops)
-- Not on-chain rules → [univocity.md](./univocity.md)
+- Not on-chain rules → [arc-univocity](../arc-univocity/SKILL.md)

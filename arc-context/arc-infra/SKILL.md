@@ -1,3 +1,10 @@
+---
+name: arc-infra
+description: Infra domain glossary (forest-1 + arbor-flux). Use when a task touches Terraform, GKE, Flux bootstrap, cluster ops, or GitOps manifests (Kustomize, ExternalSecrets).
+when_to_use: "Terraform, GKE, Flux bootstrap, DNS, Traefik, Kustomize, ExternalSecrets, service rollouts, Workload Identity."
+user-invocable: false
+---
+
 # arc-context: infra (forest-1 + arbor-flux)
 
 Minimal glossary for **forest-1** (GKE platform) and **arbor-flux** (GitOps

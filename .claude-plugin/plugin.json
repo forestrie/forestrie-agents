@@ -1,12 +1,16 @@
 {
   "name": "forestrie-core",
-  "description": "Forestrie team workflow skills, team rules as path-scoped background skills, and the require-worktree guardrail hook.",
-  "author": { "name": "Forestrie", "url": "https://github.com/forestrie" },
+  "description": "Forestrie team workflow skills, team rules and domain glossaries as background skills, and the require-worktree guardrail hook.",
+  "author": {
+    "name": "Forestrie",
+    "url": "https://github.com/forestrie"
+  },
   "homepage": "https://github.com/forestrie/forestrie-agents",
   "repository": "https://github.com/forestrie/forestrie-agents",
   "skills": [
     "./workflow/skills/",
-    "./workflow/rules/"
+    "./workflow/rules/",
+    "./arc-context/"
   ],
   "hooks": "./harness/hooks/hooks.json"
 }

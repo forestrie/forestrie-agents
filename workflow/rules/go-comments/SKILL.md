@@ -1,6 +1,6 @@
 ---
 name: go-comments
-description: Go comment conventions for arbor and the shared Go libraries: package comments, exported symbol docs, and signposting cross-repo wire contracts instead of duplicating devdocs prose.
+description: "Go comment conventions for arbor and the shared Go libraries: package comments, exported symbol docs, and signposting cross-repo wire contracts instead of duplicating devdocs prose."
 when_to_use: Writing or reviewing Go code in arbor or go-merklelog / go-univocity / go-sigv4.
 paths: ["**/*.go"]
 user-invocable: false
@@ -26,9 +26,9 @@ user-invocable: false
 
 | Topic | Where |
 |-------|-------|
-| MMR / massif behaviour | [arbor/services/_deps/go-merklelog](https://github.com/forestrie/arbor/tree/main/services/_deps/go-merklelog) |
-| Grant / Univocity client | [arbor/services/_deps/go-univocity](https://github.com/forestrie/arbor/tree/main/services/_deps/go-univocity) |
-| R2 SigV4 | [arbor/services/_deps/go-sigv4](https://github.com/forestrie/arbor/tree/main/services/_deps/go-sigv4) |
+| MMR / massif behaviour | [forestrie/go-merklelog](https://github.com/forestrie/go-merklelog) |
+| Grant / Univocity client | [forestrie/go-univocity](https://github.com/forestrie/go-univocity) |
+| R2 SigV4 | [forestrie/go-sigv4](https://github.com/forestrie/go-sigv4) |
 | COSE MMR profile | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) |
 | Platform glossary | [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) |
 

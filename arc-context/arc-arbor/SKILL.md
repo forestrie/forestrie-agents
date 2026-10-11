@@ -1,3 +1,10 @@
+---
+name: arc-arbor
+description: Arbor domain glossary (Go services on GKE). Use when a task touches ranger, sealer, custodian, the grant store, or GKE services.
+when_to_use: "Queue consumers, sealing, KMS signing, grant store, shard assignments, GKE workloads, Go service tests."
+user-invocable: false
+---
+
 # arc-context: arbor (GKE services)
 
 Minimal glossary for **arbor** — Go microservices: ranger, sealer, custodian,
@@ -24,8 +31,8 @@ assignments, GKE workloads, Go service tests.
 
 ## Go dependencies (`services/_deps`)
 
-Arbor vendors sibling libraries under
-[arbor/services/_deps](https://github.com/forestrie/arbor/tree/main/services/_deps).
+Arbor clones sibling libraries into `services/_deps` (gitignored), from
+[go-merklelog](https://github.com/forestrie/go-merklelog), [go-univocity](https://github.com/forestrie/go-univocity), [go-sigv4](https://github.com/forestrie/go-sigv4) and others.
 Read source there for MMR, signing, and storage behaviour — do not guess APIs.
 
 | Dependency | Role |
@@ -54,9 +61,9 @@ these paths locally.
 
 | Domain | Where |
 |--------|-------|
-| Ingress / API | [canopy.md](./canopy.md) |
-| GitOps deploy | [infra.md](./infra.md) |
-| On-chain verification | [univocity.md](./univocity.md) |
+| Ingress / API | [arc-canopy](../arc-canopy/SKILL.md) |
+| GitOps deploy | [arc-infra](../arc-infra/SKILL.md) |
+| On-chain verification | [arc-univocity](../arc-univocity/SKILL.md) |
 | MMR / COSE profile | [draft-bryce-cose-receipts-mmr-profile](https://github.com/robinbryce/draft-bryce-cose-receipts-mmr-profile) |
 
 ## Gotchas

@@ -1,10 +1,10 @@
 # Rules of the road — univocity (on-chain)
 
 Solidity contracts for on-chain split-view protection. Load with
-[platform.md](./platform.md). `⤷` = specialises a platform rule. The contract is
+[platform.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/platform.md). `⤷` = specialises a platform rule. The contract is
 the ground truth — an invariant that is not enforced on-chain is not enforced.
 
-Glossary/links: [arc-context/univocity.md](../arc-context/univocity.md).
+Glossary/links: [`arc-univocity` skill](https://github.com/forestrie/forestrie-agents/blob/main/arc-context/arc-univocity/SKILL.md).
 
 ---
 

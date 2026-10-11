@@ -11,7 +11,9 @@ markdown for Cursor, Claude Code, and other coding agents.
 | Path | Purpose |
 |------|---------|
 | [AGENTS.md](./AGENTS.md) | Agent bootstrap router — read first |
-| [arc-context/](./arc-context/) | Minimal domain glossaries + links |
+| [arc-context/](./arc-context/) | Minimal domain glossaries, as `arc-*` background skills |
+| [rules-of-the-road/](./rules-of-the-road/) | Fundamental invariants; a rules source for each repo's committed layer |
+| [sync/](./sync/) | Per-repo manifests for `agentfiles sync` (the committed layer) |
 | [workflow/](./workflow/) | Team-standard [skills](./workflow/skills/) (= slash commands) and [rules](./workflow/rules/) |
 | [bin/](./bin/) | [`forestrie-agents-sync`](./bin/forestrie-agents-sync) — installs skills into every harness |
 | [vendored/](./vendored/) | Pinned third-party agent content |
@@ -25,7 +27,7 @@ with two plugins:
 
 | Plugin | Provides |
 |--------|----------|
-| `forestrie-core` | team workflow skills (`/forestrie-core:review-changes`, `…:triage`, `…:save-status`, …), team rules as path-scoped background skills, the `require-worktree` hook |
+| `forestrie-core` | team workflow skills (`/forestrie-core:review-changes`, `…:triage`, `…:save-status`, …), team rules as path-scoped background skills, `arc-*` domain glossaries, the `require-worktree` hook |
 | `mattpocock-skills` | pinned upstream `tdd`, `diagnose`, `grill-with-docs` with tracked patches |
 
 ```bash
@@ -36,7 +38,8 @@ claude plugin install mattpocock-skills@forestrie-agents
 
 A marketplace added from a local checkout loads plugins in place, so edits are
 live after `/reload-plugins`. Cloud sessions never load plugins; a repo that
-needs these skills there commits a synced copy (see
+needs these skills there commits a synced copy, made from its
+[sync manifest](./sync/README.md) (see
 [agentfiles plan 2610-01](https://github.com/robinbryce/agentfiles/tree/robin/agent-config-reorg/docs/plans/plan-2610-01-agent-config-reorg)).
 
 ## Layer model
