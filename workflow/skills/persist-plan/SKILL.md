@@ -71,8 +71,8 @@ Then use `plan-YYMM-NN-<slug>/README.md` (the plan, with a slice table),
 
 ## 5. Hand off
 
-Run `dox lint --changed`, commit, open the forestrie/work PR, and link the plan from the Linear
-issue. Then continue with [plan-with-linear](../plan-with-linear/SKILL.md)
+Run `dox lint --changed`, commit, open the forestrie/work PR, and link
+the plan from the Linear issue. Then continue with [plan-with-linear](../plan-with-linear/SKILL.md)
 step 5. Code PRs link the plan; they do not carry it.
 
 In Claude Code, the `require-worktree` hook
