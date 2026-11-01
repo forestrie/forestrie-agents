@@ -41,6 +41,7 @@ profile, and from each repo's `AGENTS.md`, `.claude/rules/` and
 | protocol | forestrie/protocol | Protocol spec, glossary, platform rules of the road, conformance vectors |
 | product | forestrie/product | Briefs, decks, product intent |
 | work | forestrie/work | Plans and status snapshots for every repo (ADR-0071). Open by id; never bulk-read |
+| dox | forestrie/dox | Schema repo for the dox docs checker: frontmatter schemas, preset, templates |
 | forestrie-agents | forestrie/forestrie-agents | Agent skills, rules and sync manifests (this file's source) |
 | dotgithub | forestrie/.github | Org profile |
 | ietf-126-demo | forestrie/ietf-126-demo | IETF 126 demo scripts |

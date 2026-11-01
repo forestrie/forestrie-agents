@@ -28,7 +28,8 @@ rules through those two channels. This file is for changing this repo.
 
 Every row has a [sync manifest](./sync/). Document layout, ids and
 frontmatter for all of them: [docs-layout](./workflow/rules/docs-layout/SKILL.md)
-and [schemas/](./schemas/README.md). The
+and the frontmatter schemas in [forestrie/dox](https://github.com/forestrie/dox),
+checked by [dox](https://github.com/robinbryce/dox). The
 clone layout on a workstation is in [workspace/AGENTS.md](./workspace/AGENTS.md).
 
 **Visibility matters.** This repo is private, and synced copies land in public
@@ -44,7 +45,7 @@ names, no internal hostnames.
 | [arc-context/](./arc-context/) | Domain glossaries as `arc-*` background skills | plugin `forestrie-core`; one synced per repo |
 | [rules-of-the-road/](./rules-of-the-road/) | Fundamental invariants, cited by id (`P4`, `canopy/C3`) | synced to `.claude/rules/rules-of-the-road-*.md` |
 | [sync/](./sync/) | Per-repo manifests for `agentfiles sync` | — |
-| [schemas/](./schemas/) | JSON Schemas for doc frontmatter, one per document type | — |
+| [schemas/](./schemas/) | Pointer: the frontmatter schemas moved to [forestrie/dox](https://github.com/forestrie/dox) | — |
 | [vendored/matt-skills/](./vendored/matt-skills/) | Upstream `tdd`, `diagnose`, `grill-with-docs` with tracked patches | plugin `mattpocock-skills` |
 | [harness/](./harness/) | Claude Code and other-tool notes; the `require-worktree` hook | hook ships in `forestrie-core` |
 | [workspace/](./workspace/) | Workstation `AGENTS.md`, installed by `agentfiles bootstrap` | — |
