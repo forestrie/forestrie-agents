@@ -10,10 +10,10 @@ command `/<name>` in Claude Code, Cursor, and pi alike.
 | [/pre-commit-checks](./pre-commit-checks/SKILL.md) | Before commit |
 | [/review-changes](./review-changes/SKILL.md) | PR/stack review, Graphite-aware |
 | [/plan-with-linear](./plan-with-linear/SKILL.md) | Planning against a FOR issue |
-| [/persist-plan](./persist-plan/SKILL.md) | Persist an approved plan as a canonical `docs/plans/` doc |
+| [/persist-plan](./persist-plan/SKILL.md) | Persist an approved plan into [forestrie/work](https://github.com/forestrie/work) `plans/` |
 | [/triage](./triage/SKILL.md) | Issue triage |
 | [/fork-mandate](./fork-mandate/SKILL.md) | Fork a mandate instance against lane-b |
-| [/save-status](./save-status/SKILL.md) | Checkpoint work in flight for a fresh session |
+| [/save-status](./save-status/SKILL.md) | Checkpoint work in flight into forestrie/work `status/` for a fresh session |
 | [/rules-of-the-road-review](./rules-of-the-road-review/SKILL.md) | Check a diff/plan against the fundamental invariants in [rules-of-the-road/](../../rules-of-the-road/README.md) — the design-invariant core of a review |
 
 Pinned upstream skills ship separately, as the `mattpocock-skills` plugin from

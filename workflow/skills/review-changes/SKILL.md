@@ -46,7 +46,7 @@ Read selectively before reviewing the diff:
 | [forestrie-agents/workflow/rules/](../../rules/) | go-task, commits, TS/Go/Solidity rules, breaking-changes |
 | [forestrie-agents/vendored/matt-skills/skills/engineering/tdd/](../../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Testability, coverage |
 | The matching `arc-*` glossary skill (`arc-canopy`, `arc-arbor`, `arc-univocity`, `arc-infra`, `arc-mandate`, `arc-tools`, `arc-company`) | Domain terms for touched area |
-| [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) | Shared vocabulary |
+| [protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md) | Shared vocabulary |
 
 ### 1.2 Repo-specific routers (read one matching repo)
 

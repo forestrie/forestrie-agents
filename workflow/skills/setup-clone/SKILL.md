@@ -82,7 +82,7 @@ In each repo, read root `AGENTS.md` (or `forest/agents/AGENTS.md`) before
 coding. Common process lives in
 [forestrie-agents](https://github.com/forestrie/forestrie-agents).
 
-Platform vocabulary: [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md).
+Platform vocabulary: [protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md).
 
 ## 6. Git worktrees
 

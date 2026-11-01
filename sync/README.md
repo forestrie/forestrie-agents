@@ -56,10 +56,20 @@ One directive per line. `#` starts a comment.
 | [forest-1](./forest-1.manifest) | platform, forest-1 | go-task | `arc-infra` |
 | [arbor-flux](./arbor-flux.manifest) | platform, arbor-flux | none | `arc-infra` |
 | [devdocs](./devdocs.manifest) | platform | none | `arc-company` |
+| [work](./work.manifest) | platform | none | none |
+| [protocol](./protocol.manifest) | owns platform | none | none |
+| [product](./product.manifest) | none | none | `arc-company` |
 
 Every manifest enables the `forestrie-core` and `mattpocock-skills` plugins for
 terminal sessions, and carries the common rules (`commit-conventions`,
-`branch-naming`, `breaking-changes`, `plan-docs`, `adr-format`). Each code repo
+`branch-naming`, `breaking-changes`, `docs-layout`). Each code repo
 gets the `review-changes`, `rules-of-the-road-review`, `pre-commit-checks`,
 `save-status` and `persist-plan` skills. devdocs gets `plan-with-linear` in place
-of the code-review skills.
+of the code-review skills. work gets the planning skills (`save-status`,
+`persist-plan`, `plan-with-linear`) and the platform rules for each plan's
+Rules check. protocol and product get the planning skills too (plus the
+rules review for protocol, which owns the platform rules).
+
+Removing a rule here does not delete the copy a repo already committed:
+the repo's next sync (its ADR-0071 normalisation change) deletes the stale
+`.claude/rules/plan-docs.md` and `adr-format.md` by hand.

@@ -23,9 +23,12 @@ rules through those two channels. This file is for changing this repo.
 | [arbor-flux](https://github.com/forestrie/arbor-flux) | private | GitOps manifests | [arbor-flux](./rules-of-the-road/arbor-flux.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
 | [devdocs](https://github.com/forestrie/devdocs) | private | ADRs, ARCs, runbooks | [platform](./rules-of-the-road/platform.md) only | [arc-company](./arc-context/arc-company/SKILL.md) |
 | [protocol](https://github.com/forestrie/protocol) | public | Protocol spec, glossary, platform rules (`P1`–`P16`) | owns platform | — |
-| [product](https://github.com/forestrie/product) | private | Briefs, decks, product plans | — | [arc-company](./arc-context/arc-company/SKILL.md) |
+| [product](https://github.com/forestrie/product) | private | Briefs, decks, product intent | — | [arc-company](./arc-context/arc-company/SKILL.md) |
+| [work](https://github.com/forestrie/work) | private | Plans and status snapshots for every repo | [platform](./rules-of-the-road/platform.md) | — |
 
-Each row with a rules-of-the-road file has a [sync manifest](./sync/). The
+Every row has a [sync manifest](./sync/). Document layout, ids and
+frontmatter for all of them: [docs-layout](./workflow/rules/docs-layout/SKILL.md)
+and [schemas/](./schemas/README.md). The
 clone layout on a workstation is in [workspace/AGENTS.md](./workspace/AGENTS.md).
 
 **Visibility matters.** This repo is private, and synced copies land in public
@@ -41,6 +44,7 @@ names, no internal hostnames.
 | [arc-context/](./arc-context/) | Domain glossaries as `arc-*` background skills | plugin `forestrie-core`; one synced per repo |
 | [rules-of-the-road/](./rules-of-the-road/) | Fundamental invariants, cited by id (`P4`, `canopy/C3`) | synced to `.claude/rules/rules-of-the-road-*.md` |
 | [sync/](./sync/) | Per-repo manifests for `agentfiles sync` | — |
+| [schemas/](./schemas/) | JSON Schemas for doc frontmatter, one per document type | — |
 | [vendored/matt-skills/](./vendored/matt-skills/) | Upstream `tdd`, `diagnose`, `grill-with-docs` with tracked patches | plugin `mattpocock-skills` |
 | [harness/](./harness/) | Claude Code and other-tool notes; the `require-worktree` hook | hook ships in `forestrie-core` |
 | [workspace/](./workspace/) | Workstation `AGENTS.md`, installed by `agentfiles bootstrap` | — |
