@@ -67,7 +67,7 @@ gets the `review-changes`, `rules-of-the-road-review`, `pre-commit-checks`,
 `save-status` and `persist-plan` skills. devdocs gets `plan-with-linear` in place
 of the code-review skills. work gets the planning skills (`save-status`,
 `persist-plan`, `plan-with-linear`) and the platform rules for each plan's
-Rules check. protocol and product get `plan-with-linear` only (plus the
+Rules check. protocol and product get the planning skills too (plus the
 rules review for protocol, which owns the platform rules).
 
 Removing a rule here does not delete the copy a repo already committed:

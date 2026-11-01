@@ -56,13 +56,19 @@ def validator_for(kind, registry):
 
 
 def frontmatter(path):
-    text = path.read_text()
+    try:
+        text = path.read_text()
+    except OSError as e:
+        raise ValueError(f"cannot read: {e.strerror}") from e
     if not text.startswith("---\n"):
         raise ValueError("no YAML frontmatter")
     end = text.find("\n---", 4)
     if end < 0:
         raise ValueError("unterminated YAML frontmatter")
-    data = yaml.load(text[4:end], Loader=StringDateLoader)
+    try:
+        data = yaml.load(text[4:end], Loader=StringDateLoader)
+    except yaml.YAMLError as e:
+        raise ValueError(f"invalid YAML: {e}") from e
     if not isinstance(data, dict):
         raise ValueError("frontmatter is not a mapping")
     return data
@@ -73,9 +79,15 @@ def errors(validator, path):
         data = frontmatter(path)
     except ValueError as e:
         return [str(e)]
+    found = list(validator.iter_errors(data))
+    # A failing field fails the whole allOf branch that declares it, and
+    # draft 2020-12 then drops that branch's annotations, so
+    # unevaluatedProperties also reports every valid sibling field. Show
+    # that error only when it is the sole problem.
+    real = [e for e in found if e.validator != "unevaluatedProperties"]
     return [
         f"{'/'.join(map(str, e.absolute_path)) or '(root)'}: {e.message}"
-        for e in validator.iter_errors(data)
+        for e in (real or found)
     ]
 
 

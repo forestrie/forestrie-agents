@@ -11,24 +11,74 @@
       "pattern": "^arc-[0-9]{4}-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
     "status": {
-      "enum": ["draft", "accepted", "absorbed", "superseded", "abandoned"]
+      "enum": [
+        "draft",
+        "accepted",
+        "absorbed",
+        "superseded",
+        "abandoned"
+      ]
     },
     "categories": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]*$" },
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9-]*$"
+      },
       "uniqueItems": true
     }
   },
-  "required": ["id", "title", "status", "created", "updated"],
+  "required": [
+    "id",
+    "title",
+    "status",
+    "created",
+    "updated"
+  ],
   "allOf": [
-    { "$ref": "common.schema.json#/$defs/base" },
     {
-      "if": { "properties": { "status": { "const": "absorbed" } }, "required": ["status"] },
-      "then": { "required": ["absorbed-into"] }
+      "$ref": "common.schema.json#/$defs/base"
     },
     {
-      "if": { "properties": { "status": { "const": "superseded" } }, "required": ["status"] },
-      "then": { "required": ["superseded-by"] }
+      "if": {
+        "properties": {
+          "status": {
+            "const": "absorbed"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "absorbed-into"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "superseded"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded-by"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "superseded-by"
+          ]
+        }
+      }
     }
   ],
   "unevaluatedProperties": false

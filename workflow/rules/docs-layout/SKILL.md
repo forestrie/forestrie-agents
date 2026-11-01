@@ -40,7 +40,8 @@ Frontmatter schemas (JSON Schema 2020-12) are in
 
 In a repo, canon lives under `docs/` (`docs/adr/`, `docs/arc/`,
 `docs/rules.md`, `docs/<area>.md`). devdocs, protocol and product are docs
-repos and use the same directories at their root.
+repos and use the same directories at their root. Until its normalisation
+change, protocol keeps its ADRs and ARCs together in `decisions/`.
 
 ## Files and directories
 
@@ -73,9 +74,12 @@ directory document.
 - **Allocate against the remote.** Scan the home's default branch on
   `origin` (fetch first) and its open pull requests, never just your
   working tree. Scan everything that can hold the series: `adr/` and
-  `adr/retired/`; `plans/` and `archive/*/` in the work repo.
-- Each repo, plus devdocs, protocol and product, is its own namespace.
-  devdocs continues from ADR-0071; protocol numbers its own from here on.
+  `adr/retired/` (and any directory a not-yet-normalised home still uses,
+  such as protocol's `decisions/`, which mixes ADRs and ARCs); `plans/` and
+  `archive/*/` in the work repo.
+- Each repo, plus devdocs, protocol and product, is its own namespace, and
+  numbers continue from the highest id already in that home: devdocs from
+  ADR-0071, protocol from its existing ADR-0069 and ARC-0019.
 - Existing duplicate ids and frozen legacy `plan-NNNN-<slug>` ids keep
   their names. The slug tells them apart; never renumber.
 
@@ -119,7 +123,7 @@ Per type:
 |------|------|------------------------|
 | ADR | `categories` (upper case), `amends` | `superseded-by` when `superseded` |
 | ARC | `categories` | `absorbed-into` when `absorbed`; `superseded-by` when `superseded` |
-| Named doc | `owner` (GitHub user or `org/team`), `review-by` | `owner`, `review-by`, `decisions` |
+| Named doc | `owner` (GitHub user or `org/team`), `review-by` | `owner`, `review-by`, `decisions`; `superseded-by` when `superseded` |
 | Plan | `repos`, `issues`, `outcome` | `repos`, `issues`; `outcome` when `complete` |
 | Status | `repos`, `issues`, `plans` | — |
 | Rules | `version` (semver), `amended` | `version`, `created`, `amended` |
@@ -192,13 +196,21 @@ way.
 
 ## Retiring canon
 
-`adr/` and `arc/` hold in-force and in-discussion documents only. In the
-same change that sets `superseded`, `rejected`, `deprecated`, `absorbed`
-or `abandoned`, `git mv` the document to `adr/retired/` or `arc/retired/`
-and rewrite inbound links to the new path. An ADR or ARC may retire by
-absorption once a named living doc or rule carries its substance; record
-`absorbed-into:` and add it to that document's `decisions:` if still in
-force.
+`adr/` and `arc/` hold the documents an agent should read: those in
+force that no living doc has absorbed, and those in discussion. In the same
+change that sets `superseded`, `rejected`, `deprecated`, `absorbed` or
+`abandoned`, or adds `absorbed-into`, `git mv` the document to
+`adr/retired/` or `arc/retired/` and rewrite inbound links to the new path.
+
+Retirement by absorption: once a named living doc or rule carries an ADR's
+or ARC's substance, record `absorbed-into:` on it and retire it.
+
+- An absorbed **ARC** takes status `absorbed`.
+- An absorbed **ADR** keeps its status (normally `accepted`): the decision
+  still holds, and ADRs have no `absorbed` status. The absorbing document
+  lists it in `decisions:`.
+- `superseded-by` appears only on a `superseded` document; a decision that
+  merely went away is `deprecated`, with no link.
 
 Never leave a "moved" stub file behind. Never hand-maintain an index of a
 series; indexes are generated.

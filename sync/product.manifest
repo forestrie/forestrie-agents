@@ -16,4 +16,4 @@ rule workflow/rules/breaking-changes/SKILL.md breaking-changes.md
 rule workflow/rules/docs-layout/SKILL.md docs-layout.md
 
 # Skills vendored into .agents/skills (+ .claude/skills symlinks) for cloud sessions and other harnesses
-skill plan-with-linear arc-company
+skill plan-with-linear persist-plan save-status arc-company

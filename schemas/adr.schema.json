@@ -11,12 +11,22 @@
       "pattern": "^adr-[0-9]{4}-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
     "status": {
-      "enum": ["discuss", "ready", "accepted", "rejected", "superseded", "deprecated"]
+      "enum": [
+        "discuss",
+        "ready",
+        "accepted",
+        "rejected",
+        "superseded",
+        "deprecated"
+      ]
     },
     "categories": {
       "description": "Areas the decision touches, upper case, e.g. [DOCS, PROCESS].",
       "type": "array",
-      "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]*$" },
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9-]*$"
+      },
       "uniqueItems": true
     },
     "amends": {
@@ -25,12 +35,40 @@
       "minItems": 1
     }
   },
-  "required": ["id", "title", "status", "created", "updated"],
+  "required": [
+    "id",
+    "title",
+    "status",
+    "created",
+    "updated"
+  ],
   "allOf": [
-    { "$ref": "common.schema.json#/$defs/base" },
     {
-      "if": { "properties": { "status": { "const": "superseded" } }, "required": ["status"] },
-      "then": { "required": ["superseded-by"] }
+      "$ref": "common.schema.json#/$defs/base"
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "superseded"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded-by"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "superseded-by"
+          ]
+        }
+      }
     }
   ],
   "unevaluatedProperties": false

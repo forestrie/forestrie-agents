@@ -10,7 +10,11 @@
       "$ref": "common.schema.json#/$defs/slug"
     },
     "status": {
-      "enum": ["draft", "current", "superseded"]
+      "enum": [
+        "draft",
+        "current",
+        "superseded"
+      ]
     },
     "owner": {
       "description": "The GitHub user or team accountable for keeping the document true, e.g. robinbryce or forestrie/platform.",
@@ -22,12 +26,43 @@
       "$ref": "common.schema.json#/$defs/date"
     }
   },
-  "required": ["id", "title", "status", "created", "updated", "owner", "review-by", "decisions"],
+  "required": [
+    "id",
+    "title",
+    "status",
+    "created",
+    "updated",
+    "owner",
+    "review-by",
+    "decisions"
+  ],
   "allOf": [
-    { "$ref": "common.schema.json#/$defs/base" },
     {
-      "if": { "properties": { "status": { "const": "superseded" } }, "required": ["status"] },
-      "then": { "required": ["superseded-by"] }
+      "$ref": "common.schema.json#/$defs/base"
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "superseded"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded-by"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "superseded-by"
+          ]
+        }
+      }
     }
   ],
   "unevaluatedProperties": false
