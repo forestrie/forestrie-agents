@@ -19,7 +19,7 @@ the task and no other. They ship in the `forestrie-core` plugin. A repo's
 | [arc-company](./arc-company/SKILL.md) | Product and business vocabulary |
 
 **Platform depth:** [devdocs](https://github.com/forestrie/devdocs) — ADRs, ARCs,
-[glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md),
-[architecture.md](https://github.com/forestrie/devdocs/blob/main/architecture.md).
+[architecture.md](https://github.com/forestrie/devdocs/blob/main/architecture.md);
+[protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md).
 
 **Product context:** [product](https://github.com/forestrie/product) — briefs, decks, plans.

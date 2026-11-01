@@ -14,7 +14,7 @@ implementation.
 roadmap discussions, decks and briefs.
 
 **Do not bulk-read** — use [product/](https://github.com/forestrie/product) and
-[devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md).
+[protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md).
 
 ---
 
@@ -42,7 +42,7 @@ for the technical end-to-end picture.
 | **Grant** | Delegated authority recorded in an owner log |
 | **SCRAPI client** | HTTP client using SCITT registration and proof APIs |
 
-Full domain language: [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md).
+Full domain language: [protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md).
 
 ## Product materials
 

@@ -17,7 +17,7 @@ Arguments: `$ARGUMENTS`
 - Issue title, description, labels, priority
 - Linked PRs or parent initiative
 - The relevant `arc-*` glossary skill if domain-specific
-- [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) if terminology is ambiguous
+- [protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md) if terminology is ambiguous
 
 ## 2. Classify
 

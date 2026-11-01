@@ -34,7 +34,7 @@ Record the issue id (e.g. `FOR-1234`).
 |--------|------|
 | The matching `arc-*` glossary skill | Domain terms |
 | Repo `AGENTS.md` or `forest/agents/AGENTS.md` | Repo-specific routes |
-| [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) | Shared vocabulary |
+| [protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md) | Shared vocabulary |
 | Relevant plan or ARC | If user named a path |
 
 Do **not** bulk-load devdocs arc/adr trees or full repo doc trees.
@@ -44,24 +44,24 @@ Do **not** bulk-load devdocs arc/adr trees or full repo doc trees.
 Follow [grill-with-docs](../../../vendored/matt-skills/skills/engineering/grill-with-docs/SKILL.md):
 
 - Interview relentlessly; one question at a time with recommended answers
-- Challenge terms against [devdocs/glossary.md](https://github.com/forestrie/devdocs/blob/main/glossary.md) and the `arc-*` glossary skill
+- Challenge terms against the [protocol glossary.md](https://github.com/forestrie/protocol/blob/main/glossary.md) and the `arc-*` glossary skill
 - Update repo `CONTEXT.md` or glossary docs lazily when terms crystallise
 - Offer ADRs only when hard to reverse, surprising, and trade-off driven — use
-  [adr-format](../../rules/adr-format/SKILL.md) for the doc itself, **not** the
+  [docs-layout](../../rules/docs-layout/SKILL.md) for the doc itself, **not** the
   vendored `ADR-FORMAT.md` the skill links to
 
-For Forestrie repos, prefer updating:
+Where things go (see [docs-layout](../../rules/docs-layout/SKILL.md#canon-and-work)):
 
-- `docs/plans/plan-NNNN-*.md` in the implementing repo for the implementation plan
-- **devdocs** for cross-repo ADR/ARC (see [devdocs AGENTS.md](https://github.com/forestrie/devdocs/blob/main/AGENTS.md) ownership table)
-- Existing ARC/ADR indexes rather than new monolithic context files
+- The implementation plan: [forestrie/work](https://github.com/forestrie/work) `plans/`, whichever repos it changes
+- ADRs and ARCs: `docs/adr/`, `docs/arc/` in the repo they affect; devdocs when cross-repo
+- Current-state changes: the named living doc for the area, not a new context file
 
 ## 4. Output
 
 Once the user approves the plan, run
-[persist-plan](../persist-plan/SKILL.md) to write it out per
-[plan-docs](../../rules/plan-docs/SKILL.md) (scope, numbering, header, location —
-repo `docs/plans/` or devdocs/plans for multi-repo work). Then produce:
+[persist-plan](../persist-plan/SKILL.md) to write it into forestrie/work
+`plans/` per [docs-layout](../../rules/docs-layout/SKILL.md), with a
+`## Rules check` section. Then produce:
 
 1. **Linear issue** updated with link to the persisted plan and acceptance criteria
 2. **Behaviours to test** list (not implementation steps) for TDD handoff

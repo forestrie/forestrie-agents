@@ -24,8 +24,7 @@ They ship as background skills in the `forestrie-core` plugin. A repo's
 | [go-comments](./go-comments/SKILL.md) | `**/*.go` |
 | [solidity-comments](./solidity-comments/SKILL.md) | `**/*.sol` |
 | [go-task-over-shell](./go-task-over-shell/SKILL.md) | `**/Taskfile.yml`, `**/taskfiles/**`, `**/*.sh` |
-| [plan-docs](./plan-docs/SKILL.md) | `**/plans/**`, `**/adr/**`, `**/arc/**` |
-| [adr-format](./adr-format/SKILL.md) | `**/adr/**`, `**/docs/adr/**` |
+| [docs-layout](./docs-layout/SKILL.md) | `**/adr/**`, `**/arc/**`, `**/plans/**`, `**/status/**`, `**/rules/**`, `**/docs/**` |
 
 ## Situational — loaded on description match
 

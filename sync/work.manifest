@@ -1,0 +1,22 @@
+# sync/work.manifest — committed agent layer for forestrie/work: Plans and status snapshots for every repo (work home, ADR-0071).
+# Apply: agentfiles sync <path-to-work> --manifest <this file>
+# Format: see sync/README.md. A relative 'source' resolves against this file's directory.
+
+source ..
+
+# Plugins for terminal collaborators -> .claude/settings.json
+marketplace forestrie-agents forestrie/forestrie-agents
+plugin forestrie-core@forestrie-agents
+plugin mattpocock-skills@forestrie-agents
+
+# Always-on and path-scoped team rules -> .claude/rules/<name>.md
+rule workflow/rules/commit-conventions/SKILL.md commit-conventions.md
+rule workflow/rules/branch-naming/SKILL.md branch-naming.md
+rule workflow/rules/breaking-changes/SKILL.md breaking-changes.md
+rule workflow/rules/docs-layout/SKILL.md docs-layout.md
+
+# Rules of the road: platform, for each plan's Rules check -> .claude/rules/
+rule rules-of-the-road/platform.md rules-of-the-road-platform.md
+
+# Skills vendored into .agents/skills (+ .claude/skills symlinks) for cloud sessions and other harnesses
+skill save-status persist-plan plan-with-linear rules-of-the-road-review
