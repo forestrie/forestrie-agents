@@ -61,7 +61,8 @@ Where things go (see [docs-layout](../../rules/docs-layout/SKILL.md#canon-and-wo
 Once the user approves the plan, run
 [persist-plan](../persist-plan/SKILL.md) to write it into forestrie/work
 `plans/` per [docs-layout](../../rules/docs-layout/SKILL.md), with a
-`## Rules check` section. Then produce:
+`## Rules check` section. It allocates the id with
+`dox new plan <slug> [--dir]`; never hand-pick one. Then produce:
 
 1. **Linear issue** updated with link to the persisted plan and acceptance criteria
 2. **Behaviours to test** list (not implementation steps) for TDD handoff

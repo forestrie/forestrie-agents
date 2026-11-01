@@ -14,6 +14,7 @@ rule workflow/rules/commit-conventions/SKILL.md commit-conventions.md
 rule workflow/rules/branch-naming/SKILL.md branch-naming.md
 rule workflow/rules/breaking-changes/SKILL.md breaking-changes.md
 rule workflow/rules/docs-layout/SKILL.md docs-layout.md
+rule workflow/rules/dox/SKILL.md dox.md
 
 # Rules of the road: platform plus this repo's file -> .claude/rules/
 rule rules-of-the-road/platform.md rules-of-the-road-platform.md
