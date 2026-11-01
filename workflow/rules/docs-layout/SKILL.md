@@ -66,20 +66,19 @@ directory document.
 
 | Type | id | Allocated by |
 |------|----|--------------|
-| ADR | `adr-NNNN-<slug>`; `adr-NNNN-sec-<slug>` if security critical | next free number in the home |
-| ARC | `arc-NNNN-<slug>` | next free number in the home |
+| ADR | `adr-NNNN-<slug>`; `adr-NNNN-sec-<slug>` if security critical | `dox new adr <slug>` in the home |
+| ARC | `arc-NNNN-<slug>` | `dox new arc <slug>` in the home |
 | Named doc, rules file | `<slug>` | the author |
-| Plan | `plan-YYMM-NN-<slug>` | `/plan-new` in forestrie/work |
-| Status | `status-YYMM-NN-<slug>` | `/save-status` in forestrie/work |
+| Plan | `plan-YYMM-NN-<slug>` | `dox new plan <slug> [--dir]` in forestrie/work |
+| Status | `status-YYMM-NN-<slug>` | `dox new status <slug>` in forestrie/work |
 
 - Numbers are 4 digits; plan and status ordinals are 2 digits within the
   month (`YYMM`) the document was created.
-- **Allocate against the remote.** Scan the home's default branch on
-  `origin` (fetch first) and its open pull requests, never just your
-  working tree. Scan everything that can hold the series: `adr/` and
-  `adr/retired/` (and any directory a not-yet-normalised home still uses,
-  such as protocol's `decisions/`, which mixes ADRs and ARCs); `plans/` and
-  `archive/*/` in the work repo.
+- **Allocate against the remote, with dox.** `dox next <type>` and
+  `dox new` fetch `origin` and scan its default branch and open pull
+  requests across every directory that can hold the series (`retired/`,
+  `archive/*/`, and protocol's legacy `decisions/`), never just your
+  working tree. Never hand-pick a number. See [dox](../dox/SKILL.md).
 - Each repo, plus devdocs, protocol and product, is its own namespace, and
   numbers continue from the highest id already in that home: devdocs from
   ADR-0071, protocol from its existing ADR-0069 and ARC-0019.
@@ -184,7 +183,8 @@ restate a topic and supersede a cluster at once.
 ## Writing a plan or status doc
 
 Plans and status docs go in a forestrie/work worktree, created with
-`/plan-new` and `/save-status`. A plan has a `## Rules check` section
+`dox new plan` and `dox new status` (which `/plan-new` and `/save-status`
+run). A plan has a `## Rules check` section
 listing each rule id it touches (platform `P#`, repo rule ids), each
 marked honoured or amendment proposed with a link. An unjustified
 violation blocks the plan and its PRs. Code PRs link the plan; they do not
@@ -195,7 +195,8 @@ landed in canon (an ADR per decision taken, the ARC or living doc whose
 current state changed, a rules amendment if an invariant moved). List
 those in `outcome:`, or write `outcome: "none: <reason>"`. Then `git mv`
 it to `archive/<YYMM>/` (month closed). Abandoned plans archive the same
-way.
+way. `dox lint` checks that a closed plan has an `outcome:` and sits in
+`archive/`.
 
 ## Retiring canon
 
@@ -204,6 +205,8 @@ force that no living doc has absorbed, and those in discussion. In the same
 change that sets `superseded`, `rejected`, `deprecated`, `absorbed` or
 `abandoned`, or adds `absorbed-into`, `git mv` the document to
 `adr/retired/` or `arc/retired/` and rewrite inbound links to the new path.
+Find them first with `dox graph --json` (`backlinks`; afterwards
+`into_retired` must not name it).
 
 Retirement by absorption: once a named living doc or rule carries an ADR's
 or ARC's substance, record `absorbed-into:` on it and retire it.
@@ -216,7 +219,12 @@ or ARC's substance, record `absorbed-into:` on it and retire it.
   merely went away is `deprecated`, with no link.
 
 Never leave a "moved" stub file behind. Never hand-maintain an index of a
-series; indexes are generated.
+series; indexes are generated (`dox index`).
+
+**The baseline.** A repo's `.dox-baseline.json` records findings that
+predate its dox gate. It only shrinks: fix a finding, then
+`dox lint --update-baseline`. Never hand-edit it or baseline a new
+finding.
 
 ## Rules files
 

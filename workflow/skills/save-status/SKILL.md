@@ -30,20 +30,18 @@ job with the forestrie profile's `status_root`; either is fine.
    `git -C <work clone> worktree add ../.worktrees/work-<slug> -b <branch> origin/main`.
 3. **Prefer update in place.** If a live `status/` doc already tracks this
    workstream (same issue, plan id or slug), refresh it.
-4. **Otherwise allocate** the next ordinal for the current month against
-   the remote, never the working tree:
+4. **Otherwise allocate** with [dox](../../rules/dox/SKILL.md), from the
+   work worktree:
 
    ```bash
-   git fetch -q origin
-   yymm=$(date +%y%m)
-   { git ls-tree -r --name-only origin/main -- status archive
-     gh pr list -R forestrie/work --json files --jq '.[].files[].path'
-   } | grep -oE "status-$yymm-[0-9]{2}" | sort -u | tail -1
+   dox new status <slug>
    ```
 
-   Next is that ordinal plus one, or `01`. Put the lead issue in the slug:
-   `status-2611-03-for-632-docs-layout.md`.
-5. Commit and open (or update) the PR in forestrie/work.
+   It takes the next ordinal for the current month from origin's default
+   branch and open PRs, and scaffolds the doc. Never hand-pick. Put the
+   lead issue in the slug: `status-2611-03-for-632-docs-layout.md`.
+5. Run `dox lint --changed`, then commit and open (or update) the PR in
+   forestrie/work.
 
 ## Content
 

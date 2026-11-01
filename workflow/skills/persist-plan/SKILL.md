@@ -25,23 +25,21 @@ Never write on the primary clone's `main`.
 
 ## 2. Allocate the id
 
-Prefer `/plan-new <slug> [--dir]` (the personal `core:plan-new` skill),
-run with the work worktree's `plans/` as root. Without it, allocate the
-next ordinal for the current month against the remote:
+From the work worktree, allocate and scaffold with
+[dox](../../rules/dox/SKILL.md):
 
 ```bash
-git fetch -q origin
-yymm=$(date +%y%m)
-{ git ls-tree -r --name-only origin/main -- plans archive
-  gh pr list -R forestrie/work --json files --jq '.[].files[].path'
-} | grep -oE "plan-$yymm-[0-9]{2}" | sort -u | tail -1
+dox new plan <slug>          # plans/plan-YYMM-NN-<slug>.md
+dox new plan <slug> --dir    # plans/plan-YYMM-NN-<slug>/README.md
 ```
 
-Next is that ordinal plus one, or `01`. Never hand-pick.
+It takes the next ordinal for the current month from origin's default
+branch and open PRs. `/plan-new` (the personal `core:plan-new` skill) runs
+the same command. Never hand-pick.
 
 ## 3. Write the plan
 
-`plans/plan-YYMM-NN-<slug>.md`:
+Fill the scaffold dox wrote:
 
 ```yaml
 ---
@@ -73,8 +71,8 @@ Then use `plan-YYMM-NN-<slug>/README.md` (the plan, with a slice table),
 
 ## 5. Hand off
 
-Commit, open the forestrie/work PR, and link the plan from the Linear
-issue. Then continue with [plan-with-linear](../plan-with-linear/SKILL.md)
+Run `dox lint --changed`, commit, open the forestrie/work PR, and link
+the plan from the Linear issue. Then continue with [plan-with-linear](../plan-with-linear/SKILL.md)
 step 5. Code PRs link the plan; they do not carry it.
 
 In Claude Code, the `require-worktree` hook

@@ -24,7 +24,7 @@ Optional arguments (pass through if given):
 
 - Fixed point: branch, tag, commit, or `main` (default: stack-aware — step 2)
 - Linear issue id(s): e.g. `FOR-167`
-- Plan path: e.g. `docs/plans/plan-0028-*.md`
+- Plan id: e.g. `plan-2611-02-dox-adoption` (forestrie/work)
 - Scope override: `single-branch`, `full-stack`, `cross-repo`, or repo class:
   `canopy`, `arbor`, `univocity`, `infra`, `mandate`, `tools`
 
@@ -102,7 +102,7 @@ Resolve in order:
 
 1. User-supplied plan path or Linear id
 2. `FOR-*` in branch name, PR title, or commit messages
-3. Matching `docs/plans/plan-*.md` in the repo (or devdocs/plans for platform)
+3. The forestrie/work plan whose `issues:` names the `FOR-*` id
 4. PR body: `gh pr view --json url,title,body`
 
 If no spec exists, review design invariants + code quality only.
@@ -143,7 +143,17 @@ gt branch info --branch "$BR"
 | User: `full-stack` | Cumulative `$TRUNK...HEAD` plus per-PR slices |
 | Cross-repo coupled work | **Cross-repo** — primary review in current repo; Linear for sibling gaps |
 
-### 2.3 Collect diffs
+### 2.3 Docs inputs (repos with a `.dox.toml`)
+
+Run [dox](../../rules/dox/SKILL.md) on the branch and treat its output as
+review input, not a substitute for reading:
+
+- `dox lint --json`: every error is a finding; a `--skip` or a grown
+  `.dox-baseline.json` without a reason in the PR is a finding too.
+- Retiring or superseding a document: `dox graph --json`. Live docs left
+  citing it (`into_retired`) and new `orphans` are findings.
+
+### 2.4 Collect diffs
 
 **Single branch:** `git log $TRUNK..HEAD --oneline`, `git diff $TRUNK...HEAD`,
 `gh pr view` if exists.
@@ -190,10 +200,11 @@ Bullets with doc/spec citations.
 
 ## 5. Output: remediation plan
 
-Write under the repo's `docs/plans/` (or devdocs/plans for platform-wide):
+Persist it as a plan in [forestrie/work](https://github.com/forestrie/work)
+`plans/` with [persist-plan](../persist-plan/SKILL.md)
+(`dox new plan <slug>-review-remediation`), never in a code repo:
 
-- **Path:** `docs/plans/plan-NNNN-{slug}-review-remediation.md`
-- **Header:** Status DRAFT, Date, Related (spec, Linear, branches/PRs)
+- **Frontmatter:** `status: draft`, `issues`, `refs` (spec, branches/PRs)
 - **Sections:** scope summary; remediation items with acceptance criteria;
   branch assignment (current stack vs new branch vs sibling repo); deferred (Low)
 
@@ -223,6 +234,6 @@ No secrets.
 2. Graphite scope determined
 3. Diffs for correct range(s)
 4. Review dimensions applied
-5. Remediation plan in `docs/plans/` (if Medium+ findings)
+5. Remediation plan in forestrie/work `plans/` (if Medium+ findings)
 6. Linear comments + off-stack issues
 7. Summary: worst finding, counts, plan path, Linear ids touched
