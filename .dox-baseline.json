@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "findings": [
+    {
+      "check": "links-local",
+      "path": "incubator/robin/linear-project-plan.md",
+      "message": "relative link does not resolve: ../../workflow/rules/plan-docs/SKILL.md"
+    },
+    {
+      "check": "no-work-ids",
+      "path": "README.md",
+      "message": "plan id plan-2610 in canon prose"
+    },
+    {
+      "check": "no-work-ids",
+      "path": "rules-of-the-road/canopy.md",
+      "message": "tracker id FOR-129 in canon prose"
+    }
+  ]
+}
