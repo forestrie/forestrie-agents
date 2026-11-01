@@ -36,5 +36,5 @@ re-sync the org repos afterwards.
 3. **Vendored** — upstream skills; patch through `vendored/*/patches/`, never in place
 4. **Incubator** — opt-in only; never loaded by default
 
-The design behind this layout is
-[agentfiles plan 2610-01](https://github.com/robinbryce/agentfiles/tree/8b60ee4a/docs/plans/plan-2610-01-agent-config-reorg).
+The layout follows the agent configuration design in
+[agentfiles](https://github.com/robinbryce/agentfiles).
