@@ -1,7 +1,7 @@
 ---
 name: docs-layout
 description: "The one specification for Forestrie docs: where ADRs, ARCs, named living docs, rules files, plans and status snapshots live, how they are named and numbered, their YAML frontmatter and status values, how they link, and how they retire."
-when_to_use: Creating, editing, moving, retiring or citing any ADR, ARC, living doc, rules file, plan or status doc in a Forestrie repo, or choosing where a document belongs.
+when_to_use: Creating, editing, moving, retiring or citing any ADR, ARC, living doc, rules file, plan or status doc in a Forestrie repo, choosing where a document belongs, or when grill-with-docs points at its own ADR-FORMAT.md.
 paths: ["**/adr/**", "**/arc/**", "**/plans/**", "**/status/**", "**/rules/**", "**/docs/**"]
 user-invocable: false
 ---
