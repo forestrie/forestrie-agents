@@ -14,8 +14,11 @@ It replaces the old `plan-docs`, `adr-format` and forestrie `save-status`
 conventions. Where anything else disagrees (an older repo README, a
 vendored `ADR-FORMAT.md`, a hand-written `.cursor/rules` copy), this wins.
 
-Frontmatter schemas (JSON Schema 2020-12) are in
-[forestrie-agents/schemas/](https://github.com/forestrie/forestrie-agents/blob/main/schemas/README.md).
+Frontmatter schemas (JSON Schema 2020-12) and the machine-checked form of
+this specification are in [forestrie/dox](https://github.com/forestrie/dox).
+[dox](https://github.com/robinbryce/dox) checks them (`dox lint`) and
+allocates ids against the remote (`dox next <type>`, `dox new <type>
+<slug>`); set `DOX_SCHEMA_REPO=forestrie/dox`.
 
 ## Canon and work
 
