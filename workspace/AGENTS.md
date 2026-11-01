@@ -50,6 +50,7 @@ profile, and from each repo's `AGENTS.md`, `.claude/rules/` and
 | Directory | Repo | What |
 |-----------|------|------|
 | go-merklelog | forestrie/go-merklelog | Go MMR log and proofs |
+| arbor/services/_deps/go-univocity | forestrie/go-univocity | Go univocity grant and leaf formats (`docs/grant-and-leaf-format.md`). No sibling clone: arbor's `task bootstrap` clones it, gitignored |
 | go-sigv4 | forestrie/go-sigv4 | Minimal SigV4 for R2/S3, used by arbor |
 | go-datatrails-common | robinbryce/go-datatrails-common | Shared Go utilities, used by arbor |
 | merkle-mountain-range-proofs | robinbryce/merkle-mountain-range-proofs | MMR proofs reference |
