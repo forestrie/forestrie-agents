@@ -59,4 +59,4 @@ uses relative links, and it is never copied.
    ADR is superseded, the rule moves with it.
 
 Reasoning links point at [devdocs](https://github.com/forestrie/devdocs)
-ADRs/ARCs and the [receipt trust model](https://github.com/forestrie/devdocs/blob/main/protocol/receipt-trust-model.md).
+ADRs/ARCs and the [receipt trust model](https://github.com/forestrie/protocol/blob/main/spec/receipt-trust-model.md).
