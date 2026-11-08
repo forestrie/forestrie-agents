@@ -13,11 +13,11 @@ user-invocable: false
 [docs-layout](../docs-layout/SKILL.md). Each repo's committed `.dox.toml`
 pins the forestrie/dox version (`schema_ref`); the `docs` CI job runs
 `dox lint` on every PR. Keys and checks:
-[contract](https://github.com/robinbryce/dox/blob/v0.1.0/docs/contract.md).
+[contract](https://github.com/robinbryce/dox/blob/v0.3.0/docs/contract.md).
 
 ## Setup
 
-- Install: `uv tool install git+https://github.com/robinbryce/dox@v0.1.0`.
+- Install: `uv tool install git+https://github.com/robinbryce/dox@v0.3.0`.
 - `export DOX_SCHEMA_REPO=forestrie/dox` (the forestrie `.envrc` sets it).
   Without it dox exits 2.
 
@@ -40,6 +40,14 @@ pins the forestrie/dox version (`schema_ref`); the `docs` CI job runs
 - **Check the graph before retiring or superseding.** `dox graph --json`
   lists `backlinks` (who cites the document) and `into_retired` (live
   docs citing retired ones). Rewrite inbound links in the same change.
+- **Retire with `dox retire`.** `dox retire <ref> --by <ref>` (or
+  `--absorbed-into <ref>`) sets the status, writes the link fields on both
+  sides, `git mv`s the document to `retired/` and rewrites relative links.
+  Run it with `--dry-run` first. Its `moved <old> <new>` lines are the
+  moves map for links from other repositories.
+- **The rules digest is generated.** After editing `docs/rules.md` or
+  bumping the protocol pin in `.dox.toml` `[digest]`, run `dox digest` and
+  commit `.claude/rules/rules-of-the-road.md`.
 - **Indexes are generated.** After adding or retiring ADRs or ARCs, run
   `dox index`; never edit between the `dox:index` markers.
 
