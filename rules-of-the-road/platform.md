@@ -2,7 +2,7 @@
 
 Moved to `forestrie/protocol`:
 **[`rules/platform.md`](https://github.com/forestrie/protocol/blob/main/rules/platform.md)**
-(rule-id anchors `P1`–`P16` preserved at the new location — see the table
+(rule-id anchors `P1`–`P17` preserved at the new location — see the table
 below).
 
 Rule → link:
@@ -25,6 +25,7 @@ Rule → link:
 | P14 | [One instance root, set once; global logId→R uniqueness](https://github.com/forestrie/protocol/blob/main/rules/platform.md#p14--one-instance-root-set-once-global-logidr-uniqueness) |
 | P15 | [Published artifacts declare their own cache policy; completeness decides immutability](https://github.com/forestrie/protocol/blob/main/rules/platform.md#p15--published-artifacts-declare-their-own-cache-policy-completeness-decides-immutability) |
 | P16 | [Conformant COSE/CBOR everywhere, with one named exception](https://github.com/forestrie/protocol/blob/main/rules/platform.md#p16--conformant-cosecbor-everywhere-with-one-named-exception) |
+| P17 | [A log's authority is used only once anchored](https://github.com/forestrie/protocol/blob/main/rules/platform.md#p17--a-logs-authority-is-used-only-once-anchored) |
 
 Repo files that specialise these rules remain in
 [README.md](https://github.com/forestrie/forestrie-agents/blob/main/rules-of-the-road/README.md).
