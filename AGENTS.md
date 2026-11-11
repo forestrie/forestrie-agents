@@ -22,7 +22,7 @@ rules through those two channels. This file is for changing this repo.
 | [forest-1](https://github.com/forestrie/forest-1) | private | GKE platform (Terraform + Flux) | [forest-1](./rules-of-the-road/forest-1.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
 | [arbor-flux](https://github.com/forestrie/arbor-flux) | private | GitOps manifests | [arbor-flux](./rules-of-the-road/arbor-flux.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
 | [devdocs](https://github.com/forestrie/devdocs) | private | ADRs, ARCs, runbooks | [platform](./rules-of-the-road/platform.md) only | [arc-company](./arc-context/arc-company/SKILL.md) |
-| [protocol](https://github.com/forestrie/protocol) | public | Protocol spec, glossary, platform rules (`P1`–`P16`) | owns platform | — |
+| [protocol](https://github.com/forestrie/protocol) | public | Protocol spec, glossary, platform rules (`P1`–`P17`) | owns platform | — |
 | [product](https://github.com/forestrie/product) | private | Briefs, decks, product intent | — | [arc-company](./arc-context/arc-company/SKILL.md) |
 | [work](https://github.com/forestrie/work) | private | Plans and status snapshots for every repo | [platform](./rules-of-the-road/platform.md) | — |
 
