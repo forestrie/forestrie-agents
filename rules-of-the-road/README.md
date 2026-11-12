@@ -20,6 +20,18 @@ choices; it is not an index of every ruling.
 - A rule is a *check target*, not prose to restate — cite it by id (e.g.
   `P4`, `univocity/U3`) in review findings and plans.
 
+## Moving out
+
+Rules of the road are moving to the repos they govern (devdocs ADR-0071
+section 7, ADR-0074): the platform rules are in
+[forestrie/protocol `rules/platform.md`](https://github.com/forestrie/protocol/blob/main/rules/platform.md),
+and each repo's rules move into its own `docs/rules.md` as that repo is
+normalised. A repo that has moved commits a `dox digest` of both as
+`.claude/rules/rules-of-the-road.md` and no longer syncs anything from here.
+
+Moved: mandate (`M#`), arbor-flux (`FX#`). The files below are for repos
+that have not moved yet; this directory goes when the last one moves.
+
 ## A rules source for the committed layer
 
 These files are not loaded from here. Each repo's
@@ -40,10 +52,8 @@ uses relative links, and it is never copied.
 | [arbor.md](./arbor.md) | Go services: ranger, sealer, custodian, sharder |
 | [canopy.md](./canopy.md) | Cloudflare Workers: SCRAPI, ingress DO, x402, delegation |
 | [univocity.md](./univocity.md) | Solidity on-chain contracts |
-| [mandate.md](./mandate.md) | BYOK operator UI, delegation agent, signer |
 | [univocity-tools.md](./univocity-tools.md) | Bun/TS CLIs (Cart, deploy) |
 | [forest-1.md](./forest-1.md) | GKE Terraform + cluster provisioning |
-| [arbor-flux.md](./arbor-flux.md) | GitOps manifests + release qualification |
 
 ## Rules for the rules
 
