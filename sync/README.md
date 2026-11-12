@@ -52,11 +52,11 @@ One directive per line. `#` starts a comment.
 | [arbor](./arbor.manifest) | platform, arbor | Go, go-task | `arc-arbor` |
 | [univocity](./univocity.manifest) | platform, univocity | Solidity, go-task | `arc-univocity` |
 | [univocity-tools](./univocity-tools.manifest) | platform, univocity-tools | TypeScript | `arc-tools` |
-| [mandate](./mandate.manifest) | platform, mandate | TypeScript | `arc-mandate` |
+| [mandate](./mandate.manifest) | digest (`docs/rules.md` in repo) | TypeScript | `arc-mandate` |
 | [forest-1](./forest-1.manifest) | platform, forest-1 | go-task | `arc-infra` |
-| [arbor-flux](./arbor-flux.manifest) | platform, arbor-flux | none | `arc-infra` |
-| [devdocs](./devdocs.manifest) | platform | none | `arc-company` |
-| [work](./work.manifest) | platform | none | none |
+| [arbor-flux](./arbor-flux.manifest) | digest (`docs/rules.md` in repo) | none | `arc-infra` |
+| [devdocs](./devdocs.manifest) | digest | none | `arc-company` |
+| [work](./work.manifest) | digest | none | none |
 | [protocol](./protocol.manifest) | owns platform | none | none |
 | [product](./product.manifest) | none | none | `arc-company` |
 

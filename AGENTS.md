@@ -18,9 +18,9 @@ rules through those two channels. This file is for changing this repo.
 | [arbor](https://github.com/forestrie/arbor) | public | Go services on GKE | [arbor](./rules-of-the-road/arbor.md) | [arc-arbor](./arc-context/arc-arbor/SKILL.md) |
 | [univocity](https://github.com/forestrie/univocity) | public | On-chain checkpoint contracts | [univocity](./rules-of-the-road/univocity.md) | [arc-univocity](./arc-context/arc-univocity/SKILL.md) |
 | [univocity-tools](https://github.com/forestrie/univocity-tools) | public | Contract build and deploy CLIs | [univocity-tools](./rules-of-the-road/univocity-tools.md) | [arc-tools](./arc-context/arc-tools/SKILL.md) |
-| [mandate](https://github.com/forestrie/mandate) | public | BYOK operator UI and delegation | [mandate](./rules-of-the-road/mandate.md) | [arc-mandate](./arc-context/arc-mandate/SKILL.md) |
+| [mandate](https://github.com/forestrie/mandate) | public | BYOK operator UI and delegation | [mandate](https://github.com/forestrie/mandate/blob/main/docs/rules.md) | [arc-mandate](./arc-context/arc-mandate/SKILL.md) |
 | [forest-1](https://github.com/forestrie/forest-1) | private | GKE platform (Terraform + Flux) | [forest-1](./rules-of-the-road/forest-1.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
-| [arbor-flux](https://github.com/forestrie/arbor-flux) | private | GitOps manifests | [arbor-flux](./rules-of-the-road/arbor-flux.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
+| [arbor-flux](https://github.com/forestrie/arbor-flux) | private | GitOps manifests | [arbor-flux](https://github.com/forestrie/arbor-flux/blob/main/docs/rules.md) | [arc-infra](./arc-context/arc-infra/SKILL.md) |
 | [devdocs](https://github.com/forestrie/devdocs) | private | ADRs, ARCs, runbooks | [platform](./rules-of-the-road/platform.md) only | [arc-company](./arc-context/arc-company/SKILL.md) |
 | [protocol](https://github.com/forestrie/protocol) | public | Protocol spec, glossary, platform rules (`P1`–`P17`) | owns platform | — |
 | [product](https://github.com/forestrie/product) | private | Briefs, decks, product intent | — | [arc-company](./arc-context/arc-company/SKILL.md) |
