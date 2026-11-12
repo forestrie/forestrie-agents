@@ -41,7 +41,7 @@ Read selectively before reviewing the diff:
 
 | Source | When |
 | ------ | ---- |
-| [Rules of the road](https://github.com/forestrie/forestrie-agents/tree/main/rules-of-the-road): `platform.md` + the one matching repo file (already loaded as `.claude/rules/rules-of-the-road-*.md` in a synced repo) | **Always** — fundamental invariants; run the [rules-of-the-road-review](../rules-of-the-road-review/SKILL.md) skill as the design-invariant pass |
+| Rules of the road: protocol `rules/platform.md` + the repo's `docs/rules.md` (the digest is already loaded as `.claude/rules/rules-of-the-road.md`) | **Always** — fundamental invariants; run the [rules-of-the-road-review](../rules-of-the-road-review/SKILL.md) skill as the design-invariant pass |
 | Repo `forest/agents/AGENTS.md` or root `AGENTS.md` | Repo overlay and precedence |
 | [forestrie-agents/workflow/rules/](../../rules/) | go-task, commits, TS/Go/Solidity rules, breaking-changes |
 | [forestrie-agents/vendored/matt-skills/skills/engineering/tdd/](../../../vendored/matt-skills/skills/engineering/tdd/SKILL.md) | Testability, coverage |
@@ -63,8 +63,8 @@ Read selectively before reviewing the diff:
 
 ### 1.3 Design invariants (read on demand)
 
-The fundamental invariants are already the distilled
-[rules-of-the-road](https://github.com/forestrie/forestrie-agents/tree/main/rules-of-the-road) loaded in §1.1 — check
+The fundamental invariants are already the distilled rules of the road
+loaded in §1.1 — check
 the diff against those **first**. Use the indexes below only when a finding
 needs the deeper rationale behind a rule (each rule links to its ADR/ARC).
 Select a **tight** subset from touched paths. Start at indexes; do not bulk-read
