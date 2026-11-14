@@ -68,7 +68,7 @@ live elsewhere. Ask the user:
 >   Workers. Requires a SvelteKit adapter swap (Appendix B).
 > - **Other / self-host** — UI + BFF elsewhere; same Cloudflare-Workers caveat.
 
-Record the choice. Default and primary path is **Cloudflare** (Section 3 +
+Record the choice. Default and primary path is **Cloudflare** (Section 4 +
 Appendix A). Non-Cloudflare choices only change the UI/BFF sub-step and use
 Appendix B; everything else is identical.
 
@@ -86,9 +86,10 @@ required items are present.
 | GitHub Packages auth for `@forestrie/delegation-cose` | root `.npmrc` + `NODE_AUTH_TOKEN` (`read:packages`) | `gh auth refresh -s read:packages -h github.com`; see mandate README "Workers deploy" |
 | `pnpm install` succeeds | build deps present | run it |
 | Cloudflare account + `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` | present in Doppler `mandate-forestrie/dev` | Prompt: create scoped token (Workers, Pages, KV) in Cloudflare dashboard, store in Doppler |
-| Privy app (embedded EVM wallets) | `MANDATE_PRIVY_APP_ID` etc. in Doppler | Prompt: create in Privy dashboard (Section 3.1) |
+| Privy app (embedded EVM wallets) | `MANDATE_PRIVY_APP_ID` etc. in Doppler | Prompt: create in Privy dashboard (Section 4.1) |
 | Doppler project `mandate-forestrie` (configs `dev`, `e2e`) | `doppler projects` | Prompt to create / request access |
 | Contact email + instance label | user-supplied | Prompt |
+| Funded Base Sepolia deploy key + RPC URL, for the anchor deploy (5.2) | present in Doppler `mandate-forestrie/dev` | Prompt: the deploy costs gas, so confirm first |
 
 Secrets live in Doppler `mandate-forestrie` (`dev` = operational `MANDATE_*`,
 `e2e` = `E2E_*` fixtures). Full catalog:
@@ -107,9 +108,13 @@ Read from it:
 
 - `catalog.dnsSub` / `catalog.dnsApex` → hostname suffix (currently
   `forest-2` / `forestrie.dev`).
-- `univocity.ks256.imutableAddress` and `univocity.es256.imutableAddress` →
-  the deployed anchor addresses (path A: **reuse**, no deploy).
 - Chain: **Base Sepolia, chainId `84532`** (Forestrie live lane).
+
+The manifest's `univocity.*.imutableAddress` entries are lane-b's own anchors.
+Do **not** reuse them. Canopy binds one forest to each Univocity instance, and
+both the onboard attestation and genesis must come from the contract's
+bootstrap signer, which Forestrie holds. The fork deploys its own anchor
+(5.2).
 
 Derive lane-b endpoints from `dnsSub`/`dnsApex` and lane letter `b`
 (FORKING.md uses `api-a.<dnsSub>.<dnsApex>` for lane a), then **confirm each by
@@ -127,20 +132,18 @@ DNS docs — do not assume). If a probe fails, stop and ask the canopy operator
 for the exact lane-b hostnames rather than guessing.
 
 Choose the bootstrap algorithm (prompt, default **KS256** — the secp256k1 /
-`ecrecover` path that matches Privy embedded wallets; ES256 is the alternative).
-Set `UNIVOCITY_ADDR` to the matching manifest address.
-
-> **Deploying your own independent root instead of reusing lane-b?** That is
-> FORKING.md §1 paths B/C (deployer CLI / counterfactual UUPS) and is **out of
-> scope** for this lane-b command. Offer it only if the user explicitly wants a
-> sovereign anchor, then hand off to FORKING.md §1.
+`ecrecover` path that matches Privy embedded wallets). `mandate-register` signs
+only KS256 onboard attestations, so an ES256 fork gets its onboard token by
+break-glass from the canopy operator (5.3).
 
 ---
 
 ## 4. Deploy the sealing plane (Cloudflare) + operator console
 
 Ordering matters: Workers must exist before provisioning (Section 5 needs the
-agent webhook URL). This maps to **FORKING.md §3**.
+agent webhook URL), and the signer must hold the bootstrap wallet before the
+onboard request (5.3 signs through it). This maps to **FORKING.md §3**, which
+FORKING.md's order of operations runs first.
 
 ### 4.1 Privy setup (prompt — dashboard, cannot be scripted here)
 
@@ -153,8 +156,9 @@ Doppler `mandate-forestrie/dev` (never in chat):
 2. Create a **key quorum + P-256 additional-signer key** →
    `MANDATE_PRIVY_SIGNER_ID`, `MANDATE_PRIVY_AUTHORIZATION_KEY`.
 3. Create the **ownerless, app-controlled operator wallet** — this is the
-   payment-authoritative root (ADR-0005 §7). Record its address for the
-   `KEY_DIRECTORY` operator entry.
+   payment-authoritative root (ADR-0005 §7). Record its address as
+   `OPERATOR_WALLET_ADDR` and its wallet id. It is the bootstrap signer for
+   the anchor (5.2), the onboard attestation (5.3) and genesis (5.4).
 
 ### 4.2 Provision Cloudflare infra + deploy Workers (automated)
 
@@ -185,7 +189,55 @@ coordinator.
 
 ## 5. Onboard token → payment-authoritative log (automated + one approval)
 
-### 5.1 Self-service onboard token (FORKING.md §2)
+### 5.1 Choose the forest id and authorise it on the signer (automated)
+
+The signer signs only for log ids its `KEY_DIRECTORY` entry lists, and genesis
+derives the log id from the forest id `R`. Choose `R` now, so the attestation
+(5.3) and genesis (5.4) agree:
+
+```bash
+FOREST_R=$(uuidgen | tr '[:upper:]' '[:lower:]')
+LOG_ID_HEX32=$(printf %s "$FOREST_R" | tr -d -)
+```
+
+Store `FOREST_R` in Doppler `mandate-forestrie/dev` as `MANDATE_FOREST_R`,
+which `mandate-register provision` reads. Add the operator entry to
+`KEY_DIRECTORY` and re-bind it on the signer Worker (`wrangler secret put`):
+
+```json
+{
+  "operator-root": {
+    "walletId": "<operator wallet id>",
+    "rootSignerAddress": "<OPERATOR_WALLET_ADDR>",
+    "logIds": ["<LOG_ID_HEX32>"]
+  }
+}
+```
+
+### 5.2 Deploy the Univocity anchor (FORKING.md §1)
+
+Deploy an `ImutableUnivocity` on Base Sepolia with the operator wallet as its
+bootstrap signer: path **B′** in the browser
+([univocity-deploy](https://univocity-deploy.pages.dev)) or path **B** with the
+deployer CLI. Use the release tags FORKING.md §1 names. Confirm before
+sending: the deploy costs gas.
+
+```bash
+./deployer-<os>-<arch> deploy imutable \
+  --from-release <univocity release tag> \
+  --bootstrap-alg ks256 \
+  --bootstrap-ks256-signer "$OPERATOR_WALLET_ADDR" \
+  --deploy-key "$DEPLOY_KEY" \
+  --rpc-url "$RPC_URL"
+```
+
+Record the deployed address as `UNIVOCITY_ADDR`.
+
+### 5.3 Self-service onboard token (FORKING.md §2)
+
+The request carries a bootstrap-key attestation, which the CLI signs with the
+operator wallet through the signer; canopy refuses a request without one.
+`MANDATE_SIGNER_TOKEN` comes from Doppler.
 
 ```bash
 task onboard:request -- \
@@ -194,10 +246,15 @@ task onboard:request -- \
   --chain-id 84532 \
   --univocity-addr "$UNIVOCITY_ADDR" \
   --contact-email "<operator-email>" \
-  --mandate-origin "<deployed-ui-url>"
+  --mandate-origin "<deployed-ui-url>" \
+  --root-address "$OPERATOR_WALLET_ADDR" \
+  --log-id "$LOG_ID_HEX32" \
+  --key-ref operator-root \
+  --signer-url "$MANDATE_SIGNER_URL"
 ```
 
-Capture `requestId` + `redeemCode`. Poll status until approved (prompt: **the
+Each attestation buys one request. On 409 `attestation already used`, run the
+command again: it signs a fresh one. Capture `requestId` + `redeemCode`. Poll status until approved (prompt: **the
 canopy operator must approve lane-b requests** — dev auto-approves, lane-b does
 not); if the user holds `CANOPY_OPS_ADMIN_TOKEN` they may break-glass mint
 instead (FORKING.md §2 "Break-glass"). Then:
@@ -211,7 +268,7 @@ task onboard:redeem -- --canopy-url "$CANOPY_BASE_URL" \
 Store the returned bearer as `CANOPY_PAYMENTS_ONBOARD_TOKEN` in Doppler
 `mandate-forestrie/dev` — **do not print it**.
 
-### 5.2 Provision the PA log (FORKING.md §4)
+### 5.4 Provision the PA log (FORKING.md §4)
 
 ```bash
 task provision -- \
@@ -220,7 +277,8 @@ task provision -- \
   --coordinator-url "$COORDINATOR_URL" \
   --webhook-url "$MANDATE_AGENT_WEBHOOK_URL" \
   --univocity-addr "$UNIVOCITY_ADDR" \
-  --chain-id 84532
+  --chain-id 84532 \
+  --forest-r "$FOREST_R"
 ```
 
 Keep from the output: `forestR` (bootstrap UUID `R`), `logIdHex32`,
@@ -228,11 +286,11 @@ Keep from the output: `forestR` (bootstrap UUID `R`), `logIdHex32`,
 `genesis.coordinator` shows `publicRoot: ok`, `webhook: ok`. Merge descriptors
 into the agent/signer Worker secrets.
 
-> **Production nuance:** for a real fork the PA genesis `bootstrapKey` should be
-> the **ownerless app-controlled operator wallet** from 4.1. The default
-> `task provision` Mode C path is the dev/CI shortcut (user-owned wallet) —
-> ADR-0005 §7. Confirm which the user wants; default to the ownerless operator
-> wallet for a genuine fork.
+> **Bootstrap key:** the PA genesis `bootstrapKey` must be the anchor's
+> bootstrap signer, the **ownerless app-controlled operator wallet** from 4.1;
+> canopy answers 422 `genesis bootstrapKey/alg does not match` otherwise. The
+> default `task provision` Mode C path is the dev/CI shortcut (user-owned
+> wallet, ADR-0005 §7) and works only for an anchor deployed with that wallet.
 
 Then register the root-creation grant and poll to a receipt (FORKING.md §4 warm
 -log flow) so the PA log can accept statements.
@@ -283,11 +341,13 @@ Report the receipt URL. Offline receipt verification is a documented gap
 1. `GET $CANOPY_BASE_URL/api/health` and `/.well-known/scitt-configuration` → JSON.
 2. Agent + signer Workers deployed; webhook + signer URLs recorded in Doppler.
 3. Operator console loads; BFF reaches lane-b coordinator.
-4. Onboard token minted and stored (never printed).
+4. Anchor deployed with the operator wallet as bootstrap signer; onboard token
+   minted and stored (never printed).
 5. PA log provisioned: `forestR`, `logId`, `publicRoot: ok`, `webhook: ok`.
 6. At least one user log onboarded (Mode C or B).
 7. A statement registered end-to-end returned a receipt URL.
-8. Summarize: provider choice, lane-b endpoints used, `forestR`/`logId`,
+8. Summarize: provider choice, lane-b endpoints used, `UNIVOCITY_ADDR`,
+   `forestR`/`logId`,
    deployed URLs, and any manual step still owed by the user.
 
 ---
@@ -326,6 +386,10 @@ Flag this as extra maintenance surface (adapter + BFF divergence from upstream).
 | Symptom | Check |
 | ------- | ----- |
 | Genesis 401 | Onboard token wrong / revoked |
+| Genesis 422 `bootstrapKey/alg does not match` | Genesis wallet is not the anchor's bootstrap signer |
+| Onboard request 400 on the attestation | Anchor's bootstrap signer, `--root-address`, signer `KEY_DIRECTORY` log id |
+| Onboard request 409 `attestation already used` | Re-run the request: it signs a fresh attestation |
+| Approval or mint 409 `already reserved or registered` | The anchor already has a forest; deploy a new one |
 | Genesis 503 coordinator | Webhook URL unreachable from canopy |
 | Statement 403 `signer_mismatch` | Statement signer ≠ grant binding |
 | Receipt poll never completes | Ask canopy operator: Ranger + Sealer health |
