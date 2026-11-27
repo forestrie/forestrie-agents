@@ -43,8 +43,7 @@ allocates ids against the remote (`dox next <type>`, `dox new <type>
 
 In a repo, canon lives under `docs/` (`docs/adr/`, `docs/arc/`,
 `docs/rules.md`, `docs/<area>.md`). devdocs, protocol and product are docs
-repos and use the same directories at their root. Until its normalisation
-change, protocol keeps its ADRs and ARCs together in `decisions/`.
+repos and use the same directories at their root.
 
 ## Files and directories
 
@@ -77,7 +76,7 @@ directory document.
 - **Allocate against the remote, with dox.** `dox next <type>` and
   `dox new` fetch `origin` and scan its default branch and open pull
   requests across every directory that can hold the series (`retired/`,
-  `archive/*/`, and protocol's legacy `decisions/`), never just your
+  `archive/*/`), never just your
   working tree. Never hand-pick a number. See [dox](../dox/SKILL.md).
 - Each repo, plus devdocs, protocol and product, is its own namespace, and
   numbers continue from the highest id already in that home: devdocs from
